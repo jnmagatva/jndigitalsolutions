@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JN Magat | U.S.-Hours Virtual Assistant for Restoration, Real Estate &amp; Legal Teams</title>
+<meta name="description" content="Experienced virtual assistant working U.S. Eastern hours. Intake, CRM, claims, case files, customer support, website design and AI-powered workflows for insurance restoration, real estate, legal and rental businesses. Book a free 20-minute call.">
+<meta property="og:title" content="JN Magat | U.S.-Hours Virtual Assistant">
+<meta property="og:description" content="Hand off intake, CRM cleanup, claims follow-up and inbox work to someone who has already done the job.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ BRAND SETTINGS: edit these to restyle the site ============ */
+:root{
+  --bg:#F6F7F9; --surface:#FFFFFF; --line:#DDE1E8;
+  --ink:#13213C; --ink-2:#3E4A5E; --ink-3:#5B6679;
+  --navy:#13213C; --navy-2:#1D2E50; --navy-text:#C3CCDC;
+  --cta:#F5B301; --cta-hover:#FFC62E; --cta-ink:#13213C;
+  --good:#1E7A4F;
+  --display:"Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
+  --body:"Figtree", "Segoe UI", Helvetica, Arial, sans-serif;
+  --pad:clamp(20px,5.5vw,88px);
+}
+/* ====================================================================== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,ol,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid #2F6FEB;outline-offset:3px;border-radius:6px}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:var(--pad)}
+.display{font-family:var(--display);font-weight:800;letter-spacing:-0.03em;line-height:1}
+.section{padding-block:clamp(72px,9vw,120px)}
+.kicker{font-weight:700;color:var(--ink-3);margin-bottom:14px}
+.h2{font-size:clamp(34px,4.6vw,56px);max-width:18ch}
+.sub{font-size:clamp(17px,1.5vw,19px);color:var(--ink-2);max-width:60ch;margin-top:18px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 28px;border-radius:12px;font-weight:700;font-size:17px;text-decoration:none;border:0;cursor:pointer;transition:background .15s,transform .15s}
+.btn-cta{background:var(--cta);color:var(--cta-ink);box-shadow:0 2px 0 #C98F00}
+.btn-cta:hover{background:var(--cta-hover);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.btn-sm{min-height:44px;padding:0 18px;font-size:15px}
+.microcopy{font-size:14px;color:var(--ink-3);margin-top:12px}
+
+/* Header */
+.top{position:sticky;top:0;z-index:20;background:rgba(246,247,249,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-family:var(--display);font-weight:800;font-size:21px;text-decoration:none;letter-spacing:-0.02em}
+.logo span{color:var(--ink-3);font-weight:500}
+.menu{display:flex;align-items:center;gap:28px;font-weight:600;font-size:15px}
+.menu a:not(.btn){text-decoration:none;color:var(--ink-2)}
+.menu a:not(.btn):hover{color:var(--ink)}
+
+/* Hero */
+.hero{padding-block:clamp(48px,7vw,96px) clamp(56px,7vw,88px);display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(36px,5vw,80px);align-items:center}
+.hero h1{font-size:clamp(46px,6.6vw,88px)}
+.hero h1 .quiet{display:block;color:var(--ink-3);font-weight:700}
+.hero .sub{margin-top:24px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:28px;font-size:15px;font-weight:600;color:var(--ink-2)}
+.trust li{display:flex;align-items:center;gap:8px}
+.trust svg{flex:none;color:var(--good)}
+
+.hero-card{position:relative}
+.portrait{border-radius:28px 28px 28px 6px;overflow:hidden;aspect-ratio:4/4.6;background:var(--navy)}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+.slides{position:relative}
+.slides .slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
+.slides .slide.is-on{opacity:1}
+.slide-dots{position:absolute;top:16px;right:16px;display:flex;gap:6px;z-index:2}
+.slide-dots button{width:10px;height:10px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer}
+.slide-dots button[aria-current="true"]{background:#fff;width:24px;border-radius:5px}
+.clock{position:absolute;left:-28px;bottom:28px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 22px;box-shadow:0 18px 40px -18px rgba(19,33,60,.35);min-width:250px}
+.clock .row{display:flex;align-items:center;gap:10px;font-weight:700}
+.pulse{width:10px;height:10px;border-radius:50%;background:#22A267;box-shadow:0 0 0 0 rgba(34,162,103,.5);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,162,103,.5)}70%{box-shadow:0 0 0 10px rgba(34,162,103,0)}100%{box-shadow:0 0 0 0 rgba(34,162,103,0)}}
+.clock time{display:block;font-family:var(--display);font-weight:700;font-size:34px;letter-spacing:-0.02em;line-height:1.1;margin-top:6px}
+.clock small{color:var(--ink-3);font-size:14px}
+
+/* Proof strip */
+.proof{background:var(--navy);color:#fff}
+.proof ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;padding-block:44px}
+.proof b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(38px,4vw,52px);letter-spacing:-0.03em;line-height:1;color:var(--cta)}
+.proof span{display:block;margin-top:10px;color:var(--navy-text);font-size:15px;line-height:1.5}
+
+/* Pain */
+.pains{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:48px}
+.pain{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px}
+.pain h3{font-size:20px;font-weight:700;margin-bottom:8px}
+.pain p{color:var(--ink-2)}
+.pivot{margin-top:40px;font-family:var(--display);font-weight:700;font-size:clamp(24px,2.6vw,32px);letter-spacing:-0.02em;max-width:30ch}
+
+/* AI */
+.ai-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:44px}
+.ai-proof{margin-top:24px;background:var(--navy);color:var(--navy-text);border-radius:18px;padding:24px 28px}
+.ai-proof strong{color:var(--cta)}
+
+/* Leadership */
+.lead-wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(36px,5vw,72px);align-items:start}
+.lead-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.lead-creds{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:15px;font-weight:600;color:var(--ink-2)}
+.lead-proof{margin-top:28px}
+.lead-wide{grid-column:1 / -1}
+.team-gallery{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px;margin-top:32px}
+.team-gallery .shot{grid-column:span 2}
+.team-gallery .tg-wide{grid-column:1 / -1}
+.team-gallery .tg-half{grid-column:span 3}
+.team-gallery .shot-btn img{height:220px;object-fit:cover;object-position:center}
+.team-gallery .tg-wide .shot-btn img{height:auto;max-height:520px}
+.team-gallery .tg-half .shot-btn img{height:auto;max-height:340px;object-fit:contain;background:#fff}
+
+/* Gallery */
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:44px;align-items:start}
+.shot{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.shot-wide{grid-column:1 / -1}
+.shot-btn{display:block;width:100%;padding:0;border:0;background:#F0F2F6;cursor:zoom-in}
+.shot-btn img{width:100%;height:260px;object-fit:cover;object-position:center top}
+.shot-wide .shot-btn img{height:auto;max-height:420px;object-fit:contain}
+.shot figcaption{padding:16px 20px 20px;color:var(--ink-2);font-size:15px;line-height:1.5}
+.shot figcaption strong{display:block;color:var(--ink);font-size:16px;margin-bottom:2px}
+.lightbox{border:0;padding:0;background:transparent;max-width:min(1200px,94vw);max-height:92vh}
+.lightbox::backdrop{background:rgba(10,16,30,.85)}
+.lightbox img{max-width:100%;max-height:80vh;border-radius:12px;background:#fff;margin:0 auto}
+.lightbox p{color:#fff;text-align:center;margin-top:14px;font-size:16px}
+.lb-close{position:fixed;top:16px;right:20px;width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:var(--ink);font-size:30px;line-height:1;cursor:pointer}
+
+/* Portfolio */
+.portfolio-shot{margin-top:40px}
+.portfolio-shot .shot-btn img{height:auto}
+.portfolio-shot figcaption a{color:var(--ink);font-weight:700}
+.quote-cta{margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:20px 40px;flex-wrap:wrap;background:#FFF4D1;border:1px solid #F1D98A;border-radius:18px;padding:26px 30px}
+.quote-cta h3{font-family:var(--display);font-weight:700;font-size:clamp(22px,2.2vw,28px);letter-spacing:-0.02em;line-height:1.15}
+.quote-cta p{color:var(--ink-2);margin-top:6px;max-width:60ch}
+.quote-cta .price-tag{display:inline-flex;align-items:baseline;gap:8px;margin:0 0 10px;background:var(--navy);color:#fff;border-radius:999px;padding:6px 16px;font-size:14px;font-weight:600}
+.quote-cta .price-tag b{font-family:var(--display);font-size:22px;font-weight:800;color:var(--cta);letter-spacing:-0.02em}
+@media (max-width:780px){.quote-cta .btn{width:100%}}
+
+/* Tabs */
+.tabs{margin-top:44px;background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.tablist{display:flex;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:none}
+.tablist::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;background:none;border:0;border-bottom:3px solid transparent;padding:20px 24px;font:inherit;font-weight:700;font-size:16px;color:var(--ink-3);cursor:pointer;white-space:nowrap;min-height:60px}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--cta);background:#FFFBEF}
+.tab:hover{color:var(--ink)}
+.panel{padding:clamp(24px,4vw,44px);display:grid;grid-template-columns:1fr 1.4fr;gap:32px 56px}
+.panel[hidden]{display:none}
+.panel h3{font-family:var(--display);font-weight:700;font-size:clamp(26px,2.8vw,34px);letter-spacing:-0.02em;line-height:1.1}
+.panel .lead{color:var(--ink-2);margin-top:14px}
+.checks{display:grid;gap:14px}
+.checks li{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start}
+.checks svg{margin-top:3px;color:var(--good)}
+
+/* Compare */
+.compare{margin-top:44px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--surface)}
+.compare table{width:100%;border-collapse:collapse}
+.compare th,.compare td{text-align:left;padding:18px 24px;border-bottom:1px solid var(--line);vertical-align:top}
+.compare tr:last-child td{border-bottom:0}
+.compare thead th{font-size:15px;color:var(--ink-3);background:#F0F2F6}
+.compare thead th.me{color:var(--ink);background:#FFF4D1}
+.compare td.me{background:#FFFCF1;font-weight:600}
+.compare td:first-child{font-weight:700;width:26%}
+.compare td.them{color:var(--ink-3)}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:48px;counter-reset:s}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px;position:relative}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;font-family:var(--display);font-weight:800;margin-bottom:18px}
+.step h3{font-size:21px;font-weight:700;margin-bottom:8px}
+.step p{color:var(--ink-2)}
+.guarantee{margin-top:24px;display:flex;gap:18px;align-items:center;background:#E8F4EE;border:1px solid #BFDFCD;border-radius:18px;padding:22px 26px}
+.guarantee svg{flex:none;color:var(--good)}
+.guarantee p{color:#1C3D2D}
+
+/* Experience */
+.exp{display:block}
+.exp .toolset{grid-template-columns:repeat(2,minmax(0,1fr))}
+.exp .certs{grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px}
+.timeline li{display:grid;grid-template-columns:150px 1fr;gap:6px 24px;padding:20px 0;border-top:1px solid var(--line)}
+.timeline li:last-child{border-bottom:1px solid var(--line)}
+.timeline .when{color:var(--ink-3);font-size:15px;font-weight:600;padding-top:2px}
+.timeline h3{font-size:18px;font-weight:700}
+.timeline p{color:var(--ink-2);font-size:16px}
+.toolset{display:grid;gap:18px;margin-top:28px}
+.tool-group{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.tool-group h3{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;margin-bottom:12px}
+.tg-icon{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--navy);color:var(--cta);flex:none}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+.tools li{display:inline-flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:14px;font-weight:600;color:var(--ink-2)}
+.tool-logo{width:20px;height:20px;object-fit:contain}
+.certs{margin-top:28px;display:grid;gap:8px;font-size:15px;color:var(--ink-2)}
+
+/* FAQ */
+.faq{max-width:860px;margin-top:40px}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 44px 22px 0;font-weight:700;font-size:19px;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:8px;top:50%;width:12px;height:12px;border-right:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+.faq details p{padding:0 0 24px;color:var(--ink-2);max-width:68ch}
+
+/* Final CTA */
+.final{background:var(--navy);color:#fff;border-radius:32px;padding:clamp(40px,6vw,80px);display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
+.final h2{font-size:clamp(36px,4.8vw,60px)}
+.final p{color:var(--navy-text);margin-top:18px;max-width:48ch}
+.final .contact{display:grid;gap:12px}
+.final .contact a:not(.btn){color:#fff;font-weight:600;text-decoration:none;padding:14px 18px;border:1px solid #33456B;border-radius:12px;overflow-wrap:anywhere}
+.final .contact a:not(.btn):hover{background:var(--navy-2)}
+.final .contact small{display:block;color:var(--navy-text);font-weight:500;font-size:13px}
+.final :focus-visible{outline-color:#fff}
+
+footer{padding-block:36px 110px;color:var(--ink-3);font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px}
+
+/* Mobile sticky CTA */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--line);display:none;transform:translateY(110%);transition:transform .25s}
+.sticky-cta.show{transform:none}
+.sticky-cta .btn{width:100%}
+
+/* Responsive */
+@media (max-width:1024px){
+  .hero{grid-template-columns:1fr 0.85fr}
+  .proof ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .panel,.exp,.final,.lead-wrap{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ai-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:780px){
+  .menu a:not(.btn){display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-card{max-width:400px;width:100%;margin-inline:auto}
+  .clock{left:12px;right:12px;bottom:12px;min-width:0}
+  .pains,.steps,.ai-grid,.lead-grid,.gallery,.team-gallery,.exp .toolset,.exp .certs{grid-template-columns:1fr}
+  .team-gallery .shot,.team-gallery .tg-half{grid-column:auto}
+  .shot-btn img{height:auto;max-height:420px;object-fit:contain}
+  .hero-actions .btn{width:100%}
+  .compare th,.compare td{padding:14px 14px;font-size:15px}
+  .compare td:first-child{width:auto}
+  .timeline li{grid-template-columns:1fr}
+  .sticky-cta{display:block}
+  footer{padding-bottom:120px}
+}
+@media (min-width:781px){footer{padding-bottom:36px}}
+
+/* ===== Visual effects ===== */
+/* Photos: lift and zoom on hover */
+.shot{transition:transform .35s ease,box-shadow .35s ease}
+.shot:hover{transform:translateY(-4px);box-shadow:0 22px 44px -22px rgba(19,33,60,.45)}
+.shot-btn{overflow:hidden;position:relative}
+.shot-btn img{transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .4s ease}
+.shot:hover .shot-btn img{transform:scale(1.06);filter:saturate(1.1) contrast(1.04)}
+.shot-btn::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(19,33,60,.35));opacity:0;transition:opacity .35s ease;pointer-events:none}
+.shot:hover .shot-btn::after{opacity:1}
+.shot-btn::before{content:"View";position:absolute;right:14px;bottom:14px;z-index:1;background:#fff;color:var(--ink);font-weight:700;font-size:13px;padding:6px 12px;border-radius:999px;opacity:0;transform:translateY(6px);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
+.shot:hover .shot-btn::before,.shot-btn:focus-visible::before{opacity:1;transform:none}
+/* Hero photos: slow zoom while showing */
+.slides .slide.is-on{animation:kenburns 6s ease-out both}
+@keyframes kenburns{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hero-card .portrait{transition:transform .4s ease,box-shadow .4s ease;box-shadow:0 30px 60px -30px rgba(19,33,60,.5)}
+.hero-card:hover .portrait{transform:translateY(-4px) rotate(-.4deg)}
+/* Scroll reveal */
+.js .reveal{opacity:0;translate:0 28px;transition:opacity .7s ease,translate .7s cubic-bezier(.2,.7,.2,1),transform .35s ease,box-shadow .35s ease}
+.js .reveal.in{opacity:1;translate:none}
+
+/* Buttons: lift, glow and a light sweep */
+.btn{position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .25s ease,background .2s ease,color .2s ease}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .6s ease;pointer-events:none}
+.btn:hover::after{left:130%}
+.btn-cta:hover{transform:translateY(-3px);box-shadow:0 5px 0 #C98F00,0 16px 30px -12px rgba(245,179,1,.8)}
+.btn-cta:active,.btn-ghost:active{transform:translateY(0)}
+.btn-ghost:hover{transform:translateY(-3px);box-shadow:0 14px 26px -14px rgba(19,33,60,.6)}
+.final .contact a:not(.btn),.link-card{transition:transform .2s ease,background .2s ease,border-color .2s ease}
+.final .contact a:not(.btn):hover{transform:translateX(6px);border-color:var(--cta)}
+.menu a:not(.btn){position:relative}
+.menu a:not(.btn)::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--cta);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.menu a:not(.btn):hover::after{transform:scaleX(1)}
+.tab{transition:color .2s ease,background .2s ease}
+.tab:hover{background:#FFF8E3}
+.slide-dots button{transition:width .25s ease,background .25s ease,transform .2s ease}
+.slide-dots button:hover{transform:scale(1.25);background:#fff}
+.lb-close{transition:transform .2s ease}
+.lb-close:hover{transform:rotate(90deg) scale(1.08)}
+.faq summary{transition:color .2s ease,padding-left .2s ease}
+.faq summary:hover{color:var(--cta-ink);padding-left:6px}
+.tool-group,.pain,.step{transition:transform .3s ease,box-shadow .3s ease}
+.tool-group:hover,.pain:hover,.step:hover{transform:translateY(-3px);box-shadow:0 18px 36px -24px rgba(19,33,60,.45)}
+@media (prefers-reduced-motion:reduce){
+  .js .reveal{opacity:1;translate:none}
+  .slides .slide.is-on{animation:none}
+  .btn::after{display:none}
+}
+
+/* ===== Photo hero ===== */
+.hero-shell{position:relative;overflow:hidden;background:var(--navy);isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden}
+.hero-bg img{position:absolute;top:0;right:-14%;height:100%;width:auto;min-width:62%;max-width:none;object-fit:cover;object-position:40% 40%;transform-origin:62% 40%;animation:heroZoom 20s ease-out both;will-change:transform}
+@keyframes heroZoom{from{transform:scale(1.14)}to{transform:scale(1)}}
+.hero-bg::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(90deg,var(--navy) 0%,var(--navy) 34%,rgba(19,33,60,.78) 48%,rgba(19,33,60,.25) 68%,rgba(19,33,60,.05) 100%),
+  linear-gradient(0deg,rgba(19,33,60,.85) 0%,rgba(19,33,60,0) 38%)}
+.hero-glow{position:absolute;inset:-20%;background:radial-gradient(40% 40% at 70% 30%,rgba(245,179,1,.18),transparent 70%);animation:glowDrift 12s ease-in-out infinite alternate;z-index:1}
+@keyframes glowDrift{from{transform:translate(-4%,0)}to{transform:translate(4%,6%)}}
+.hero-shell .hero{position:relative;min-height:min(86vh,820px)}
+.hero-shell .kicker{color:#C3CCDC!important}
+.hero-shell h1{color:#fff}
+.hero-shell h1 .quiet{color:var(--cta)}
+.hero-shell .sub{color:#D6DCE8}
+.hero-shell .microcopy{color:#AEB9CC}
+.hero-shell .trust{color:#E6EAF1}
+.hero-shell .trust svg{color:#7FD1A6}
+.hero-shell .btn-ghost{color:#fff;border-color:rgba(255,255,255,.7)}
+.hero-shell .btn-ghost:hover{background:#fff;color:var(--ink)}
+.hero-shell .hero-card{align-self:end;justify-self:end;width:min(100%,280px)}
+.hero-shell .portrait{aspect-ratio:4/4.6;border:3px solid rgba(255,255,255,.9)}
+.hero-shell .clock{left:auto;right:calc(100% - 40px);bottom:24px}
+/* entrance */
+.hero-copy-in>*{animation:riseIn .8s cubic-bezier(.2,.7,.2,1) both}
+.hero-copy-in>*:nth-child(2){animation-delay:.08s}.hero-copy-in>*:nth-child(3){animation-delay:.16s}.hero-copy-in>*:nth-child(4){animation-delay:.24s}.hero-copy-in>*:nth-child(5){animation-delay:.32s}.hero-copy-in>*:nth-child(6){animation-delay:.4s}
+.hero-shell .hero-card{animation:riseIn 1s .35s cubic-bezier(.2,.7,.2,1) both}
+@keyframes riseIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@media (max-width:1024px){
+  .hero-bg::after{background:linear-gradient(90deg,rgba(19,33,60,.94) 0%,rgba(19,33,60,.8) 55%,rgba(19,33,60,.45) 100%)}
+}
+@media (max-width:780px){
+  .hero-bg img{right:0;min-width:100%;width:100%;object-position:38% 30%}
+  .hero-bg::after{background:linear-gradient(180deg,rgba(19,33,60,.7) 0%,rgba(19,33,60,.88) 45%,var(--navy) 100%)}
+  .hero-shell .hero{min-height:0}
+  .hero-shell .hero-card{justify-self:center;width:min(100%,300px)}
+  .hero-shell .clock{right:12px;left:12px}
+}
+@media (prefers-reduced-motion:reduce){.hero-bg img,.hero-glow,.hero-copy-in>*,.hero-shell .hero-card{animation:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top">JN Magat <span>VA</span></a>
+    <nav class="menu" aria-label="Main">
+      <a href="#services">What I handle</a>
+      <a href="#ai">AI workflow</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#proof">Track record</a>
+      <a href="#why">Why me</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-cta btn-sm" href="#book">Book a free call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<div class="hero-shell">
+  <div class="hero-bg" aria-hidden="true"><img src="proof/john-at-work.jpg" alt=""><span class="hero-glow"></span></div>
+<section class="wrap hero">
+  <div class="hero-copy-in">
+    <p class="kicker" style="color:var(--ink-2)">Virtual Assistant · Operations · Client Support · Web &amp; Social Media Management</p>
+    <h1 class="display">Hand off the busywork.<span class="quiet">Keep the clients.</span></h1>
+    <p class="sub">I'm John, a U.S.-hours virtual assistant with more than eight years of combined experience: four years as a VA and freelancer, plus over four years in BPO leadership and customer support. I take over intake, CRM cleanup, follow-ups and inbox work so your leads stop going cold and your evenings stop disappearing. I also build and redesign websites, and I put modern AI tools to work every day so you get results faster, with every detail still checked by hand.</p>
+    <div class="hero-actions">
+      <a class="btn btn-cta" href="#book">Book a free 20-minute call</a>
+      <a class="btn btn-ghost" href="#services">See what I can handle</a>
+    </div>
+    <p class="microcopy">No commitment. You'll leave the call with a clear list of what to delegate first.</p>
+    <ul class="trust">
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Former Team Lead &amp; Operations Supervisor</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Works U.S. Eastern hours</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>HIPAA &amp; data-privacy trained</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Already knows Salesforce, HubSpot, GoHighLevel &amp; Filevine</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>AI-powered, human-checked work</li>
+    </ul>
+  </div>
+  <div class="hero-card">
+    <figure class="portrait slides" aria-roledescription="carousel" aria-label="Photos of John">
+      <img class="slide is-on" src="data:image/jpeg;base64,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" alt="JN Magat" width="400" height="460">
+      <img class="slide" src="proof/john-casual.jpg" alt="John, off the clock" style="object-position:72% 40%" loading="lazy">
+      <img class="slide" src="proof/john-personal.jpg" alt="John with family" style="object-position:60% 20%" loading="lazy">
+      <div class="slide-dots" role="group" aria-label="Choose photo">
+        <button type="button" aria-label="Photo 1" aria-current="true"></button><button type="button" aria-label="Photo 2"></button><button type="button" aria-label="Photo 3"></button>
+      </div>
+    </figure>
+    <div class="clock" aria-live="off">
+      <div class="row"><span class="pulse" aria-hidden="true"></span>On your schedule</div>
+      <time id="et-time">9:00 AM</time>
+      <small id="et-label">Right now in New York (ET)</small>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ================= PROOF ================= -->
+<section class="proof" aria-label="Results">
+  <ul class="wrap">
+    <li><b>~52%</b><span>Intake conversion, the highest on my team at a restoration company</span></li>
+    <li><b>40–60+</b><span>Active claim files managed at the same time, intake to closeout</span></li>
+    <li><b>#3</b><span>Global performance ranking as a Team Lead on TTEC&#8217;s T-Mobile US account, across onshore and offshore teams</span></li>
+    <li><b>15–20</b><span>New hires trained per cohort as a product trainer</span></li>
+  </ul>
+</section>
+
+<!-- ================= PAIN ================= -->
+<section class="wrap section">
+  <p class="kicker">Sound familiar?</p>
+  <h2 class="display h2">You didn't start a business to chase paperwork.</h2>
+  <div class="pains">
+    <div class="pain"><h3>Leads go cold</h3><p>New inquiries sit for hours because nobody owns the follow-up, and the job goes to whoever called back first.</p></div>
+    <div class="pain"><h3>Your CRM can't be trusted</h3><p>Missing claim numbers, stale stages and duplicate records. Reports are wrong, and commissions get stuck.</p></div>
+    <div class="pain"><h3>Admin eats your nights</h3><p>You finish client work at 5 and start the inbox, scheduling and document prep at 8.</p></div>
+  </div>
+  <p class="pivot">The fix isn't working longer. It's handing the process to someone who's run it before.</p>
+</section>
+
+<!-- ================= SERVICES (TABS) ================= -->
+<section id="services" class="wrap section" style="padding-top:0">
+  <p class="kicker">What I handle</p>
+  <h2 class="display h2">Pick your industry. See exactly what comes off your plate.</h2>
+  <div class="tabs">
+    <div class="tablist" role="tablist" aria-label="Industries">
+      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">Insurance restoration</button>
+      <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Real estate</button>
+      <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">Law firms</button>
+      <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">Vacation rentals</button>
+      <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false" tabindex="-1">Websites &amp; social media</button>
+      <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1">Any small business</button>
+    </div>
+    <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1">
+      <div><h3>From first call to final check</h3><p class="lead">I've carried 40–60+ water, mold and rebuild files at once. I know where claims stall and how to unstick them.</p></div>
+      <ul class="checks">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Intake calls, lead qualification and fast follow-up that turns inquiries into signed jobs</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Adjuster, carrier and public adjuster communication to move approvals along</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Mitigation scheduling with field and scheduling teams</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Florida permitting support</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Asbestos testing coordination for North and South Carolina files, routed through ECS so demo starts on schedule</span></li>
+      </ul>
+    </div>
+    <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+      <div><h3>More time for showings and closings</h3><p class="lead">Trained as a real estate transaction coordinator, with a year as a senior concierge at eXp Realty.</p></div>
+      <ul class="checks">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Transaction and listing admin, document tracking and deadline follow-up</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Property and vacant-land comps using Zillow, Redfin and Distance.to</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Lead follow-up and appointment setting in KVCore, Podio or HubSpot</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Agent support tickets and policy questions, handled at volume</span></li>
+      </ul>
+    </div>
+    <div class="panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+      <div><h3>Case files that stay organized</h3><p class="lead">Former case manager at a personal injury firm, trained in managing PI cases.</p></div>
+      <ul class="checks">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Medical, police and insurance records organized in Filevine and Dropbox</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Drafting demand letters and settlement agreements for attorney review</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Client status updates so your attorneys aren't fielding "any news?" calls</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>HIPAA-aware handling of sensitive records</span></li>
+      </ul>
+    </div>
+    <div class="panel" role="tabpanel" id="p4" aria-labelledby="t4" hidden>
+      <div><h3>Guests answered. Calendar full.</h3><p class="lead">I ran my own vacation rental for two years, so I know what guests expect and what hosts dread.</p></div>
+      <ul class="checks">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Guest inquiries, bookings, changes and refunds on Airbnb and Booking.com</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Listing copy and social media graphics in Canva</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Photo and video editing for listings, ads and social media marketing</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Cleaner and repair scheduling between stays</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Monthly income and expense tracking in Google Sheets or Excel</span></li>
+      </ul>
+    </div>
+    <div class="panel" role="tabpanel" id="p6" aria-labelledby="t6" hidden>
+      <div><h3>A website that finally looks like your business</h3><p class="lead">I build new sites and redesign dated ones for service businesses, including an ongoing redesign for a South Florida remodeling contractor. This page is my own work too.</p></div>
+      <ul class="checks">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>New websites built from scratch: fast, mobile-friendly and written to turn visitors into calls</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Redesigns of outdated sites, with clearer copy, stronger calls to action and a modern look</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Ongoing page edits, new services, photos and content updates</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Hosting and launch on Namecheap or GitHub Pages</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Social media posts, Canva graphics and content scheduling</span></li>
+      </ul>
+    </div>
+    <div class="panel" role="tabpanel" id="p5" aria-labelledby="t5" hidden>
+      <div><h3>The everyday work, done right</h3><p class="lead">Five years in high-volume customer support and team leadership means I work fast and document everything.</p></div>
+      <ul class="checks">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Inbox triage, calendar management and meeting prep</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Phone, email and chat support through RingCentral, Aircall or Zoom</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Client-ready PDFs, reports and filled or merged forms</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Website builds, redesigns and content updates</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Training guides, SOPs and onboarding support for new team members</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AI WORKFLOW ================= -->
+<section id="ai" class="wrap section" style="padding-top:0">
+  <p class="kicker">How I use AI</p>
+  <h2 class="display h2">AI does the heavy lifting. I make sure it's right.</h2>
+  <p class="sub">I use Claude and ChatGPT every day as part of how I work. That means first drafts in minutes, documents built faster and websites shipped in days instead of weeks. Every output gets checked by me before it reaches you or your clients.</p>
+  <div class="ai-grid">
+    <div class="pain"><h3>Drafting &amp; communication</h3><p>Client updates, follow-up emails, cover letters and first drafts of letters and summaries, written in your voice and edited by me.</p></div>
+    <div class="pain"><h3>Documents &amp; reports</h3><p>Formatted PDFs and Word reports, filled and merged forms, and clean workload or case summaries built from messy notes.</p></div>
+    <div class="pain"><h3>Review &amp; research</h3><p>Summarizing long contracts, policies and threads, flagging clauses worth a second look and pulling out the details that matter.</p></div>
+    <div class="pain"><h3>Websites &amp; design</h3><p>Planning, writing and coding websites with Claude, then testing and launching them. This site was built that way.</p></div>
+  </div>
+  <div class="ai-proof">
+    <p><strong>A real example:</strong> this landing page, from first draft to a mobile-ready site on GitHub, was planned, written and built with Claude, with me directing every section, checking every detail and deciding what went live.</p>
+  </div>
+</section>
+
+<!-- ================= WHY ME ================= -->
+<section id="why" class="wrap section" style="padding-top:0">
+  <p class="kicker">Why me</p>
+  <h2 class="display h2">Not a generalist you have to train from zero.</h2>
+  <div class="compare">
+    <table>
+      <thead><tr><th scope="col"></th><th scope="col">Typical new VA</th><th scope="col" class="me">Working with John</th></tr></thead>
+      <tbody>
+        <tr><td>Ramp-up</td><td class="them">Weeks learning your industry</td><td class="me">Already knows claims, closings and case files</td></tr>
+        <tr><td>Hours</td><td class="them">Overlaps your day partially</td><td class="me">Works U.S. Eastern business hours</td></tr>
+        <tr><td>Tools</td><td class="them">Needs logins and tutorials</td><td class="me">Salesforce, HubSpot, Filevine, RAIN, KVCore and more</td></tr>
+        <tr><td>Ownership</td><td class="them">Waits to be told what's next</td><td class="me">Spots blockers and fixes them before they escalate</td></tr>
+        <tr><td>Leadership</td><td class="them">Needs close supervision</td><td class="me">Former Team Lead who can train and guide other team members</td></tr>
+        <tr><td>AI skills</td><td class="them">Uses AI occasionally, if at all</td><td class="me">Uses Claude and ChatGPT daily, then checks every output</td></tr>
+        <tr><td>Websites</td><td class="them">Outsourced to a separate designer</td><td class="me">Builds and redesigns your site in-house</td></tr>
+        <tr><td>Communication</td><td class="them">Updates when you ask</td><td class="me">End-of-day summary, every day</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section id="portfolio" class="wrap section" style="padding-top:0">
+  <p class="kicker">Web design portfolio</p>
+  <h2 class="display h2">From a single page to a full website.</h2>
+  <p class="sub">A complete redesign for a South Florida remodeling contractor. I rebuilt the site around their real project photos, gave every service its own page, and added a browsable project gallery.</p>
+  <figure class="shot portfolio-shot">
+    <button type="button" class="shot-btn" data-full="proof/hc-remodeling-portfolio.png" data-cap="HC Remodeling &amp; Renovation: Full redesign for a South Florida remodeling contractor: 1 page expanded to 7, with real project photos." aria-label="Enlarge: HC Remodeling &amp; Renovation before and after"><img src="proof/hc-remodeling-portfolio.png" alt="Before and after of the HC Remodeling &amp; Renovation website redesign" loading="lazy"></button>
+    <figcaption><strong>HC Remodeling &amp; Renovation</strong>Full redesign for a South Florida remodeling contractor: 1 page expanded to 7, with real project photos. <a href="https://homeconstructionremodeling.com" target="_blank" rel="noopener">Visit the live site</a></figcaption>
+  </figure>
+  <div class="quote-cta">
+    <div>
+      <p class="price-tag"><span>HTML websites from</span> <b>$100</b></p>
+      <h3>Need a new website or a redesign?</h3>
+      <p>Custom HTML websites start at just $100, one of the most affordable rates on the market. Tell me about your business and I'll send a clear quote for building or refreshing your site, usually within one business day.</p>
+    </div>
+    <a class="btn btn-cta" href="mailto:jnmagatva@gmail.com?subject=Website%20quote%20request&amp;body=Hi John,%0A%0AI%27d like a quote for a website project.%0A%0ABusiness name:%0ACurrent website (if any):%0ANew site or redesign:%0APages or features needed:%0ATimeline:%0A%0AThanks!">Get a quote</a>
+  </div>
+</section>
+
+<!-- ================= LEADERSHIP ================= -->
+<section id="leadership" class="wrap section" style="padding-top:0">
+  <div class="lead-wrap">
+    <div>
+      <p class="kicker">Leadership</p>
+      <h2 class="display h2">You're not hiring an assistant who waits for instructions.</h2>
+      <p class="sub">I bring more than eight years of combined experience: over four years in BPO and four years as a virtual assistant and freelancer. Most of my BPO years were at TTEC, where I worked my way up from the phones. As an agent in the Team of Experts (TEX) department, I was recognized every month among the top 10 agents. I then joined the pioneer team that launched T-Mobile's telesales department in the Philippines, where I became the top agent within a month, and our site went on to outperform competing companies on the account. As a Team Lead on the T-Mobile US account, I ranked 3rd globally while leading and training frontline teams. For the past four years as a VA and freelancer, I've brought that same discipline to U.S. businesses in insurance restoration, real estate, legal and hospitality: clear standards, steady follow-through and the ability to train and guide others as your business grows.</p>
+      <p class="lead-creds">Trained through the TTEC Leadership Institute (Trainer 101, Team Lead 101 &amp; 201) and Lean Six Sigma White Belt certified.</p>
+    </div>
+    <div class="lead-grid">
+      <div class="pain"><h3>Led high-performing teams</h3><p>As a Team Lead and Operations Supervisor, I coached agents through daily performance goals and ranked 3rd in global performance across onshore and offshore teams.</p></div>
+      <div class="pain"><h3>Trained new hires</h3><p>As a Product Trainer, I onboarded 15–20 new hires per cohort and reported daily, weekly and monthly progress to senior management.</p></div>
+      <div class="pain"><h3>Raised quality standards</h3><p>I ran quality audits, enforced compliance with company policy and drove process improvements that kept teams consistent.</p></div>
+      <div class="pain"><h3>Owned the hard files</h3><p>In insurance restoration, I took direct ownership of stalled, high-value claims and negotiated with adjusters and carriers to break deadlocks.</p></div>
+      <div class="pain lead-wide"><h3>Build websites from scratch to finish</h3><p>I take a website from a blank page to a live launch on my own: planning, copywriting, design, coding and hosting. No hand-holding, no handoffs to a separate designer. This site is one example.</p></div>
+    </div>
+  </div>
+  <div class="team-gallery">
+    <figure class="shot tg-wide">
+      <button type="button" class="shot-btn" data-full="proof/team-lead-group.jpg" data-cap="Team Nikko: The team I led on the T-Mobile US account at TTEC." aria-label="Enlarge: Team Nikko"><img src="proof/team-lead-group.jpg" alt="Team Nikko: The team I led on the T-Mobile US account at TTEC." loading="lazy"></button>
+      <figcaption><strong>Team Nikko</strong>The team I led on the T-Mobile US account at TTEC.</figcaption>
+    </figure>
+    <figure class="shot">
+      <button type="button" class="shot-btn" data-full="proof/team-lead-team-2.jpg" data-cap="Team huddle: Building a team that shows up and performs together." aria-label="Enlarge: Team huddle"><img src="proof/team-lead-team-2.jpg" alt="Team huddle: Building a team that shows up and performs together." loading="lazy"></button>
+      <figcaption><strong>Team huddle</strong>Building a team that shows up and performs together.</figcaption>
+    </figure>
+    <figure class="shot">
+      <button type="button" class="shot-btn" data-full="proof/team-lead-team-3.jpg" data-cap="Team Nikko: Coaching new agents from their first weeks on the floor." aria-label="Enlarge: Team Nikko"><img src="proof/team-lead-team-3.jpg" alt="Team Nikko: Coaching new agents from their first weeks on the floor." loading="lazy"></button>
+      <figcaption><strong>Team Nikko</strong>Coaching new agents from their first weeks on the floor.</figcaption>
+    </figure>
+    <figure class="shot">
+      <button type="button" class="shot-btn" data-full="proof/team-lead-team-4.jpg" data-cap="After hours: Keeping morale high outside the production floor, too." aria-label="Enlarge: After hours"><img src="proof/team-lead-team-4.jpg" alt="After hours: Keeping morale high outside the production floor, too." loading="lazy"></button>
+      <figcaption><strong>After hours</strong>Keeping morale high outside the production floor, too.</figcaption>
+    </figure>
+    <figure class="shot tg-half">
+      <button type="button" class="shot-btn" data-full="proof/team-lead-global-leaderboard.png" data-cap="Global Care Leaderboard: Ranked #3 overall, ahead of sites from Teleperformance, Sutherland and Alorica." aria-label="Enlarge: Global Care Leaderboard"><img src="proof/team-lead-global-leaderboard.png" alt="Global Care Leaderboard: Ranked #3 overall, ahead of sites from Teleperformance, Sutherland and Alorica." loading="lazy"></button>
+      <figcaption><strong>Global Care Leaderboard</strong>Ranked #3 overall, ahead of sites from Teleperformance, Sutherland and Alorica.</figcaption>
+    </figure>
+    <figure class="shot tg-half">
+      <button type="button" class="shot-btn" data-full="proof/team-lead-top10-coaches.png" data-cap="Top 10 Coaches: Named to the Top 10 Coaches list at 107.42% of goal." aria-label="Enlarge: Top 10 Coaches"><img src="proof/team-lead-top10-coaches.png" alt="Top 10 Coaches: Named to the Top 10 Coaches list at 107.42% of goal." loading="lazy"></button>
+      <figcaption><strong>Top 10 Coaches</strong>Named to the Top 10 Coaches list at 107.42% of goal.</figcaption>
+    </figure>
+  </div>
+  <div class="ai-proof lead-proof">
+    <p><strong>What that means for you:</strong> start with one VA who can take work off your plate today, then help you write the process, train the next hire and keep a growing team on standard.</p>
+  </div>
+</section>
+
+<!-- ================= TRACK RECORD ================= -->
+<section id="proof" class="wrap section" style="padding-top:0">
+  <p class="kicker">Track record</p>
+  <h2 class="display h2">Proof, not promises.</h2>
+  <p class="sub">Real scorecards and recognition from my years on the T-Mobile account at TTEC, plus guest reviews from my own Airbnb business. Other people's names are blurred for privacy; the numbers are untouched. Tap any image to enlarge it.</p>
+  <div class="gallery">
+      <figure class="shot">
+        <button type="button" class="shot-btn" data-full="proof/top-frontline-heroes-110pct.png" data-cap="Top Frontline Heroes: Ranked in the month's top 5 at 110.60% of goal." aria-label="Enlarge: Top Frontline Heroes"><img src="proof/top-frontline-heroes-110pct.png" alt="Top Frontline Heroes: Ranked in the month's top 5 at 110.60% of goal." loading="lazy"></button>
+        <figcaption><strong>Top Frontline Heroes</strong>Ranked in the month's top 5 at 110.60% of goal.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button type="button" class="shot-btn" data-full="proof/top-frontline-heroes-rank3.jpg" data-cap="Top Frontline Heroes: Ranked #3 among the top 10 frontline experts at 117.64% of goal." aria-label="Enlarge: Top Frontline Heroes"><img src="proof/top-frontline-heroes-rank3.jpg" alt="Top Frontline Heroes: Ranked #3 among the top 10 frontline experts at 117.64% of goal." loading="lazy"></button>
+        <figcaption><strong>Top Frontline Heroes</strong>Ranked #3 among the top 10 frontline experts at 117.64% of goal.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button type="button" class="shot-btn" data-full="proof/aal-rockstar-award.jpg" data-cap="AAL Rockstar award: Recognized for 42 added lines (AALs) in a single month." aria-label="Enlarge: AAL Rockstar award"><img src="proof/aal-rockstar-award.jpg" alt="AAL Rockstar award: Recognized for 42 added lines (AALs) in a single month." loading="lazy"></button>
+        <figcaption><strong>AAL Rockstar award</strong>Recognized for 42 added lines (AALs) in a single month.</figcaption>
+      </figure>
+      <figure class="shot shot-wide">
+        <button type="button" class="shot-btn" data-full="proof/team-performance-dashboard.png" data-cap="Team performance dashboard: Highest DDC on the team at 79.94%, with a 94.12 NPS and a perfect 10.00 Rep UP." aria-label="Enlarge: Team performance dashboard"><img src="proof/team-performance-dashboard.png" alt="Team performance dashboard: Highest DDC on the team at 79.94%, with a 94.12 NPS and a perfect 10.00 Rep UP." loading="lazy"></button>
+        <figcaption><strong>Team performance dashboard</strong>Highest DDC on the team at 79.94%, with a 94.12 NPS and a perfect 10.00 Rep UP.</figcaption>
+      </figure>
+      <figure class="shot shot-wide">
+        <button type="button" class="shot-btn" data-full="proof/bonus-scorecard.png" data-cap="Performance bonus scorecard: Reached 112.51% of individual goal for the period." aria-label="Enlarge: Performance bonus scorecard"><img src="proof/bonus-scorecard.png" alt="Performance bonus scorecard: Reached 112.51% of individual goal for the period." loading="lazy"></button>
+        <figcaption><strong>Performance bonus scorecard</strong>Reached 112.51% of individual goal for the period.</figcaption>
+      </figure>
+      <figure class="shot shot-wide">
+        <button type="button" class="shot-btn" data-full="proof/personal-scorecard.png" data-cap="Personal scorecard: 188 inbound calls with a 100.00 NPS and 10.00 Rep UP." aria-label="Enlarge: Personal scorecard"><img src="proof/personal-scorecard.png" alt="Personal scorecard: 188 inbound calls with a 100.00 NPS and 10.00 Rep UP." loading="lazy"></button>
+        <figcaption><strong>Personal scorecard</strong>188 inbound calls with a 100.00 NPS and 10.00 Rep UP.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button type="button" class="shot-btn" data-full="proof/top-frontline-heroes-mtd.png" data-cap="Top Frontline Heroes: Listed among the top 10 frontline experts for the running month." aria-label="Enlarge: Top Frontline Heroes"><img src="proof/top-frontline-heroes-mtd.png" alt="Top Frontline Heroes: Listed among the top 10 frontline experts for the running month." loading="lazy"></button>
+        <figcaption><strong>Top Frontline Heroes</strong>Listed among the top 10 frontline experts for the running month.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button type="button" class="shot-btn" data-full="proof/magenta-fox-warrior-1.jpg" data-cap="Magenta Fox Warrior: Floor recognition on the T-Mobile account." aria-label="Enlarge: Magenta Fox Warrior"><img src="proof/magenta-fox-warrior-1.jpg" alt="Magenta Fox Warrior: Floor recognition on the T-Mobile account." loading="lazy"></button>
+        <figcaption><strong>Magenta Fox Warrior</strong>Floor recognition on the T-Mobile account.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button type="button" class="shot-btn" data-full="proof/magenta-fox-warrior-2.jpg" data-cap="Magenta Fox Warrior: Recognition on the T-Mobile production floor." aria-label="Enlarge: Magenta Fox Warrior"><img src="proof/magenta-fox-warrior-2.jpg" alt="Magenta Fox Warrior: Recognition on the T-Mobile production floor." loading="lazy"></button>
+        <figcaption><strong>Magenta Fox Warrior</strong>Recognition on the T-Mobile production floor.</figcaption>
+      </figure>
+      <figure class="shot shot-wide">
+        <button type="button" class="shot-btn" data-full="proof/la-casa-magat-airbnb.png" data-cap="La Casa Magat on Airbnb: My own short-term rental business: 4.17-star host rating and 3 years hosting guests in a studio and 2BR staycation units." aria-label="Enlarge: La Casa Magat on Airbnb"><img src="proof/la-casa-magat-airbnb.png" alt="La Casa Magat on Airbnb: My own short-term rental business: 4.17-star host rating and 3 years hosting guests in a studio and 2BR staycation units." loading="lazy"></button>
+        <figcaption><strong>La Casa Magat on Airbnb</strong>My own short-term rental business: 4.17-star host rating and 3 years hosting guests in a studio and 2BR staycation units.</figcaption>
+      </figure>
+  </div>
+</section>
+
+<dialog id="lightbox" class="lightbox" aria-label="Enlarged image">
+  <button type="button" class="lb-close" aria-label="Close">&times;</button>
+  <img id="lb-img" src="" alt="">
+  <p id="lb-cap"></p>
+</dialog>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="wrap section" style="padding-top:0">
+  <p class="kicker">How it works</p>
+  <h2 class="display h2">Up and running in about a week.</h2>
+  <ol class="steps">
+    <li class="step"><h3>Free 20-minute call</h3><p>You walk me through what's piling up. I tell you honestly what I can own and what I'd need from you.</p></li>
+    <li class="step"><h3>Paid trial week</h3><p>I learn your tools, write down your process and deliver real work, so you judge the fit on results.</p></li>
+    <li class="step"><h3>Ongoing support</h3><p>Hourly, part-time or full-time, with a daily update so nothing sits unanswered.</p></li>
+  </ol>
+  <div class="guarantee">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+    <p><strong>Simple payment terms.</strong> Website management, social media management and project-based assistance require a 50% down payment to get started.</p>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS (hidden until you have quotes) =================
+     To show client quotes: remove the comment markers around this block and fill it in.
+<section class="wrap section" style="padding-top:0">
+  <p class="kicker">What clients say</p>
+  <h2 class="display h2">Don't take my word for it.</h2>
+  <div class="pains">
+    <div class="pain"><p>"Client quote here."</p><p style="margin-top:14px;font-weight:700;color:var(--ink)">Name, Title, Company</p></div>
+  </div>
+</section>
+================================================================================== -->
+
+<!-- ================= EXPERIENCE ================= -->
+<section class="wrap section" style="padding-top:0">
+  <div class="exp">
+    <div>
+      <p class="kicker">Background</p>
+      <h2 class="display h2">8+ years. Eight areas of expertise.</h2>
+      <p class="sub">Customer &amp; client support, legal, real estate, insurance, construction, hospitality, social media management and website development.</p>
+      <div class="toolset" aria-label="Tools">
+      <!-- Optional logos: add image files to a "logos" folder named like logos/salesforce.png.
+           Any logo file that is missing is hidden automatically and the name still shows. -->
+        <div class="tool-group"><h3><span class="tg-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>CRM &amp; case management</h3><ul class="tools"><li><img class="tool-logo" src="logos/salesforce.png" alt="" width="20" height="20" onerror="this.remove()">Salesforce</li><li><img class="tool-logo" src="logos/hubspot.png" alt="" width="20" height="20" onerror="this.remove()">HubSpot</li><li><img class="tool-logo" src="logos/gohighlevel-pro.png" alt="" width="20" height="20" onerror="this.remove()">GoHighLevel Pro</li><li><img class="tool-logo" src="logos/filevine.png" alt="" width="20" height="20" onerror="this.remove()">Filevine</li><li><img class="tool-logo" src="logos/rain.png" alt="" width="20" height="20" onerror="this.remove()">RAIN</li><li><img class="tool-logo" src="logos/podio.png" alt="" width="20" height="20" onerror="this.remove()">Podio</li><li><img class="tool-logo" src="logos/kvcore.png" alt="" width="20" height="20" onerror="this.remove()">KVCore</li><li><img class="tool-logo" src="logos/joinapp.png" alt="" width="20" height="20" onerror="this.remove()">JoinApp</li></ul></div>
+        <div class="tool-group"><h3><span class="tg-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>Calls &amp; team chat</h3><ul class="tools"><li><img class="tool-logo" src="logos/slack.png" alt="" width="20" height="20" onerror="this.remove()">Slack</li><li><img class="tool-logo" src="logos/ringcentral.png" alt="" width="20" height="20" onerror="this.remove()">RingCentral</li><li><img class="tool-logo" src="logos/aircall.png" alt="" width="20" height="20" onerror="this.remove()">Aircall</li><li><img class="tool-logo" src="logos/zoom.png" alt="" width="20" height="20" onerror="this.remove()">Zoom</li><li><img class="tool-logo" src="logos/avaya.png" alt="" width="20" height="20" onerror="this.remove()">Avaya</li></ul></div>
+        <div class="tool-group"><h3><span class="tg-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></span>Docs, sheets &amp; files</h3><ul class="tools"><li><img class="tool-logo" src="logos/google-workspace.png" alt="" width="20" height="20" onerror="this.remove()">Google Workspace</li><li><img class="tool-logo" src="logos/ms-excel.png" alt="" width="20" height="20" onerror="this.remove()">MS Excel</li><li><img class="tool-logo" src="logos/dropbox.png" alt="" width="20" height="20" onerror="this.remove()">Dropbox</li><li><img class="tool-logo" src="logos/encircle.png" alt="" width="20" height="20" onerror="this.remove()">Encircle</li></ul></div>
+        <div class="tool-group"><h3><span class="tg-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m9 8-2 2 2 2M15 8l2 2-2 2"/></svg></span>Design, web &amp; AI</h3><ul class="tools"><li><img class="tool-logo" src="logos/canva.png" alt="" width="20" height="20" onerror="this.remove()">Canva</li><li><img class="tool-logo" src="logos/claude-and-chatgpt.png" alt="" width="20" height="20" onerror="this.remove()">Claude &amp; ChatGPT</li><li><img class="tool-logo" src="logos/github-pages.png" alt="" width="20" height="20" onerror="this.remove()">GitHub Pages</li><li><img class="tool-logo" src="logos/namecheap.png" alt="" width="20" height="20" onerror="this.remove()">Namecheap</li></ul></div>
+      </div>
+      <ul class="certs" aria-label="Certifications">
+        <li>Lean Six Sigma White Belt</li>
+        <li>HIPAA Certification</li>
+        <li>Transaction Coordinator for Real Estate</li>
+        <li>Data Privacy &amp; Intro to GDPR</li>
+        <li>TTEC Leadership Institute: Trainer 101, Team Lead 101 &amp; 201</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" class="wrap section" style="padding-top:0">
+  <p class="kicker">Questions</p>
+  <h2 class="display h2">Before you book</h2>
+  <div class="faq">
+    <details><summary>You're in the Philippines. Will you really be online when I am?</summary><p>Yes. I work U.S. Eastern business hours as my regular schedule, so I'm on when your phones ring and your clients email.</p></details>
+    <details><summary>How much does it cost?</summary><p>It depends on hours and scope. I offer hourly, part-time (about 20 hours a week) and full-time (40 hours a week) arrangements. We'll settle on a clear rate on the free call, before any work starts.</p></details>
+    <details><summary>How do you keep my client data safe?</summary><p>I'm HIPAA certified and trained in data privacy, GDPR and cybersecurity awareness. I work inside your systems with the access you grant, and I'm used to handling medical, legal and insurance records.</p></details>
+    <details><summary>What if you don't know our software?</summary><p>I've worked in Salesforce, HubSpot, Filevine, RAIN, Podio and KVCore, among others. If yours is new to me, I learn it during the trial week and write down the steps as I go.</p></details>
+    <details><summary>How will I know what you did each day?</summary><p>You get a short end-of-day update covering what's done, what's in progress and anything that needs your decision. I'll use Slack, email or whatever your team already uses.</p></details>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section id="book" class="wrap" style="padding-bottom:clamp(56px,7vw,96px)">
+  <div class="final">
+    <div>
+      <h2 class="display">Let's find the first 10 hours you can hand off.</h2>
+      <p>Book a free 20-minute call. You'll leave with a short delegation list, whether or not we work together.</p>
+    </div>
+    <div class="contact">
+      <!-- If you set up Calendly, replace the mailto link below with your Calendly URL -->
+      <a class="btn btn-cta" href="mailto:jnmagatva@gmail.com?subject=Free%2020-minute%20call&amp;body=Hi%20John%2C%0A%0AI%27d%20like%20to%20book%20a%20call.%20Here%27s%20what%20I%20need%20help%20with%3A%0A%0A">Book my free call</a>
+      <a href="mailto:jnmagatva@gmail.com"><small>Email</small>jnmagatva@gmail.com</a>
+      <a href="https://linkedin.com/in/johnnikkomagat" target="_blank" rel="noopener"><small>LinkedIn</small>linkedin.com/in/johnnikkomagat</a>
+      <a href="https://drive.google.com/file/d/1GrYzyrMpO4Pfd_VxJpSy9PthY2Nv9Ba4/view?usp=drive_link" target="_blank" rel="noopener"><small>Résumé</small>View my full CV</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 JN Magat</span>
+    <span>Remote from Bataan, Philippines. Working U.S. Eastern hours.</span>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="sticky"><a class="btn btn-cta" href="#book">Book a free 20-minute call</a></div>
+
+<script>
+// Live Eastern Time clock
+(function(){
+  var t=document.getElementById('et-time');
+  function tick(){
+    try{t.textContent=new Date().toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'});}catch(e){}
+  }
+  tick();setInterval(tick,20000);
+})();
+
+// Accessible industry tabs
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('[role="tab"]'));
+  function select(tab){
+    tabs.forEach(function(t){
+      var on=t===tab;
+      t.setAttribute('aria-selected',on);
+      t.tabIndex=on?0:-1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
+    });
+  }
+  tabs.forEach(function(tab,i){
+    tab.addEventListener('click',function(){select(tab)});
+    tab.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight')n=tabs[(i+1)%tabs.length];
+      if(e.key==='ArrowLeft')n=tabs[(i-1+tabs.length)%tabs.length];
+      if(n){e.preventDefault();select(n);n.focus();}
+    });
+  });
+})();
+
+// Mobile sticky CTA: shows after the hero, hides near the booking section
+(function(){
+  var s=document.getElementById('sticky'),hero=document.querySelector('.hero'),book=document.getElementById('book');
+  if(!('IntersectionObserver' in window))return;
+  var heroVisible=true,bookVisible=false;
+  function update(){s.classList.toggle('show',!heroVisible&&!bookVisible)}
+  new IntersectionObserver(function(e){heroVisible=e[0].isIntersecting;update()}).observe(hero);
+  new IntersectionObserver(function(e){bookVisible=e[0].isIntersecting;update()}).observe(book);
+})();
+
+// Proof gallery lightbox
+(function(){
+  var d=document.getElementById('lightbox');if(!d||!d.showModal)return;
+  var img=document.getElementById('lb-img'),cap=document.getElementById('lb-cap');
+  document.querySelectorAll('.shot-btn').forEach(function(b){
+    b.addEventListener('click',function(){img.src=b.dataset.full;img.alt=b.dataset.cap;cap.textContent=b.dataset.cap;d.showModal();});
+  });
+  d.querySelector('.lb-close').addEventListener('click',function(){d.close()});
+  d.addEventListener('click',function(e){if(e.target===d)d.close()});
+})();
+
+// Hero photo slideshow
+(function(){
+  var box=document.querySelector('.slides');if(!box)return;
+  var imgs=[].slice.call(box.querySelectorAll('.slide')),dots=[].slice.call(box.querySelectorAll('.slide-dots button')),i=0,t;
+  function show(n){imgs[i].classList.remove('is-on');dots[i].removeAttribute('aria-current');i=(n+imgs.length)%imgs.length;imgs[i].classList.add('is-on');dots[i].setAttribute('aria-current','true');}
+  function start(){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;t=setInterval(function(){show(i+1)},4500);}
+  dots.forEach(function(d,n){d.addEventListener('click',function(){clearInterval(t);show(n);start();})});
+  start();
+})();
+
+// Scroll reveal for photos and sections
+(function(){
+  var els=document.querySelectorAll('.shot,.pain,.step,.tool-group,.tabs,.compare,.quote-cta,.final,.proof li');
+  if(!('IntersectionObserver' in window)){return;}
+  els.forEach(function(el){el.classList.add('reveal')});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el){io.observe(el)});
+})();
+
+// Hero background parallax
+(function(){
+  var img=document.querySelector('.hero-bg img');if(!img||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var ticking=false;
+  window.addEventListener('scroll',function(){if(ticking)return;ticking=true;requestAnimationFrame(function(){var y=Math.min(window.scrollY,900);img.style.translate='0 '+(y*0.25)+'px';ticking=false;});},{passive:true});
+})();
+</script>
+</body>
+</html>
