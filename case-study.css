@@ -200,7 +200,7 @@ footer a{color:#C3CCDC}
 .compare .knob svg{width:26px;height:26px;color:#fff}
 .compare .tag{position:absolute;bottom:14px;z-index:2;font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;background:rgba(11,18,34,.72);color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .compare .tag.b{left:14px}.compare .tag.a{right:14px;background:var(--client)}
-.compare input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.compare{cursor:ew-resize}.compare input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;pointer-events:none}
 .compare input:focus-visible+.knob{outline:3px solid #fff;outline-offset:4px}
 .compare-cap{margin-top:14px;font-size:14px;color:var(--navy-text)}
 .compare-cap b{color:#fff}
