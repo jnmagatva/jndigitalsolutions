@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" style="--hero-bg:#121311;--hero-shade:linear-gradient(90deg,#121311 30%,rgba(18,19,17,.86) 50%,rgba(18,19,17,.35) 100%),linear-gradient(0deg,#121311 0%,transparent 35%);--spot:rgba(200,105,42,.22);--eyebrow:#E08A4E;--h1-accent:#E08A4E;--logo-bg:#0B0B0A;--bg-w:66%;--client:#C8692A">
+<html lang="en" class="theme-dark" style="--hero-bg:#121311;--hero-shade:linear-gradient(90deg,#121311 30%,rgba(18,19,17,.86) 50%,rgba(18,19,17,.35) 100%),linear-gradient(0deg,#121311 0%,transparent 35%);--spot:rgba(200,105,42,.22);--eyebrow:#E08A4E;--h1-accent:#E08A4E;--logo-bg:#0B0B0A;--bg-w:66%;--client:#C8692A">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="case-study.css?v=5">
+<link rel="stylesheet" href="case-study.css?v=6">
 </head>
 <body>
 <div class="progress" aria-hidden="true"></div>
@@ -190,6 +190,18 @@
   els.forEach(function(e){io.observe(e)});
 })();
 
+</script>
+<script>
+/* Cursor spotlight on every section below the hero */
+(function(){
+  if(!matchMedia('(pointer: fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.querySelectorAll('main > section:not(.c-hero), main .photo-sec, main .cta, main .next').forEach(function(sec){
+    sec.classList.add('spot-on');
+    var s=document.createElement('span');s.className='sec-spot';s.setAttribute('aria-hidden','true');sec.insertBefore(s,sec.firstChild);
+    sec.addEventListener('pointermove',function(e){var r=s.getBoundingClientRect();
+      s.style.setProperty('--mx',(e.clientX-r.left)+'px');s.style.setProperty('--my',(e.clientY-r.top)+'px');});
+  });
+})();
 </script>
 </body>
 </html>

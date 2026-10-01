@@ -249,3 +249,54 @@ html,body{overflow-x:clip}
 .photo-sec .ai-proof{background:rgba(11,18,34,.6);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .photo-sec .pain h3{color:var(--ink)}
 .photo-sec + section{padding-top:clamp(56px,7vw,100px)!important}
+
+/* =========================================================
+   Dark charcoal theme (HC case study). Turned on with
+   class="theme-dark" on <html>; other pages are unaffected.
+   ========================================================= */
+.theme-dark{
+  --bg:#121311;--surface:#1B1C19;--line:rgba(255,255,255,.09);
+  --ink:#F3EFE7;--ink-2:#C4BEB2;--ink-3:#9A9387;
+  --navy:#171815;--navy-2:#20211D;--deep:#0D0E0C;--navy-text:#B9B2A5;
+  --sec-spot:rgba(224,138,78,.13);
+  background:#121311;color-scheme:dark}
+.theme-dark body{background:#121311;color:var(--ink)}
+.theme-dark main{position:relative;isolation:isolate}
+.theme-dark main::before{content:"";position:absolute;inset:0;z-index:-3;pointer-events:none;
+  background:radial-gradient(900px 600px at 0% 18%,rgba(224,138,78,.08),transparent 60%),
+             radial-gradient(800px 600px at 100% 62%,rgba(224,138,78,.06),transparent 60%)}
+
+/* Header */
+.theme-dark .top{background:rgba(18,19,17,.86);border-bottom-color:var(--line)}
+
+/* Screenshot band and photo sections */
+.theme-dark .show{background:#0D0E0C}
+.theme-dark .photo-sec::after{background:linear-gradient(90deg,rgba(18,19,17,.95) 0%,rgba(18,19,17,.88) 55%,rgba(18,19,17,.76) 100%),linear-gradient(0deg,rgba(13,14,12,.7),transparent 40%)}
+.theme-dark .photo-sec .kicker{color:#B9B2A5!important}
+.theme-dark .photo-sec .lead,.theme-dark .photo-sec .sub{color:#D9D3C8}
+.theme-dark .photo-sec .built span{color:#C4BEB2}
+
+/* Cards and panels */
+.theme-dark .goals li{background:var(--surface);border-color:var(--line);border-left-color:var(--client)}
+.theme-dark .steps li{background:rgba(27,28,25,.9);border-color:var(--line);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.theme-dark .steps li::before{background:#0D0E0C;color:#E08A4E;box-shadow:0 0 0 1px rgba(224,138,78,.35)}
+.theme-dark .built li::before{filter:brightness(1.9) saturate(.8)}
+.theme-dark .extra div{background:var(--surface);border:1px solid var(--line);border-top:2px solid #E08A4E}
+.theme-dark .cta{background:radial-gradient(600px 280px at 0% 0%,rgba(224,138,78,.22),transparent 70%),#171815;border:1px solid var(--line);border-top:2px solid #E08A4E}
+.theme-dark .price-line small,.theme-dark .cta .fine{color:#9A9387}
+.theme-dark .next{background:var(--surface);border-color:var(--line)}
+.theme-dark .next:hover{box-shadow:0 30px 60px -30px rgba(0,0,0,.9),0 0 0 1px rgba(224,138,78,.35)}
+.theme-dark footer{background:#0D0E0C;color:#8E887C;border-top:1px solid var(--line)}
+.theme-dark footer a{color:#C4BEB2}
+
+/* White hover fills keep dark text */
+.theme-dark .btn-ghost:hover,.theme-dark .c-hero .btn-ghost:hover,.theme-dark .cta .btn-ghost:hover{background:#fff;color:#121311;border-color:#fff}
+
+/* Cursor spotlight on every section */
+.sec-spot{position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:0;pointer-events:none;opacity:0;transition:opacity .45s ease;
+  background:radial-gradient(560px circle at var(--mx,50%) var(--my,50%),var(--sec-spot),transparent 62%)}
+.spot-on{position:relative;isolation:isolate}
+.spot-on>:not(.sec-spot){position:relative;z-index:1}
+.spot-on:hover>.sec-spot{opacity:1}
+.cta.spot-on>.sec-spot,.next.spot-on>.sec-spot{left:0;width:100%;border-radius:inherit}
+@media (prefers-reduced-motion:reduce){.sec-spot{display:none}}
