@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Checkout | JN Digital Solutions</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="case-study.css?v=5">
+<style>
+/* ===== Cart ===== */
+[hidden]{display:none!important}
+.cart-btn{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:transform .2s ease,border-color .2s ease}
+.cart-btn:hover{transform:translateY(-2px);border-color:var(--ink)}
+.cart-btn svg{width:22px;height:22px}
+.cart-count{position:absolute;top:-7px;right:-7px;min-width:21px;height:21px;padding:0 6px;border-radius:999px;background:var(--cta);color:var(--cta-ink);font-size:12px;font-weight:800;display:grid;place-items:center;transform:scale(0);transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.cart-count.on{transform:scale(1)}
+.cart-btn.bump{animation:bump .5s ease}
+@keyframes bump{30%{transform:scale(1.18) rotate(-6deg)}60%{transform:scale(.95)}}
+.add-cart{width:100%}.plan .add-cart+.btn{margin-top:10px}
+.add-cart.added{background:var(--good)!important;color:#fff!important;border-color:var(--good)!important;box-shadow:none!important}
+.cart-veil{position:fixed;inset:0;z-index:90;background:rgba(11,18,34,.55);opacity:0;pointer-events:none;transition:opacity .3s ease}
+.cart-panel{position:fixed;top:0;right:0;bottom:0;z-index:91;width:min(420px,100%);background:#fff;color:var(--ink);display:flex;flex-direction:column;transform:translateX(105%);visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s;box-shadow:-30px 0 80px -30px rgba(0,0,0,.5);padding-bottom:env(safe-area-inset-bottom,0px)}
+.cart-open .cart-veil{opacity:1;pointer-events:auto}.cart-open .cart-panel{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s}
+.cart-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid var(--line)}
+.cart-head h2{font-family:var(--display);font-weight:400;font-size:34px;letter-spacing:.01em;line-height:1}
+.cart-x{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:22px;line-height:1;color:var(--ink)}
+.cart-items{flex:1;overflow:auto;padding:8px 24px}
+.cart-empty{padding:40px 0;text-align:center;color:var(--ink-3)}
+.cart-empty a{color:var(--ink);font-weight:700}
+.ci{display:grid;grid-template-columns:1fr auto;gap:6px 14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.ci b{font-size:16px}.ci small{display:block;color:var(--ink-3);font-size:13px;margin-top:2px}
+.ci .amt{font-weight:800;font-size:16px;text-align:right}
+.ci .rm{grid-column:1/-1;justify-self:start;background:none;border:0;padding:0;color:var(--ink-3);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer}
+.cart-foot{padding:20px 24px 24px;border-top:1px solid var(--line);background:var(--bg)}
+.cart-total{display:flex;justify-content:space-between;align-items:baseline;font-weight:700}
+.cart-total b{font-family:var(--display);font-weight:400;font-size:40px;line-height:1}
+.cart-foot p{font-size:13px;color:var(--ink-3);margin:6px 0 16px}
+.cart-foot .btn{width:100%}
+.toast{position:fixed;left:50%;bottom:24px;z-index:95;transform:translate(-50%,140%);background:var(--navy);color:#fff;padding:14px 18px;border-radius:14px;font-weight:600;font-size:15px;display:flex;gap:14px;align-items:center;box-shadow:0 20px 50px -20px rgba(0,0,0,.7);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.toast.on{transform:translate(-50%,0)}
+.toast button{background:var(--cta);color:var(--cta-ink);border:0;border-radius:999px;padding:7px 14px;font:inherit;font-weight:700;font-size:14px;cursor:pointer}
+
+.co{max-width:1120px}
+.co-h{font-size:clamp(52px,7vw,92px);margin-top:4px}
+.co-empty{margin-top:30px;padding:40px;border:1px dashed var(--line);border-radius:18px;text-align:center}
+.co-empty p{margin-bottom:16px;color:var(--ink-2)}
+.co-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;margin-top:36px;align-items:start}
+.co-form fieldset{border:1px solid var(--line);background:#fff;border-radius:18px;padding:22px 24px 8px;margin:0 0 18px}
+.co-form legend{font-weight:800;font-size:15px;padding:0 6px;margin-left:-6px}
+.co-form label{display:block;font-weight:600;font-size:14px;margin-bottom:16px}
+.co-form label em{font-style:normal;font-weight:400;color:var(--ink-3)}
+.co-form input:not([type=radio]):not([type=checkbox]),.co-form textarea{display:block;width:100%;margin-top:6px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font:inherit;font-weight:400;font-size:16px;color:var(--ink)}
+.co-form input:focus,.co-form textarea:focus{outline:none;border-color:var(--ink);background:#fff;box-shadow:0 0 0 3px rgba(245,179,1,.35)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.opt{display:grid!important;grid-template-columns:22px 1fr auto;gap:14px;align-items:center;padding:16px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer;transition:border-color .2s ease,background .2s ease}
+.opt:has(input:checked){border-color:var(--ink);background:#FFF8E1}
+.opt input{width:20px;height:20px;accent-color:var(--navy);margin:0}
+.opt b{display:block;font-size:16px}.opt small{display:block;font-weight:400;color:var(--ink-3);font-size:13px}
+.opt strong{font-family:var(--display);font-weight:400;font-size:30px}
+.agree{display:grid!important;grid-template-columns:22px 1fr;gap:12px;font-weight:400!important;color:var(--ink-2);font-size:14px!important}
+.agree input{width:18px;height:18px;margin-top:2px;accent-color:var(--navy)}
+.co-err{min-height:22px;color:#B42318;font-weight:600;font-size:14px;margin-bottom:8px}
+.co-pay{width:100%;min-height:60px;font-size:18px}
+.co-secure{display:flex;gap:8px;align-items:flex-start;justify-content:center;font-size:13px;color:var(--ink-3);margin-top:12px;text-align:center}
+.co-secure svg{flex:none;margin-top:1px}
+.co-sum{position:sticky;top:96px;background:var(--navy);color:#fff;border-radius:20px;padding:26px 26px 22px;box-shadow:0 30px 70px -40px rgba(19,33,60,.9)}
+.co-sum h2{font-family:var(--display);font-weight:400;font-size:32px;letter-spacing:.01em;line-height:1;margin-bottom:10px}
+.co-line{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.co-line small{grid-column:1/-1;color:#AEB9CC;font-size:13px}
+.co-row{display:flex;justify-content:space-between;align-items:baseline;padding-top:14px;color:#C3CCDC}
+.co-row b{color:#fff}
+.co-row.due{font-weight:700;color:#fff}
+.co-row.due b{font-family:var(--display);font-weight:400;font-size:44px;line-height:1;color:var(--cta)}
+.co-row.rest{font-size:14px;padding-top:6px}
+.co-done{margin-top:36px;max-width:640px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:34px;text-align:center}
+.co-check{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--good);color:#fff;animation:pop .6s cubic-bezier(.3,1.6,.5,1)}
+.co-check svg{width:32px;height:32px}
+@keyframes pop{from{transform:scale(0)}}
+.co-done h2{font-size:clamp(40px,5vw,56px);margin-top:14px}
+.co-done>p{color:var(--ink-2);margin:10px auto 0;max-width:48ch}
+.co-ref{display:inline-block;margin-top:20px;padding:10px 16px;border-radius:12px;background:var(--bg);border:1px dashed var(--line);font-size:14px}
+.co-ref b{font-size:16px;letter-spacing:.04em;margin-left:6px}
+.co-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:24px}
+.co-inv{margin-top:14px}.co-inv .btn{min-height:48px}
+.co-small{font-size:14px;color:var(--ink-3);margin-top:16px}.co-small a{color:var(--ink);font-weight:700;cursor:pointer}
+@media (max-width:900px){.co-grid{grid-template-columns:1fr}.co-sum{position:static;order:-1}}
+@media (max-width:560px){.row2{grid-template-columns:1fr}.co-actions .btn{width:100%}}
+
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html">JN <span>Digital Solutions</span></a>
+    <nav class="top-nav" aria-label="Main">
+      <a href="pricing.html#packages">Packages</a>
+      <a href="index.html">Main site</a>
+      <button class="cart-btn" type="button" aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><span class="cart-count">0</span></button>
+    </nav>
+  </div>
+</header>
+<main class="wrap section co">
+  <a class="crumb" href="pricing.html#packages">&larr; Back to packages</a>
+  <h1 class="display co-h">Checkout</h1>
+  <p class="lead">Review your order, choose how much to pay today, and pay securely in USD with Wise.</p>
+
+  <div class="co-empty" hidden>
+    <p>Your cart is empty.</p>
+    <a class="btn btn-cta" href="pricing.html#packages">Browse packages</a>
+  </div>
+
+  <div class="co-grid" hidden>
+    <form class="co-form" id="co-form" novalidate>
+      <fieldset>
+        <legend>1. Your details</legend>
+        <div class="row2">
+          <label>Full name<input name="name" autocomplete="name" required></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required></label>
+        </div>
+        <label>Business name <em>(optional)</em><input name="biz" autocomplete="organization"></label>
+        <label>Project notes <em>(optional)</em><textarea name="notes" rows="3" placeholder="Pages you need, your current website, deadline..."></textarea></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. Pay today</legend>
+        <label class="opt"><input type="radio" name="plan" value="deposit" checked><span><b>50% deposit</b><small>Start the project now and pay the rest before launch.</small></span><strong data-amt="deposit">$0</strong></label>
+        <label class="opt"><input type="radio" name="plan" value="full"><span><b>Pay in full</b><small>Settle everything today. Nothing due at launch.</small></span><strong data-amt="full">$0</strong></label>
+      </fieldset>
+
+      <label class="agree"><input type="checkbox" name="agree" required><span>I understand the price covers the package as described, and any extra pages or features will be quoted first.</span></label>
+      <p class="co-err" role="alert"></p>
+      <button class="btn btn-cta co-pay" type="submit">Pay $0 with Wise</button>
+      <p class="co-secure"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Payment is handled on Wise's secure page in USD. I never see your card or bank details.</p>
+    </form>
+
+    <aside class="co-sum">
+      <h2>Order summary</h2>
+      <div class="co-lines"></div>
+      <div class="co-row"><span>Package total</span><b data-amt="total">$0</b></div>
+      <div class="co-row due"><span>Due today</span><b data-amt="today">$0</b></div>
+      <div class="co-row rest"><span>Balance before launch</span><span data-amt="rest">$0</span></div>
+    </aside>
+  </div>
+
+  <section class="co-done" hidden aria-live="polite">
+    <span class="co-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+    <h2 class="display">Almost done</h2>
+    <p>Wise opened in a new tab. Finish your payment there, then send me your order confirmation so I can match it and start your project.</p>
+    <div class="co-ref">Order reference <b data-ref></b></div>
+    <div class="co-actions">
+      <a class="btn btn-cta" data-send="wa" target="_blank" rel="noopener">Send confirmation on WhatsApp</a>
+      <a class="btn btn-ghost" data-send="mail">Send by email</a>
+    </div>
+    <p class="co-inv"><a class="btn btn-ghost" data-invoice target="_blank" rel="noopener">Download your invoice (PDF)</a></p>
+    <p class="co-small">Tab didn't open? <a data-wise target="_blank" rel="noopener">Open the Wise payment page</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 JN Digital Solutions</span>
+    <span><a href="index.html">Main site</a> &middot; <a href="pricing.html">Pricing</a> &middot; <a href="mailto:jnmagatva@gmail.com">jnmagatva@gmail.com</a></span>
+  </div>
+</footer>
+<div class="cart-veil"></div>
+<aside class="cart-panel" aria-label="Your cart">
+  <div class="cart-head"><h2>Your cart</h2><button class="cart-x" type="button" aria-label="Close cart">&times;</button></div>
+  <div class="cart-items"></div>
+  <div class="cart-foot" hidden>
+    <div class="cart-total"><span>Total</span><b>$0</b></div>
+    <p>Pay in full or a 50% deposit at checkout. Secure payment in USD through Wise.</p>
+    <a class="btn btn-cta" href="checkout.html">Checkout</a>
+  </div>
+</aside>
+<div class="toast" role="status" aria-live="polite"><span></span><button type="button">View cart</button></div>
+
+<script>
+/* ===== Cart (stored in this browser) ===== */
+(function(){
+  var KEY='jn-cart-v1';
+  var CATALOG={
+    starter:{name:'Starter website',desc:'Up to 7 pages, mobile-responsive, contact form, gallery and CMS',price:100},
+    growth:{name:'Growth website',desc:'Up to 12 pages, service sub-menus, testimonials and homepage SEO setup',price:400}
+  };
+  function read(){try{var c=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(c)?c.filter(function(id){return CATALOG[id];}):[];}catch(e){return [];}}
+  function write(c){try{localStorage.setItem(KEY,JSON.stringify(c));}catch(e){}render();}
+  function money(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});}
+  window.JNCart={catalog:CATALOG,read:read,write:write,money:money,
+    total:function(){return read().reduce(function(s,id){return s+CATALOG[id].price;},0);},
+    clear:function(){write([]);}};
+
+  var panel=document.querySelector('.cart-panel');
+  function render(){
+    var c=read(),n=c.length;
+    document.querySelectorAll('.cart-count').forEach(function(el){el.textContent=n;el.classList.toggle('on',n>0);});
+    document.querySelectorAll('[data-add]').forEach(function(b){var on=c.indexOf(b.dataset.add)>-1;b.classList.toggle('added',on);b.textContent=on?'Added to cart \u2713':b.dataset.label;});
+    if(!panel)return;
+    var list=panel.querySelector('.cart-items'),foot=panel.querySelector('.cart-foot');
+    if(!n){list.innerHTML='<p class="cart-empty">Your cart is empty.<br><a href="pricing.html#packages">Browse packages</a></p>';foot.hidden=true;return;}
+    foot.hidden=false;
+    list.innerHTML=c.map(function(id){var it=CATALOG[id];return '<div class="ci"><span><b>'+it.name+'</b><small>'+it.desc+'</small></span><span class="amt">'+money(it.price)+'</span><button class="rm" data-rm="'+id+'">Remove</button></div>';}).join('');
+    panel.querySelector('.cart-total b').textContent=money(JNCart.total());
+  }
+  function open(){var tt=document.querySelector('.toast');if(tt)tt.classList.remove('on');document.documentElement.classList.add('cart-open');var x=panel&&panel.querySelector('.cart-x');if(x)x.focus();}
+  function close(){document.documentElement.classList.remove('cart-open');}
+  var toastT;
+  function toast(msg){var t=document.querySelector('.toast');if(!t)return;t.querySelector('span').textContent=msg;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on');},3200);}
+
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('[data-add]');
+    if(a){e.preventDefault();var c=read();if(c.indexOf(a.dataset.add)<0){c.push(a.dataset.add);write(c);
+        document.querySelectorAll('.cart-btn').forEach(function(b){b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');});
+        toast(CATALOG[a.dataset.add].name+' added to your cart');}else open();return;}
+    if(e.target.closest('.cart-btn')||e.target.closest('.toast button')){e.preventDefault();open();return;}
+    if(e.target.closest('.cart-x')||e.target.classList.contains('cart-veil')){close();return;}
+    var r=e.target.closest('[data-rm]');if(r){write(read().filter(function(id){return id!==r.dataset.rm;}));}
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  addEventListener('storage',function(e){if(e.key===KEY)render();});
+  document.querySelectorAll('[data-add]').forEach(function(b){b.dataset.label=b.textContent;});
+  render();
+})();
+
+</script>
+<script>
+/* ===== Checkout -> Wise (USD) ===== */
+(function(){
+  var WISE='https://wise.com/pay/me/johnnikkoreyesm';
+  var C=window.JNCart,f=document.getElementById('co-form');
+  var grid=document.querySelector('.co-grid'),empty=document.querySelector('.co-empty'),done=document.querySelector('.co-done');
+  function amounts(){var t=C.total(),full=f.plan.value==='full',today=full?t:Math.round(t*50)/100;return {total:t,deposit:Math.round(t*50)/100,full:t,today:today,rest:Math.round((t-today)*100)/100};}
+  function render(){
+    var items=C.read();
+    if(!items.length&&done.hidden){grid.hidden=true;empty.hidden=false;return;}
+    grid.hidden=!done.hidden;empty.hidden=true;
+    document.querySelector('.co-lines').innerHTML=items.map(function(id){var it=C.catalog[id];return '<div class="co-line"><b>'+it.name+'</b><b>'+C.money(it.price)+'</b><small>'+it.desc+'</small></div>';}).join('');
+    var a=amounts();
+    document.querySelectorAll('[data-amt]').forEach(function(el){el.textContent=C.money(a[el.dataset.amt]);});
+    document.querySelector('.co-pay').textContent='Pay '+C.money(a.today)+' USD with Wise';
+  }
+  f.addEventListener('change',render);
+  addEventListener('storage',render);
+  f.addEventListener('submit',function(e){
+    e.preventDefault();var err=document.querySelector('.co-err'),d=new FormData(f);
+    var name=(d.get('name')||'').trim(),email=(d.get('email')||'').trim();
+    if(!name||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){err.textContent='Please add your name and a valid email.';return;}
+    if(!d.get('agree')){err.textContent='Please tick the box to confirm the package scope.';return;}
+    err.textContent='';
+    var a=amounts(),items=C.read().map(function(id){return C.catalog[id].name+' ('+C.money(C.catalog[id].price)+')';});
+    var now=new Date(),ref='JN-'+String(now.getFullYear()).slice(2)+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+    var url=WISE+'?currency=USD&amount='+a.today.toFixed(2);
+    window.open(url,'_blank','noopener');
+    var msg='New website order '+ref+'\n\nName: '+name+'\nEmail: '+email+'\nBusiness: '+((d.get('biz')||'').trim()||'-')+
+      '\nItems: '+items.join(', ')+'\nPackage total: '+C.money(a.total)+' USD\nPaid today via Wise: '+C.money(a.today)+' USD ('+(f.plan.value==='full'?'paid in full':'50% deposit')+')'+
+      '\nBalance before launch: '+C.money(a.rest)+' USD\nNotes: '+((d.get('notes')||'').trim()||'-');
+    var inv={ref:ref,date:now.toISOString().slice(0,10),name:name,email:email,biz:(d.get('biz')||'').trim(),
+      items:C.read().map(function(id){return {name:C.catalog[id].name,desc:C.catalog[id].desc,price:C.catalog[id].price};}),paid:a.today,status:'pending'};
+    var invUrl=new URL('invoice.html',location.href).href+'#'+btoa(unescape(encodeURIComponent(JSON.stringify(inv))));
+    msg+='\n\nClient invoice: '+invUrl;
+    document.querySelector('[data-invoice]').href=invUrl;
+    document.querySelector('[data-ref]').textContent=ref;
+    var johnMsg=msg;
+    document.querySelector('[data-send="wa"]').href='https://wa.me/639541975243?text='+encodeURIComponent(johnMsg);
+    document.querySelector('[data-send="mail"]').href='mailto:jnmagatva@gmail.com?subject='+encodeURIComponent('Website order '+ref+' from '+name)+'&body='+encodeURIComponent(johnMsg);
+    document.querySelector('[data-wise]').href=url;
+    try{localStorage.setItem('jn-last-order',JSON.stringify({ref:ref,msg:msg,url:url}));}catch(x){}
+    C.clear();grid.hidden=true;done.hidden=false;window.scrollTo({top:0,behavior:'smooth'});
+  });
+  render();
+})();
+
+</script>
+</body>
+</html>

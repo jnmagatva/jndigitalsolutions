@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invoice | JN Digital Solutions</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#13213C;--ink-2:#3E4A5E;--ink-3:#5B6679;--line:#DDE1E8;--bg:#EEF1F5;--navy:#13213C;--cta:#F5B301;--good:#1E7A4F;--warn:#B54708}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Montserrat,"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+.bar{max-width:860px;margin:24px auto 0;padding:0 20px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+.bar a{color:var(--ink-2);font-weight:600;text-decoration:none}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 20px;border-radius:10px;border:0;font:inherit;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none}
+.btn-cta{background:var(--cta);color:var(--ink);box-shadow:0 2px 0 #C98F00}
+.btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+.sheet{max-width:860px;margin:16px auto 40px;background:#fff;border-radius:16px;box-shadow:0 30px 70px -40px rgba(19,33,60,.5);overflow:hidden}
+.top{display:flex;justify-content:space-between;gap:24px;padding:36px 40px;background:var(--navy);color:#fff}
+.brand{display:flex;gap:16px;align-items:center}
+.brand img{width:72px;height:72px;border-radius:14px;background:#13213C}
+.brand b{display:block;font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:30px;letter-spacing:.02em;line-height:1}
+.brand b span{color:var(--cta)}
+.brand small{display:block;color:#AEB9CC;font-size:12px;margin-top:4px}
+.ttl{text-align:right}
+.ttl h1{margin:0;font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:52px;line-height:.9;letter-spacing:.02em}
+.ttl p{margin:6px 0 0;color:#C3CCDC;font-size:13px}
+.ttl p b{color:#fff}
+.status{display:inline-block;margin-top:10px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.status.pending{background:#FEF0C7;color:var(--warn)}
+.status.paid{background:#D1FADF;color:var(--good)}
+.body{padding:32px 40px 36px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+.cols h3{margin:0 0 6px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.cols p{margin:0;color:var(--ink-2)}
+.cols p b{color:var(--ink)}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding:10px 0;border-bottom:2px solid var(--ink)}
+th:last-child,td:last-child{text-align:right}
+td{padding:16px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td b{display:block;font-size:15px}td small{color:var(--ink-3)}
+.tot{margin-left:auto;width:min(340px,100%);margin-top:18px}
+.tot div{display:flex;justify-content:space-between;padding:7px 0;color:var(--ink-2)}
+.tot .paid b{color:var(--good)}
+.tot .due{border-top:2px solid var(--ink);margin-top:6px;padding-top:12px;font-weight:800;color:var(--ink);font-size:16px}
+.note{margin-top:28px;padding:16px 18px;border-radius:12px;background:#F6F7F9;border:1px solid var(--line);color:var(--ink-2);font-size:13px}
+.note b{color:var(--ink)}
+.foot{padding:18px 40px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;color:var(--ink-3);font-size:12px}
+.totwrap{position:relative}.stamp{position:absolute;left:10px;top:24px;transform:rotate(-12deg);border:3px solid var(--good);color:var(--good);border-radius:10px;padding:6px 16px;font-family:"Bebas Neue",Impact,sans-serif;font-size:40px;letter-spacing:.06em;opacity:.85}
+.sheet{position:relative}
+/* builder */
+.builder{max-width:860px;margin:16px auto 40px;background:#fff;border-radius:16px;padding:28px 32px}
+.builder h1{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:44px;margin:0 0 4px}
+.builder p{color:var(--ink-2);margin:0 0 18px}
+.builder label{display:block;font-weight:600;margin-bottom:12px}
+.builder input,.builder select,.builder textarea{display:block;width:100%;margin-top:5px;padding:11px 12px;border:1px solid var(--line);border-radius:9px;font:inherit;font-weight:400;background:#F6F7F9}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+@media (max-width:640px){.top,.cols,.g2{grid-template-columns:1fr;display:grid}.ttl{text-align:left}.body,.top{padding:24px}.stamp{display:none}}
+@media print{body{background:#fff}.bar,.builder{display:none!important}.sheet{margin:0;box-shadow:none;border-radius:0;max-width:none}.top{-webkit-print-color-adjust:exact;print-color-adjust:exact}.status,.note,.stamp{-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{margin:12mm}}
+</style>
+</head>
+<body>
+<div class="bar"><a href="index.html">&larr; JN Digital Solutions</a><span><button class="btn btn-ghost" type="button" id="markPaid" hidden>Mark as paid</button> <button class="btn btn-cta" type="button" onclick="window.print()">Download PDF / Print</button></span></div>
+
+<form class="builder" id="builder" hidden>
+  <h1>Create an invoice</h1>
+  <p>Fill this in to generate a paid invoice for a client, then download it as a PDF and send it.</p>
+  <div class="g2"><label>Invoice / order number<input name="ref" required></label><label>Date<input name="date" type="date" required></label></div>
+  <div class="g2"><label>Client name<input name="name" required></label><label>Client email<input name="email" type="email"></label></div>
+  <label>Business name<input name="biz"></label>
+  <label>Items (one per line: description | price)<textarea name="items" rows="3" placeholder="Starter website | 100"></textarea></label>
+  <div class="g2"><label>Amount paid (USD)<input name="paid" type="number" step="0.01" min="0" required></label><label>Status<select name="status"><option value="paid">Payment received</option><option value="pending">Payment pending confirmation</option></select></label></div>
+  <button class="btn btn-cta" type="submit">Generate invoice</button>
+</form>
+
+<article class="sheet" id="sheet" hidden>
+  <header class="top">
+    <div class="brand"><img src="jn-logo.png" alt=""><span><b>JN <span>Digital Solutions</span></b><small>Virtual assistance, operations and web design</small><small>jnmagatva@gmail.com</small></span></div>
+    <div class="ttl"><h1>Invoice</h1><p>No. <b data-f="ref"></b></p><p>Issued <b data-f="date"></b></p><span class="status" data-f="statusTag"></span></div>
+  </header>
+  <div class="body">
+    <div class="cols">
+      <div><h3>Billed to</h3><p><b data-f="name"></b><br><span data-f="biz"></span><span data-f="email"></span></p></div>
+      <div><h3>Payment</h3><p>Method: <b>Wise transfer (USD)</b><br>Terms: <span data-f="terms"></span></p></div>
+    </div>
+    <table><thead><tr><th>Description</th><th>Amount (USD)</th></tr></thead><tbody data-f="lines"></tbody></table>
+    <div class="totwrap"><div class="stamp" data-f="stamp" hidden>Paid</div>
+    <div class="tot">
+      <div><span>Subtotal</span><b data-f="total"></b></div>
+      <div class="paid"><span data-f="paidLabel">Amount paid</span><b data-f="paid"></b></div>
+      <div class="due"><span data-f="balLabel">Balance due</span><span data-f="balance"></span></div>
+    </div></div>
+    <div class="note" data-f="note"></div>
+  </div>
+  <footer class="foot"><span>JN Digital Solutions &middot; Mariveles, Bataan, Philippines</span><span>Thank you for your business.</span></footer>
+</article>
+
+<script>
+(function(){
+  function money(n){return '$'+(+n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function decode(h){try{return JSON.parse(decodeURIComponent(escape(atob(h))));}catch(e){return null;}}
+  function encode(o){return btoa(unescape(encodeURIComponent(JSON.stringify(o))));}
+  function show(d){
+    var total=d.items.reduce(function(s,i){return s+(+i.price||0);},0),paid=+d.paid||0,bal=Math.max(0,Math.round((total-paid)*100)/100),isPaid=d.status==='paid';
+    var set=function(k,v,html){document.querySelectorAll('[data-f="'+k+'"]').forEach(function(el){if(html)el.innerHTML=v;else el.textContent=v;});};
+    set('ref',d.ref);set('date',new Date(d.date+'T12:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}));
+    set('name',d.name);set('biz',d.biz?d.biz+'\n':'');set('email',d.email||'');
+    document.querySelector('[data-f="biz"]').innerHTML=d.biz?esc(d.biz)+'<br>':'';
+    set('terms',bal>0?'50% deposit to start, balance due before launch':'Paid in full');
+    set('lines',d.items.map(function(i){return '<tr><td><b>'+esc(i.name)+'</b>'+(i.desc?'<small>'+esc(i.desc)+'</small>':'')+'</td><td>'+money(i.price)+'</td></tr>';}).join(''),true);
+    set('total',money(total));set('paid',money(paid));set('balance',money(bal));
+    set('paidLabel',isPaid?(bal>0?'Deposit paid':'Paid'):'Payment submitted');
+    var tag=document.querySelector('[data-f="statusTag"]');tag.className='status '+(isPaid?'paid':'pending');
+    tag.textContent=isPaid?(bal>0?'Deposit received':'Paid in full'):'Payment pending confirmation';
+    var st=document.querySelector('[data-f="stamp"]');st.hidden=!isPaid;st.textContent=bal>0?'Deposit paid':'Paid in full';
+    set('balLabel',isPaid?'Balance due':'Balance after this payment');
+    set('note',isPaid?'<b>Payment received.</b> This invoice confirms a payment of '+money(paid)+' USD for order '+esc(d.ref)+'. Your Wise payment receipt is your bank-level proof of the transfer.'+(bal>0?' The remaining '+money(bal)+' USD is due before your website goes live.':'')
+      :'<b>Payment submitted.</b> You chose to pay '+money(paid)+' USD through Wise for order '+esc(d.ref)+'. Keep the receipt Wise emails you as proof of the transfer. Once I confirm the payment has arrived, I\'ll send you an updated invoice marked as paid.',true);
+    document.title='Invoice '+d.ref+' | JN Digital Solutions';
+    document.getElementById('sheet').hidden=false;
+  }
+  var h=location.hash.slice(1),d=h?decode(h):null;
+  var owner=/[?&]owner\b/.test(location.search);
+  if(d&&d.items){show(d);
+    if(owner&&d.status!=='paid'){var b=document.getElementById('markPaid');b.hidden=false;
+      b.onclick=function(){d.status='paid';d.date=new Date().toISOString().slice(0,10);location.hash=encode(d);show(d);b.hidden=true;};}
+    return;}
+  if(!owner){document.body.insertAdjacentHTML('beforeend','<p style="text-align:center;margin:60px 20px;color:#5B6679">No invoice found. Please use the invoice link from your order.</p>');return;}
+  // No order data: invoice builder for John (open invoice.html?owner)
+  var f=document.getElementById('builder');f.hidden=false;f.date.value=new Date().toISOString().slice(0,10);
+  f.addEventListener('submit',function(e){e.preventDefault();
+    var items=f.items.value.split('\n').map(function(l){var p=l.split('|');return {name:(p[0]||'').trim(),price:parseFloat((p[1]||'').replace(/[^0-9.]/g,''))||0};}).filter(function(i){return i.name;});
+    var o={ref:f.ref.value.trim(),date:f.date.value,name:f.name.value.trim(),email:f.email.value.trim(),biz:f.biz.value.trim(),items:items,paid:+f.paid.value,status:f.status.value};
+    location.hash=encode(o);f.hidden=true;show(o);});
+})();
+</script>
+</body>
+</html>
