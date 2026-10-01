@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" style="--hero-bg:#13213C;--hero-shade:linear-gradient(90deg,#13213C 32%,rgba(19,33,60,.82) 52%,rgba(19,33,60,.25) 100%),linear-gradient(0deg,#13213C 0%,transparent 35%);--spot:rgba(245,179,1,.16);--eyebrow:#F5B301;--h1-accent:#F5B301;--logo-bg:#13213C;--bg-w:58%;--bg-pos:42% 30%;--client:#F5B301">
+<html lang="en" style="--hero-bg:#13213C;--hero-shade:linear-gradient(90deg,#13213C 32%,rgba(19,33,60,.82) 52%,rgba(19,33,60,.25) 100%),linear-gradient(0deg,#13213C 0%,transparent 35%);--spot:rgba(245,179,1,.16);--eyebrow:#F5B301;--h1-accent:#F5B301;--logo-bg:#13213C;--bg-w:58%;--bg-pos:42% 30%;--client:#F5B301;--sec-spot:rgba(245,179,1,.15)">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="case-study.css?v=5">
+<link rel="stylesheet" href="case-study.css?v=6">
 </head>
 <body>
 <div class="progress" aria-hidden="true"></div>
@@ -78,7 +78,7 @@
   <ol class="steps" style="list-style:none;padding:0"><li><b>Define the goal</b><span>Decide what the site must do: explain services, prove results and book calls.</span></li><li><b>Plan the story</b><span>Order the sections the way a client thinks: what I handle, proof, reviews, then booking.</span></li><li><b>Design and build</b><span>Hand-code every section, mobile-first, with the booking and review features.</span></li><li><b>Launch and improve</b><span>Publish on GitHub Pages and keep adding features, like the pricing page and these case studies.</span></li></ol>
 </section>
 
-<section class="wrap section" style="padding-top:0">
+<section class="wrap section photo-sec cta-photo" style="--photo:url('ai-bg.jpg');--photo-pos:70% center">
   <div class="cta rv">
     <div>
       <h2 class="display">Want a site that books clients for you?</h2>
@@ -184,6 +184,19 @@
   els.forEach(function(e){io.observe(e)});
 })();
 
+</script>
+<script>
+/* Cursor spotlight on every section below the hero */
+(function(){
+  if(!matchMedia('(pointer: fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.querySelectorAll('main > section:not(.c-hero), main .photo-sec, main .cta, main .next').forEach(function(sec){
+    if(sec.classList.contains('spot-on'))return;
+    sec.classList.add('spot-on');
+    var s=document.createElement('span');s.className='sec-spot';s.setAttribute('aria-hidden','true');sec.insertBefore(s,sec.firstChild);
+    sec.addEventListener('pointermove',function(e){var r=s.getBoundingClientRect();
+      s.style.setProperty('--mx',(e.clientX-r.left)+'px');s.style.setProperty('--my',(e.clientY-r.top)+'px');});
+  });
+})();
 </script>
 </body>
 </html>

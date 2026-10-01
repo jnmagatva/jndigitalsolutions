@@ -300,3 +300,17 @@ html,body{overflow-x:clip}
 .spot-on:hover>.sec-spot{opacity:1}
 .cta.spot-on>.sec-spot,.next.spot-on>.sec-spot{left:0;width:100%;border-radius:inherit}
 @media (prefers-reduced-motion:reduce){.sec-spot{display:none}}
+
+/* Final section: same photo background as "How the project ran" */
+.theme-dark .last-sec{border-top:1px solid rgba(255,255,255,.08)}
+.theme-dark .last-sec .cta{background:radial-gradient(600px 280px at 0% 0%,rgba(224,138,78,.22),transparent 70%),rgba(23,24,21,.78);
+  -webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2);box-shadow:0 30px 80px -30px rgba(0,0,0,.85)}
+.theme-dark .last-sec .next{background:rgba(27,28,25,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 30px 80px -30px rgba(0,0,0,.85)}
+.theme-dark .last-sec .next strong{color:#fff}
+.theme-dark .last-sec .next small,.theme-dark .last-sec .next span{color:#C4BEB2}
+.theme-dark .last-sec .next em{color:#E08A4E}
+
+/* Closing section on a photo background (JN case study) */
+.cta-photo .cta{background:rgba(19,33,60,.62);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2);box-shadow:0 40px 90px -40px rgba(0,0,0,.9)}
+.cta-photo .next{color:var(--ink);box-shadow:0 40px 90px -40px rgba(0,0,0,.9);border-color:transparent}
+.cta-photo .next:hover{box-shadow:0 40px 90px -36px rgba(0,0,0,.95),0 0 0 2px var(--client)}
