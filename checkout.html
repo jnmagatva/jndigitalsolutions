@@ -89,6 +89,8 @@
 @media (max-width:900px){.co-grid{grid-template-columns:1fr}.co-sum{position:static;order:-1}}
 @media (max-width:560px){.row2{grid-template-columns:1fr}.co-actions .btn{width:100%}}
 
+.co-method{margin-top:6px}
+.co-method .opt{grid-template-columns:22px 1fr}
 </style>
 </head>
 <body>
@@ -105,7 +107,7 @@
 <main class="wrap section co">
   <a class="crumb" href="pricing.html#packages">&larr; Back to packages</a>
   <h1 class="display co-h">Checkout</h1>
-  <p class="lead">Review your order, choose how much to pay today, and pay securely in USD with Wise.</p>
+  <p class="lead">Review your order, choose how much to pay today, and pay securely in USD by bank transfer or card. Your invoice is created instantly.</p>
 
   <div class="co-empty" hidden>
     <p>Your cart is empty.</p>
@@ -130,6 +132,12 @@
         <label class="opt"><input type="radio" name="plan" value="full"><span><b>Pay in full</b><small>Settle everything today. Nothing due at launch.</small></span><strong data-amt="full">$0</strong></label>
       </fieldset>
 
+      <fieldset class="co-method">
+        <legend>3. Payment method</legend>
+        <label class="opt"><input type="radio" name="method" value="wise" checked><span><b>Bank transfer with Wise</b><small>Low fees. Pay from your bank or Wise balance in USD.</small></span></label>
+        <label class="opt" data-stripe-opt hidden><input type="radio" name="method" value="stripe"><span><b>Card, Apple Pay or Google Pay</b><small>Pay instantly by card through a secure Stripe checkout.</small></span></label>
+      </fieldset>
+
       <label class="agree"><input type="checkbox" name="agree" required><span>I understand the price covers the package as described, and any extra pages or features will be quoted first.</span></label>
       <p class="co-err" role="alert"></p>
       <button class="btn btn-cta co-pay" type="submit">Pay $0 with Wise</button>
@@ -148,14 +156,14 @@
   <section class="co-done" hidden aria-live="polite">
     <span class="co-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
     <h2 class="display">Almost done</h2>
-    <p>Wise opened in a new tab. Finish your payment there, then send me your order confirmation so I can match it and start your project.</p>
+    <p>Your secure payment page opened in a new tab. Finish your payment there, then send me your order confirmation so I can match it and start your project.</p>
     <div class="co-ref">Order reference <b data-ref></b></div>
     <div class="co-actions">
       <a class="btn btn-cta" data-send="wa" target="_blank" rel="noopener">Send confirmation on WhatsApp</a>
       <a class="btn btn-ghost" data-send="mail">Send by email</a>
     </div>
     <p class="co-inv"><a class="btn btn-ghost" data-invoice target="_blank" rel="noopener">Download your invoice (PDF)</a></p>
-    <p class="co-small">Tab didn't open? <a data-wise target="_blank" rel="noopener">Open the Wise payment page</a>.</p>
+    <p class="co-small">Tab didn't open? <a data-wise target="_blank" rel="noopener">Open the payment page</a>.</p>
   </section>
 </main>
 
@@ -171,7 +179,7 @@
   <div class="cart-items"></div>
   <div class="cart-foot" hidden>
     <div class="cart-total"><span>Total</span><b>$0</b></div>
-    <p>Pay in full or a 50% deposit at checkout. Secure payment in USD through Wise.</p>
+    <p>Pay in full or a 50% deposit at checkout. Secure payment in USD by Wise transfer or card.</p>
     <a class="btn btn-cta" href="checkout.html">Checkout</a>
   </div>
 </aside>
@@ -229,6 +237,17 @@
 /* ===== Checkout -> Wise (USD) ===== */
 (function(){
   var WISE='https://wise.com/pay/me/johnnikkoreyesm';
+  /* ---- STRIPE SETTINGS (card payments) ----
+     Leave both empty and the card option stays hidden.
+     STRIPE_LINKS: Stripe Payment Links for exact amounts, e.g. {"50":"https://buy.stripe.com/...", "100":"https://buy.stripe.com/..."}
+     STRIPE_FLEX:  one Payment Link set to "Customers choose what to pay", used for any other amount. */
+  var STRIPE_LINKS={};
+  var STRIPE_FLEX='';
+  function stripeUrl(amt,email,ref){
+    var key=String(+amt.toFixed(2)),base=STRIPE_LINKS[key]||STRIPE_FLEX;if(!base)return '';
+    var u=new URL(base);if(email)u.searchParams.set('prefilled_email',email);u.searchParams.set('client_reference_id',ref);return u.href;}
+  var hasStripe=!!(STRIPE_FLEX||Object.keys(STRIPE_LINKS).length);
+  if(hasStripe)document.querySelector('[data-stripe-opt]').hidden=false;
   var C=window.JNCart,f=document.getElementById('co-form');
   var grid=document.querySelector('.co-grid'),empty=document.querySelector('.co-empty'),done=document.querySelector('.co-done');
   function amounts(){var t=C.total(),full=f.plan.value==='full',today=full?t:Math.round(t*50)/100;return {total:t,deposit:Math.round(t*50)/100,full:t,today:today,rest:Math.round((t-today)*100)/100};}
@@ -239,7 +258,8 @@
     document.querySelector('.co-lines').innerHTML=items.map(function(id){var it=C.catalog[id];return '<div class="co-line"><b>'+it.name+'</b><b>'+C.money(it.price)+'</b><small>'+it.desc+'</small></div>';}).join('');
     var a=amounts();
     document.querySelectorAll('[data-amt]').forEach(function(el){el.textContent=C.money(a[el.dataset.amt]);});
-    document.querySelector('.co-pay').textContent='Pay '+C.money(a.today)+' USD with Wise';
+    var card=f.method&&f.method.value==='stripe';
+    document.querySelector('.co-pay').textContent='Pay '+C.money(a.today)+' USD '+(card?'by card':'with Wise');
   }
   f.addEventListener('change',render);
   addEventListener('storage',render);
@@ -251,13 +271,15 @@
     err.textContent='';
     var a=amounts(),items=C.read().map(function(id){return C.catalog[id].name+' ('+C.money(C.catalog[id].price)+')';});
     var now=new Date(),ref='JN-'+String(now.getFullYear()).slice(2)+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
-    var url=WISE+'?currency=USD&amount='+a.today.toFixed(2);
+    var card=f.method.value==='stripe',methodName=card?'Card (Stripe)':'Wise transfer (USD)';
+    var url=card?stripeUrl(a.today,email,ref):WISE+'?currency=USD&amount='+a.today.toFixed(2);
+    if(!url){err.textContent='Card payment is not available right now. Please choose Wise.';return;}
     window.open(url,'_blank','noopener');
     var msg='New website order '+ref+'\n\nName: '+name+'\nEmail: '+email+'\nBusiness: '+((d.get('biz')||'').trim()||'-')+
-      '\nItems: '+items.join(', ')+'\nPackage total: '+C.money(a.total)+' USD\nPaid today via Wise: '+C.money(a.today)+' USD ('+(f.plan.value==='full'?'paid in full':'50% deposit')+')'+
+      '\nItems: '+items.join(', ')+'\nPackage total: '+C.money(a.total)+' USD\nPaid today via '+methodName+': '+C.money(a.today)+' USD ('+(f.plan.value==='full'?'paid in full':'50% deposit')+')'+
       '\nBalance before launch: '+C.money(a.rest)+' USD\nNotes: '+((d.get('notes')||'').trim()||'-');
     var inv={ref:ref,date:now.toISOString().slice(0,10),name:name,email:email,biz:(d.get('biz')||'').trim(),
-      items:C.read().map(function(id){return {name:C.catalog[id].name,desc:C.catalog[id].desc,price:C.catalog[id].price};}),paid:a.today,status:'pending'};
+      items:C.read().map(function(id){return {name:C.catalog[id].name,desc:C.catalog[id].desc,price:C.catalog[id].price};}),paid:a.today,status:'pending',method:card?'stripe':'wise'};
     var invUrl=new URL('invoice.html',location.href).href+'#'+btoa(unescape(encodeURIComponent(JSON.stringify(inv))));
     msg+='\n\nClient invoice: '+invUrl;
     document.querySelector('[data-invoice]').href=invUrl;

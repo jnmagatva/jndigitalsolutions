@@ -60,6 +60,13 @@ td b{display:block;font-size:15px}td small{color:var(--ink-3)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
 @media (max-width:640px){.top,.cols,.g2{grid-template-columns:1fr;display:grid}.ttl{text-align:left}.body,.top{padding:24px}.stamp{display:none}}
 @media print{body{background:#fff}.bar,.builder{display:none!important}.sheet{margin:0;box-shadow:none;border-radius:0;max-width:none}.top{-webkit-print-color-adjust:exact;print-color-adjust:exact}.status,.note,.stamp{-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{margin:12mm}}
+.share{max-width:860px;margin:16px auto 0;padding:16px 20px;background:#FFF8E1;border:1px solid #F1D98A;border-radius:14px}
+.share p{margin:0 0 10px;font-size:14px}
+.share-row{display:flex;gap:10px;flex-wrap:wrap}.share-row input{flex:1;min-width:200px;font:inherit;font-size:13px;padding:10px 12px;border:1px solid var(--line);border-radius:10px}
+.paybox{margin-top:24px;display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;padding:18px 20px;border-radius:14px;background:#FFF8E1;border:1.5px solid #F1D98A}
+.paybox b{display:block;font-size:16px}.paybox span{font-size:14px;color:var(--ink-2)}
+.pay-btns{display:flex;gap:10px;flex-wrap:wrap}
+@media print{.share,.paybox{display:none!important}}
 </style>
 </head>
 <body>
@@ -67,24 +74,30 @@ td b{display:block;font-size:15px}td small{color:var(--ink-3)}
 
 <form class="builder" id="builder" hidden>
   <h1>Create an invoice</h1>
-  <p>Fill this in to generate a paid invoice for a client, then download it as a PDF and send it.</p>
+  <p>Create a custom invoice in seconds. Choose "Awaiting payment" to give your client a link they can pay right from the invoice, by Wise transfer or card.</p>
   <div class="g2"><label>Invoice / order number<input name="ref" required></label><label>Date<input name="date" type="date" required></label></div>
   <div class="g2"><label>Client name<input name="name" required></label><label>Client email<input name="email" type="email"></label></div>
   <label>Business name<input name="biz"></label>
   <label>Items (one per line: description | price)<textarea name="items" rows="3" placeholder="Starter website | 100"></textarea></label>
-  <div class="g2"><label>Amount paid (USD)<input name="paid" type="number" step="0.01" min="0" required></label><label>Status<select name="status"><option value="paid">Payment received</option><option value="pending">Payment pending confirmation</option></select></label></div>
+  <div class="g2"><label>Status<select name="status"><option value="due">Awaiting payment (client pays from the invoice)</option><option value="paid">Payment received</option><option value="pending">Payment pending confirmation</option></select></label><label><span data-amt-label>Amount to collect now (USD)</span><input name="paid" type="number" step="0.01" min="0" required></label></div>
+  <div class="g2"><label>Payment method<select name="method"><option value="any">Client chooses (Wise or card)</option><option value="wise">Wise transfer (USD)</option><option value="stripe">Card (Stripe)</option></select></label><label>Due date (optional)<input name="due" type="date"></label></div>
   <button class="btn btn-cta" type="submit">Generate invoice</button>
 </form>
 
+<div class="share" id="share" hidden>
+  <p><b>Invoice ready.</b> Send this link to your client. They can view it, download it and pay it.</p>
+  <div class="share-row"><input id="shareUrl" readonly aria-label="Client invoice link"><button class="btn btn-cta" type="button" id="copyLink">Copy client link</button></div>
+</div>
+
 <article class="sheet" id="sheet" hidden>
   <header class="top">
-    <div class="brand"><img src="jn-logo.png" alt=""><span><b>JN <span>Digital Solutions</span></b><small>Virtual assistance, operations and web design</small><small>jnmagatva@gmail.com</small></span></div>
+    <div class="brand"><img src="jn-logo.png" alt=""><span><b>JN <span>Digital Solutions</span></b><small>Web design, local SEO and virtual assistance</small><small>jnmagatva@gmail.com</small></span></div>
     <div class="ttl"><h1>Invoice</h1><p>No. <b data-f="ref"></b></p><p>Issued <b data-f="date"></b></p><span class="status" data-f="statusTag"></span></div>
   </header>
   <div class="body">
     <div class="cols">
       <div><h3>Billed to</h3><p><b data-f="name"></b><br><span data-f="biz"></span><span data-f="email"></span></p></div>
-      <div><h3>Payment</h3><p>Method: <b>Wise transfer (USD)</b><br>Terms: <span data-f="terms"></span></p></div>
+      <div><h3>Payment</h3><p>Method: <b data-f="method">Wise transfer (USD)</b><br>Terms: <span data-f="terms"></span><span data-f="dueLine"></span></p></div>
     </div>
     <table><thead><tr><th>Description</th><th>Amount (USD)</th></tr></thead><tbody data-f="lines"></tbody></table>
     <div class="totwrap"><div class="stamp" data-f="stamp" hidden>Paid</div>
@@ -93,6 +106,10 @@ td b{display:block;font-size:15px}td small{color:var(--ink-3)}
       <div class="paid"><span data-f="paidLabel">Amount paid</span><b data-f="paid"></b></div>
       <div class="due"><span data-f="balLabel">Balance due</span><span data-f="balance"></span></div>
     </div></div>
+    <div class="paybox" data-f="paybox" hidden>
+      <div><b>Pay this invoice</b><span data-f="payText"></span></div>
+      <div class="pay-btns"><a class="btn btn-cta" data-pay="stripe" target="_blank" rel="noopener" hidden>Pay by card</a><a class="btn btn-ghost" data-pay="wise" target="_blank" rel="noopener" hidden>Pay with Wise</a></div>
+    </div>
     <div class="note" data-f="note"></div>
   </div>
   <footer class="foot"><span>JN Digital Solutions &middot; Mariveles, Bataan, Philippines</span><span>Thank you for your business.</span></footer>
@@ -100,17 +117,27 @@ td b{display:block;font-size:15px}td small{color:var(--ink-3)}
 
 <script>
 (function(){
+  /* ---- PAYMENT SETTINGS (keep the same as checkout.html) ---- */
+  var WISE='https://wise.com/pay/me/johnnikkoreyesm';
+  var STRIPE_LINKS={};   // exact-amount Stripe Payment Links, e.g. {"200":"https://buy.stripe.com/..."}
+  var STRIPE_FLEX='';    // Stripe Payment Link with "Customers choose what to pay"
+  function stripeUrl(amt,email,ref){var key=String(+(+amt).toFixed(2)),base=STRIPE_LINKS[key]||STRIPE_FLEX;if(!base)return '';
+    var u=new URL(base);if(email)u.searchParams.set('prefilled_email',email);u.searchParams.set('client_reference_id',String(ref).replace(/[^A-Za-z0-9_-]/g,'-'));return u.href;}
+  var METHODS={wise:'Wise transfer (USD)',stripe:'Card (Stripe)',any:'Wise transfer or card'};
   function money(n){return '$'+(+n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function decode(h){try{return JSON.parse(decodeURIComponent(escape(atob(h))));}catch(e){return null;}}
   function encode(o){return btoa(unescape(encodeURIComponent(JSON.stringify(o))));}
   function show(d){
-    var total=d.items.reduce(function(s,i){return s+(+i.price||0);},0),paid=+d.paid||0,bal=Math.max(0,Math.round((total-paid)*100)/100),isPaid=d.status==='paid';
+    var isDue=d.status==='due';
+    var total=d.items.reduce(function(s,i){return s+(+i.price||0);},0),paid=isDue?0:(+d.paid||0),bal=Math.max(0,Math.round((total-paid)*100)/100),isPaid=d.status==='paid';
     var set=function(k,v,html){document.querySelectorAll('[data-f="'+k+'"]').forEach(function(el){if(html)el.innerHTML=v;else el.textContent=v;});};
     set('ref',d.ref);set('date',new Date(d.date+'T12:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}));
     set('name',d.name);set('biz',d.biz?d.biz+'\n':'');set('email',d.email||'');
     document.querySelector('[data-f="biz"]').innerHTML=d.biz?esc(d.biz)+'<br>':'';
-    set('terms',bal>0?'50% deposit to start, balance due before launch':'Paid in full');
+    set('method',METHODS[d.method]||METHODS.wise);
+    document.querySelector('[data-f="dueLine"]').innerHTML=d.due?'<br>Due: <b>'+esc(new Date(d.due+'T12:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}))+'</b>':'';
+    set('terms',isDue?((+d.paid||total)<total?'Deposit due now, balance due before launch':'Due in full'):(bal>0?'50% deposit to start, balance due before launch':'Paid in full'));
     set('lines',d.items.map(function(i){return '<tr><td><b>'+esc(i.name)+'</b>'+(i.desc?'<small>'+esc(i.desc)+'</small>':'')+'</td><td>'+money(i.price)+'</td></tr>';}).join(''),true);
     set('total',money(total));set('paid',money(paid));set('balance',money(bal));
     set('paidLabel',isPaid?(bal>0?'Deposit paid':'Paid'):'Payment submitted');
@@ -118,24 +145,40 @@ td b{display:block;font-size:15px}td small{color:var(--ink-3)}
     tag.textContent=isPaid?(bal>0?'Deposit received':'Paid in full'):'Payment pending confirmation';
     var st=document.querySelector('[data-f="stamp"]');st.hidden=!isPaid;st.textContent=bal>0?'Deposit paid':'Paid in full';
     set('balLabel',isPaid?'Balance due':'Balance after this payment');
-    set('note',isPaid?'<b>Payment received.</b> This invoice confirms a payment of '+money(paid)+' USD for order '+esc(d.ref)+'. Your Wise payment receipt is your bank-level proof of the transfer.'+(bal>0?' The remaining '+money(bal)+' USD is due before your website goes live.':'')
-      :'<b>Payment submitted.</b> You chose to pay '+money(paid)+' USD through Wise for order '+esc(d.ref)+'. Keep the receipt Wise emails you as proof of the transfer. Once I confirm the payment has arrived, I\'ll send you an updated invoice marked as paid.',true);
+    set('note',isPaid?'<b>Payment received.</b> This invoice confirms a payment of '+money(paid)+' USD for order '+esc(d.ref)+'. Your payment receipt is your proof of the transaction.'+(bal>0?' The remaining '+money(bal)+' USD is due before your website goes live.':'')
+      :'<b>Payment submitted.</b> You chose to pay '+money(paid)+' USD by '+(d.method==='stripe'?'card':'Wise transfer')+' for order '+esc(d.ref)+'. Keep the payment receipt you receive by email as proof of the transfer. Once I confirm the payment has arrived, I\'ll send you an updated invoice marked as paid.',true);
+    var box=document.querySelector('[data-f="paybox"]');box.hidden=!isDue;
+    if(isDue){var now=+d.paid||total,m=d.method||'any',s=(m!=='wise')?stripeUrl(now,d.email,d.ref):'',w=(m!=='stripe')?WISE+'?currency=USD&amount='+now.toFixed(2):'';
+      set('payText','Amount due now: '+money(now)+' USD. Paying takes about a minute.');
+      var sb=document.querySelector('[data-pay="stripe"]'),wb=document.querySelector('[data-pay="wise"]');
+      sb.hidden=!s;if(s)sb.href=s;wb.hidden=!w;if(w)wb.href=w;
+      if(!s&&!w)set('payText','Amount due now: '+money(now)+' USD. Reply to the invoice email to arrange payment.');
+      set('paidLabel','Amount due now');set('paid',money(now));set('balLabel','Balance after this payment');set('balance',money(Math.max(0,total-now)));
+      tag.className='status pending';tag.textContent='Awaiting payment';
+      set('note','<b>How to pay.</b> Use the button above to pay '+money(now)+' USD for invoice '+esc(d.ref)+'. Your payment receipt is your proof of payment, and I&rsquo;ll send an updated invoice marked as paid once it arrives.',true);}
     document.title='Invoice '+d.ref+' | JN Digital Solutions';
     document.getElementById('sheet').hidden=false;
   }
   var h=location.hash.slice(1),d=h?decode(h):null;
   var owner=/[?&]owner\b/.test(location.search);
   if(d&&d.items){show(d);
+    if(owner){document.getElementById('share').hidden=false;document.getElementById('shareUrl').value=location.origin+location.pathname+'#'+h;}
     if(owner&&d.status!=='paid'){var b=document.getElementById('markPaid');b.hidden=false;
-      b.onclick=function(){d.status='paid';d.date=new Date().toISOString().slice(0,10);location.hash=encode(d);show(d);b.hidden=true;};}
+      b.onclick=function(){if(d.status==='due')d.paid=+d.paid||d.items.reduce(function(s,i){return s+(+i.price||0);},0);d.status='paid';d.date=new Date().toISOString().slice(0,10);location.hash=encode(d);show(d);b.hidden=true;};}
     return;}
   if(!owner){document.body.insertAdjacentHTML('beforeend','<p style="text-align:center;margin:60px 20px;color:#5B6679">No invoice found. Please use the invoice link from your order.</p>');return;}
   // No order data: invoice builder for John (open invoice.html?owner)
   var f=document.getElementById('builder');f.hidden=false;f.date.value=new Date().toISOString().slice(0,10);
+  var n=new Date();f.ref.value='JN-'+String(n.getFullYear()).slice(2)+String(n.getMonth()+1).padStart(2,'0')+String(n.getDate()).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,6).toUpperCase();
+  f.status.addEventListener('change',function(){document.querySelector('[data-amt-label]').textContent=f.status.value==='due'?'Amount to collect now (USD)':'Amount paid (USD)';});
   f.addEventListener('submit',function(e){e.preventDefault();
     var items=f.items.value.split('\n').map(function(l){var p=l.split('|');return {name:(p[0]||'').trim(),price:parseFloat((p[1]||'').replace(/[^0-9.]/g,''))||0};}).filter(function(i){return i.name;});
-    var o={ref:f.ref.value.trim(),date:f.date.value,name:f.name.value.trim(),email:f.email.value.trim(),biz:f.biz.value.trim(),items:items,paid:+f.paid.value,status:f.status.value};
-    location.hash=encode(o);f.hidden=true;show(o);});
+    var o={ref:f.ref.value.trim(),date:f.date.value,name:f.name.value.trim(),email:f.email.value.trim(),biz:f.biz.value.trim(),items:items,paid:+f.paid.value,status:f.status.value,method:f.method.value,due:f.due.value};
+    var hh=encode(o);location.hash=hh;f.hidden=true;show(o);
+    document.getElementById('share').hidden=false;document.getElementById('shareUrl').value=location.origin+location.pathname+'#'+hh;});
+  document.getElementById('copyLink').addEventListener('click',function(){var i=document.getElementById('shareUrl'),btn=this;i.select();
+    var ok=function(){btn.textContent='Copied';};
+    if(navigator.clipboard)navigator.clipboard.writeText(i.value).then(ok,function(){document.execCommand('copy');ok();});else{document.execCommand('copy');ok();}});
 })();
 </script>
 </body>
