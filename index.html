@@ -875,6 +875,44 @@ footer.spot-on>.sec-spot{left:0;width:100%}
   border:1px solid rgba(255,255,255,.12);border-top:2px solid #F5B301;box-shadow:0 40px 100px -40px rgba(0,0,0,.9)}
 #book .final .contact a:not(.btn){background:rgba(11,18,34,.45)}
 
+
+/* Tech photo sections: Proof, How it works, Experience */
+#proof.photo-sec::after,#how.photo-sec::after,#experience.photo-sec::after{background:
+  radial-gradient(700px 420px at 50% 55%,rgba(245,179,1,.10),transparent 65%),
+  linear-gradient(90deg,rgba(19,33,60,.95) 0%,rgba(19,33,60,.87) 55%,rgba(19,33,60,.8) 100%),
+  linear-gradient(0deg,rgba(11,18,34,.7),transparent 45%)}
+#proof .shot,#how .step,#experience .tool-group,#experience .cert{color:var(--ink);background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-color:rgba(255,255,255,.6);box-shadow:0 30px 70px -36px rgba(0,0,0,.85)}
+#how .step h3,#experience .tool-group h3{color:var(--ink)}
+#how .step p{color:var(--ink-2)}
+#how .guarantee{box-shadow:0 30px 70px -36px rgba(0,0,0,.85)}
+
+/* What clients say: photo background between two scrolling text bands */
+#reviews.photo-sec::after{background:linear-gradient(90deg,rgba(19,33,60,.95) 0%,rgba(19,33,60,.86) 55%,rgba(19,33,60,.74) 100%),linear-gradient(0deg,rgba(11,18,34,.7),transparent 45%)}
+.marquee-reviews{margin:0!important;position:relative;z-index:2}
+#reviews .review-form{color:var(--ink);box-shadow:0 40px 90px -40px rgba(0,0,0,.85)}
+#reviews .review-form h3,#reviews .review-form label{color:var(--ink)}
+#reviews .review-card{color:var(--ink);box-shadow:0 30px 70px -36px rgba(0,0,0,.85)}
+
+/* Not a generalist: open-book photo with a soft light rising from the pages */
+#why.photo-sec::after{background:radial-gradient(800px 420px at 50% 100%,rgba(245,179,1,.10),transparent 70%),
+  linear-gradient(90deg,rgba(19,33,60,.93) 0%,rgba(19,33,60,.82) 55%,rgba(19,33,60,.74) 100%),linear-gradient(0deg,rgba(11,18,34,.6),transparent 45%)}
+.fx-book-light{top:auto;bottom:-180px;width:760px;height:520px;margin:0 0 0 -380px}
+#why .compare{color:var(--ink);background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-color:rgba(255,255,255,.6);box-shadow:0 40px 90px -40px rgba(0,0,0,.85)}
+
+/* Sound familiar: clock photo behind the breathing logo watermark */
+.clock-sec{color:#fff}
+.fx-clock-photo{z-index:-2}
+.fx-clock-photo::before,.fx-clock-photo::after{content:"";position:absolute;inset:0}
+.fx-clock-photo::before{background:url('clock-bg.jpg') 78% center/cover no-repeat}
+.fx-clock-photo::after{background:radial-gradient(620px 420px at 78% 50%,rgba(245,179,1,.08),transparent 70%),
+  linear-gradient(90deg,rgba(19,33,60,.95) 0%,rgba(19,33,60,.85) 55%,rgba(19,33,60,.7) 100%),linear-gradient(0deg,rgba(11,18,34,.6),transparent 45%)}
+@media (pointer:fine) and (prefers-reduced-motion:no-preference){.fx-clock-photo::before{background-attachment:fixed}}
+.clock-sec .kicker{color:#AEB9CC!important}
+.clock-sec h2,.clock-sec .h2,.clock-sec .pivot{color:#fff}
+.clock-sec.logo-bg::before{opacity:.22}
+.clock-sec .pain{color:var(--ink);background:rgba(255,255,255,.92);border-color:rgba(255,255,255,.6);box-shadow:0 30px 70px -36px rgba(0,0,0,.85)}
+.clock-sec .pain h3{color:var(--ink)}
+.clock-sec .pain p{color:var(--ink-2)}
 /* White cards keep the site's dark text */
 #services .tabs,#schedule .booking,#schedule .avail{color:var(--ink)}
 #services .tabs .lead,#schedule .booking .lead,#schedule .avail .lead,#schedule .booking .sub{color:var(--ink-2)}
@@ -1006,7 +1044,8 @@ footer.spot-on>.sec-spot{left:0;width:100%}
   <ul class="marquee-track"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
   <ul class="marquee-track" aria-hidden="true"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
 </div></div>
-<section class="wrap section logo-bg">
+<section class="wrap section logo-bg fx-sec clock-sec">
+<div class="fx-layer fx-clock-photo" aria-hidden="true"></div>
   <p class="kicker">Sound familiar?</p>
   <h2 class="display h2">You didn't start a business to chase paperwork.</h2>
   <div class="pains">
@@ -1121,7 +1160,8 @@ footer.spot-on>.sec-spot{left:0;width:100%}
   <ul class="marquee-track"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
   <ul class="marquee-track" aria-hidden="true"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
 </div></div>
-<section id="why" class="wrap section" style="padding-top:0">
+<section id="why" class="wrap section photo-sec fx-sec" style="--photo:url('book-bg.jpg');--photo-pos:center 45%">
+<div class="fx-layer" aria-hidden="true"><span class="fx-flare fx-book-light"></span></div>
   <p class="kicker">Why me</p>
   <h2 class="display h2">Not a generalist you have to train from zero.</h2>
   <div class="compare">
@@ -1221,7 +1261,9 @@ footer.spot-on>.sec-spot{left:0;width:100%}
 </section>
 
 <!-- ================= TRACK RECORD ================= -->
-<section id="proof" class="wrap section" style="padding-top:0">
+<section id="proof" class="wrap section photo-sec fx-sec" style="--photo:url('tech-bg.jpg');--photo-pos:center 55%">
+<div class="fx-layer fx-circuit-layer" aria-hidden="true"><svg class="fx-circuit-svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="fx-traces"><path d="M1620,430 L1438,430 L1200,430 L1090,540 L880,540 L809,469"/><path d="M1620,58 L1442,58 L1221,58 L1166,20 L826,20 L750,96"/><path d="M-20,261 L212,261 L384,261 L439,206 L604,206 L920,206 L1105,206 L1173,274"/><path d="M-20,66 L347,66 L501,66 L554,20 L864,20 L967,20 L1327,20 L1377,20"/><path d="M-20,178 L306,178 L415,287 L562,287 L869,287 L926,230 L1272,230 L1325,177"/><path d="M1620,170 L1299,170 L1004,170 L934,100 L738,100 L646,192 L305,192 L196,301 L2,301"/><path d="M1620,294 L1251,294 L905,294 L668,294 L453,294"/><path d="M-20,122 L162,122 L225,59 L485,59 L555,20 L835,20 L938,20 L1162,20 L1217,75 L1567,75"/><path d="M1620,237 L1389,237 L1039,237 L924,122 L603,122 L300,122 L208,30"/><path d="M-20,113 L290,113 L357,180 L671,180 L747,256 L925,256 L1043,374 L1242,374 L1604,374"/><path d="M1620,466 L1276,466 L1224,414 L956,414 L887,483 L624,483 L547,560 L389,560 L277,580"/><path d="M-20,424 L331,424 L680,424 L826,424 L1127,424 L1208,505 L1583,505 L1677,411"/><path d="M-20,56 L343,56 L402,115 L548,115 L591,158 L790,158"/><path d="M-20,317 L316,317 L405,228 L730,228 L845,343 L1115,343 L1163,391 L1448,391 L1512,327 L1746,327 L1797,378"/></g><g class="fx-pulses"><path d="M1620,430 L1438,430 L1200,430 L1090,540 L880,540 L809,469" pathLength="1000" style="--dl:6.8s;--du:8.2s"/><path d="M-20,261 L212,261 L384,261 L439,206 L604,206 L920,206 L1105,206 L1173,274" pathLength="1000" style="--dl:7.7s;--du:6.8s"/><path d="M-20,178 L306,178 L415,287 L562,287 L869,287 L926,230 L1272,230 L1325,177" pathLength="1000" style="--dl:6.4s;--du:5.4s"/><path d="M1620,294 L1251,294 L905,294 L668,294 L453,294" pathLength="1000" style="--dl:3.5s;--du:5.3s"/><path d="M1620,237 L1389,237 L1039,237 L924,122 L603,122 L300,122 L208,30" pathLength="1000" style="--dl:7.5s;--du:9.0s"/><path d="M1620,466 L1276,466 L1224,414 L956,414 L887,483 L624,483 L547,560 L389,560 L277,580" pathLength="1000" style="--dl:6.0s;--du:8.0s"/><path d="M-20,56 L343,56 L402,115 L548,115 L591,158 L790,158" pathLength="1000" style="--dl:3.4s;--du:8.2s"/><path d="M1620,58 L1442,58 L1221,58 L1166,20 L826,20 L750,96" pathLength="1000" style="--dl:0.8s;--du:6.5s"/><path d="M-20,178 L306,178 L415,287 L562,287 L869,287 L926,230 L1272,230 L1325,177" pathLength="1000" style="--dl:3.2s;--du:8.5s"/><path d="M-20,122 L162,122 L225,59 L485,59 L555,20 L835,20 L938,20 L1162,20 L1217,75 L1567,75" pathLength="1000" style="--dl:1.6s;--du:5.6s"/><path d="M1620,466 L1276,466 L1224,414 L956,414 L887,483 L624,483 L547,560 L389,560 L277,580" pathLength="1000" style="--dl:0.8s;--du:8.4s"/><path d="M-20,317 L316,317 L405,228 L730,228 L845,343 L1115,343 L1163,391 L1448,391 L1512,327 L1746,327 L1797,378" pathLength="1000" style="--dl:2.8s;--du:8.6s"/></g><g class="fx-nodes"><circle cx="809" cy="469" r="3.2" style="--dl:1.3s"/><circle cx="750" cy="96" r="3.2" style="--dl:3.3s"/><circle cx="1173" cy="274" r="3.2" style="--dl:0.8s"/><circle cx="1377" cy="20" r="3.2" style="--dl:3.6s"/><circle cx="1325" cy="177" r="3.2" style="--dl:3.9s"/><circle cx="2" cy="301" r="3.2" style="--dl:3.5s"/><circle cx="453" cy="294" r="3.2" style="--dl:2.8s"/><circle cx="1567" cy="75" r="3.2" style="--dl:3.6s"/><circle cx="208" cy="30" r="3.2" style="--dl:3.7s"/><circle cx="277" cy="580" r="3.2" style="--dl:3.9s"/><circle cx="790" cy="158" r="3.2" style="--dl:1.1s"/></g></svg><span class="fx-flare"></span></div>
+
   <p class="kicker">Track record</p>
   <h2 class="display h2">Proof, not promises.</h2>
   <p class="sub">Real scorecards and recognition from my years on the T-Mobile account at TTEC, plus guest reviews from my own Airbnb business. Other people's names are blurred for privacy; the numbers are untouched. Tap any image to enlarge it.</p>
@@ -1276,7 +1318,11 @@ footer.spot-on>.sec-spot{left:0;width:100%}
 </dialog>
 
 <!-- ================= CLIENT REVIEWS ================= -->
-<section id="reviews" class="wrap section" style="padding-top:0">
+<div class="marquee marquee-reviews" role="region" aria-label="Areas of expertise"><div class="marquee-in">
+  <ul class="marquee-track"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
+  <ul class="marquee-track" aria-hidden="true"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
+</div></div>
+<section id="reviews" class="wrap section photo-sec" style="--photo:url('reviews-bg.jpg');--photo-pos:center">
   <p class="kicker">Client reviews</p>
   <h2 class="display h2">What clients say.</h2>
   <p class="sub">Worked with me? I'd love to hear how it went. Every review is read and approved by me before it appears here.</p>
@@ -1322,9 +1368,15 @@ footer.spot-on>.sec-spot{left:0;width:100%}
     </div>
   </form>
 </section>
+<div class="marquee marquee-reviews marquee-bottom" role="region" aria-label="Areas of expertise"><div class="marquee-in">
+  <ul class="marquee-track"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
+  <ul class="marquee-track" aria-hidden="true"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
+</div></div>
 
 <!-- ================= HOW IT WORKS ================= -->
-<section class="wrap section" style="padding-top:0">
+<section id="how" class="wrap section photo-sec fx-sec" style="--photo:url('tech-bg.jpg');--photo-pos:center 55%">
+<div class="fx-layer fx-circuit-layer" aria-hidden="true"><svg class="fx-circuit-svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="fx-traces"><path d="M1620,261 L1298,261 L1200,359 L874,359 L813,298 L585,298 L379,298 L225,298 L156,367"/><path d="M-20,491 L152,491 L257,580 L566,580 L648,498 L859,498 L948,580"/><path d="M-20,489 L318,489 L415,392 L720,392 L919,392 L1210,392 L1408,392"/><path d="M-20,121 L144,121 L297,121 L671,121 L743,193 L943,193 L1001,251 L1351,251"/><path d="M1620,243 L1387,243 L1319,311 L1046,311 L984,373 L720,373 L668,425 L339,425 L250,336 L14,336 L-77,245"/><path d="M1620,274 L1420,274 L1220,274 L1118,376 L869,376 L758,265 L533,265 L458,190 L206,190 L154,242"/><path d="M-20,51 L140,51 L417,51 L649,51 L761,163 L1058,163 L1174,279 L1354,279 L1405,330"/><path d="M1620,103 L1282,103 L950,103 L849,204 L672,204 L605,271 L311,271"/><path d="M-20,94 L226,94 L330,20 L624,20 L769,20 L857,20 L1175,20 L1219,20"/><path d="M1620,72 L1283,72 L976,72 L870,178 L697,178 L606,87 L267,87 L153,20 L0,20 L-67,87"/><path d="M-20,556 L184,556 L293,447 L530,447 L585,502 L882,502 L927,547 L1196,547 L1273,580"/><path d="M-20,168 L282,168 L353,239 L608,239 L781,239 L843,301 L1122,301 L1190,369"/><path d="M-20,175 L191,175 L251,235 L540,235 L631,326 L1010,326 L1057,279 L1224,279 L1266,321 L1499,321 L1614,436"/><path d="M-20,173 L151,173 L240,262 L539,262 L657,380 L1031,380 L1072,339 L1245,339 L1293,291 L1517,291 L1559,249"/></g><g class="fx-pulses"><path d="M1620,261 L1298,261 L1200,359 L874,359 L813,298 L585,298 L379,298 L225,298 L156,367" pathLength="1000" style="--dl:1.2s;--du:6.0s"/><path d="M-20,489 L318,489 L415,392 L720,392 L919,392 L1210,392 L1408,392" pathLength="1000" style="--dl:1.4s;--du:6.9s"/><path d="M1620,243 L1387,243 L1319,311 L1046,311 L984,373 L720,373 L668,425 L339,425 L250,336 L14,336 L-77,245" pathLength="1000" style="--dl:8.5s;--du:6.6s"/><path d="M-20,51 L140,51 L417,51 L649,51 L761,163 L1058,163 L1174,279 L1354,279 L1405,330" pathLength="1000" style="--dl:6.1s;--du:7.0s"/><path d="M-20,94 L226,94 L330,20 L624,20 L769,20 L857,20 L1175,20 L1219,20" pathLength="1000" style="--dl:8.3s;--du:6.6s"/><path d="M-20,556 L184,556 L293,447 L530,447 L585,502 L882,502 L927,547 L1196,547 L1273,580" pathLength="1000" style="--dl:6.0s;--du:5.5s"/><path d="M-20,175 L191,175 L251,235 L540,235 L631,326 L1010,326 L1057,279 L1224,279 L1266,321 L1499,321 L1614,436" pathLength="1000" style="--dl:3.4s;--du:5.1s"/><path d="M-20,491 L152,491 L257,580 L566,580 L648,498 L859,498 L948,580" pathLength="1000" style="--dl:4.6s;--du:7.5s"/><path d="M1620,243 L1387,243 L1319,311 L1046,311 L984,373 L720,373 L668,425 L339,425 L250,336 L14,336 L-77,245" pathLength="1000" style="--dl:1.7s;--du:6.9s"/><path d="M1620,103 L1282,103 L950,103 L849,204 L672,204 L605,271 L311,271" pathLength="1000" style="--dl:6.1s;--du:6.3s"/><path d="M-20,556 L184,556 L293,447 L530,447 L585,502 L882,502 L927,547 L1196,547 L1273,580" pathLength="1000" style="--dl:8.4s;--du:5.3s"/><path d="M-20,173 L151,173 L240,262 L539,262 L657,380 L1031,380 L1072,339 L1245,339 L1293,291 L1517,291 L1559,249" pathLength="1000" style="--dl:3.2s;--du:8.9s"/></g><g class="fx-nodes"><circle cx="156" cy="367" r="3.2" style="--dl:3.9s"/><circle cx="948" cy="580" r="3.2" style="--dl:2.0s"/><circle cx="1408" cy="392" r="3.2" style="--dl:0.7s"/><circle cx="1351" cy="251" r="3.2" style="--dl:1.3s"/><circle cx="154" cy="242" r="3.2" style="--dl:1.6s"/><circle cx="1405" cy="330" r="3.2" style="--dl:1.4s"/><circle cx="311" cy="271" r="3.2" style="--dl:1.7s"/><circle cx="1219" cy="20" r="3.2" style="--dl:1.4s"/><circle cx="1273" cy="580" r="3.2" style="--dl:3.5s"/><circle cx="1190" cy="369" r="3.2" style="--dl:0.2s"/><circle cx="1559" cy="249" r="3.2" style="--dl:3.4s"/></g></svg><span class="fx-flare"></span></div>
+
   <p class="kicker">How it works</p>
   <h2 class="display h2">Up and running in about a week.</h2>
   <ol class="steps">
@@ -1350,7 +1402,9 @@ footer.spot-on>.sec-spot{left:0;width:100%}
 ================================================================================== -->
 
 <!-- ================= EXPERIENCE ================= -->
-<section class="wrap section" style="padding-top:0">
+<section id="experience" class="wrap section photo-sec fx-sec" style="--photo:url('tech-bg.jpg');--photo-pos:center 55%">
+<div class="fx-layer fx-circuit-layer" aria-hidden="true"><svg class="fx-circuit-svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="fx-traces"><path d="M-20,116 L239,116 L341,218 L640,218 L685,173 L995,173 L1055,113 L1307,113 L1409,20"/><path d="M-20,355 L311,355 L454,355 L513,296 L747,296 L816,365 L1122,365 L1167,410"/><path d="M-20,406 L263,406 L403,406 L487,490 L687,490 L748,429 L1043,429 L1092,478"/><path d="M-20,445 L343,445 L610,445 L717,338 L994,338 L1072,416 L1352,416 L1400,464"/><path d="M1620,338 L1284,338 L920,338 L816,234 L560,234 L358,234 L280,312"/><path d="M1620,354 L1347,354 L1004,354 L855,354 L806,403 L538,403 L483,458 L308,458 L238,528"/><path d="M1620,95 L1341,95 L1236,200 L892,200 L593,200 L376,200 L316,140 L138,140 L40,42"/><path d="M1620,554 L1452,554 L1333,435 L1102,435 L1017,350 L721,350"/><path d="M-20,243 L242,243 L352,133 L500,133 L617,250 L835,250 L932,153"/><path d="M1620,493 L1402,493 L1183,493 L1093,403 L946,403 L905,444 L765,444 L681,360 L461,360 L347,246"/><path d="M-20,548 L183,548 L276,455 L432,455 L524,547 L785,547 L869,580 L1247,580 L1354,473 L1693,473 L1776,556"/><path d="M-20,223 L279,223 L419,223 L502,140 L746,140 L853,33 L1201,33"/><path d="M1620,483 L1297,483 L1183,580 L954,580 L895,580 L677,580 L396,580 L301,485 L109,485"/><path d="M1620,64 L1333,64 L1245,152 L1031,152 L922,43 L560,43 L470,133 L142,133 L58,217 L-163,217"/></g><g class="fx-pulses"><path d="M-20,116 L239,116 L341,218 L640,218 L685,173 L995,173 L1055,113 L1307,113 L1409,20" pathLength="1000" style="--dl:4.8s;--du:7.2s"/><path d="M-20,406 L263,406 L403,406 L487,490 L687,490 L748,429 L1043,429 L1092,478" pathLength="1000" style="--dl:3.8s;--du:7.8s"/><path d="M1620,338 L1284,338 L920,338 L816,234 L560,234 L358,234 L280,312" pathLength="1000" style="--dl:8.1s;--du:8.7s"/><path d="M1620,95 L1341,95 L1236,200 L892,200 L593,200 L376,200 L316,140 L138,140 L40,42" pathLength="1000" style="--dl:8.4s;--du:5.3s"/><path d="M-20,243 L242,243 L352,133 L500,133 L617,250 L835,250 L932,153" pathLength="1000" style="--dl:4.9s;--du:6.5s"/><path d="M-20,548 L183,548 L276,455 L432,455 L524,547 L785,547 L869,580 L1247,580 L1354,473 L1693,473 L1776,556" pathLength="1000" style="--dl:1.9s;--du:7.2s"/><path d="M1620,483 L1297,483 L1183,580 L954,580 L895,580 L677,580 L396,580 L301,485 L109,485" pathLength="1000" style="--dl:0.3s;--du:5.2s"/><path d="M-20,355 L311,355 L454,355 L513,296 L747,296 L816,365 L1122,365 L1167,410" pathLength="1000" style="--dl:6.4s;--du:8.3s"/><path d="M1620,338 L1284,338 L920,338 L816,234 L560,234 L358,234 L280,312" pathLength="1000" style="--dl:5.1s;--du:8.1s"/><path d="M1620,554 L1452,554 L1333,435 L1102,435 L1017,350 L721,350" pathLength="1000" style="--dl:8.3s;--du:5.6s"/><path d="M-20,548 L183,548 L276,455 L432,455 L524,547 L785,547 L869,580 L1247,580 L1354,473 L1693,473 L1776,556" pathLength="1000" style="--dl:2.3s;--du:7.1s"/><path d="M1620,64 L1333,64 L1245,152 L1031,152 L922,43 L560,43 L470,133 L142,133 L58,217 L-163,217" pathLength="1000" style="--dl:2.6s;--du:8.0s"/></g><g class="fx-nodes"><circle cx="1409" cy="20" r="3.2" style="--dl:2.0s"/><circle cx="1167" cy="410" r="3.2" style="--dl:1.1s"/><circle cx="1092" cy="478" r="3.2" style="--dl:3.7s"/><circle cx="1400" cy="464" r="3.2" style="--dl:1.2s"/><circle cx="280" cy="312" r="3.2" style="--dl:2.4s"/><circle cx="238" cy="528" r="3.2" style="--dl:2.9s"/><circle cx="40" cy="42" r="3.2" style="--dl:3.4s"/><circle cx="721" cy="350" r="3.2" style="--dl:0.5s"/><circle cx="932" cy="153" r="3.2" style="--dl:1.3s"/><circle cx="347" cy="246" r="3.2" style="--dl:3.9s"/><circle cx="1201" cy="33" r="3.2" style="--dl:2.0s"/><circle cx="109" cy="485" r="3.2" style="--dl:1.2s"/></g></svg><span class="fx-flare"></span></div>
+
   <div class="exp">
     <div>
       <p class="kicker">Background</p>
