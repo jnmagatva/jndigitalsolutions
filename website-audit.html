@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Website Check-Up | JN Digital Solution</title>
+<meta name="description" content="Check your website's speed, SEO, and mobile experience in 30 seconds. Free, no sign-up, by JN Digital Solution.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================
+   SETTINGS — the only two lines you need to edit
+   ========================================================== */
+</style>
+<script>
+  // 1) Free Google PageSpeed API key (optional but recommended — without it
+  //    Google's shared limit can block requests on busy days).
+  const PSI_KEY = "AIzaSyDxBI3wGpzuawZlAi0mNidjKo-E2CxC8Cw";
+  // 2) Free Web3Forms access key (sends leads to your email). Get it at web3forms.com
+  const WEB3FORMS_KEY = "";
+  const CONTACT_EMAIL = "jnmagatva@gmail.com";
+</script>
+<style>
+:root{
+  --ink:#0F1E36;        /* JN navy, text + header */
+  --navy-2:#1B3153;
+  --gold:#E3B04B;       /* brand gold, the one bold accent */
+  --teal:#1C9A94;       /* passing */
+  --amber:#E08E2B;      /* needs work */
+  --coral:#D9534A;      /* failing */
+  --paper:#F3F6FA;      /* cool page background */
+  --line:#D9E1EC;
+  --muted:#5A6B84;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Figtree", "Segoe UI", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--body);color:var(--ink);background:var(--paper);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* ---------- Header ---------- */
+.top{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.brand{font-family:var(--display);font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.01em}
+.brand span{color:var(--teal)}
+.top a.contact{font-weight:600;font-size:15px;text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:2px}
+
+/* ---------- Hero: the input IS the hero ---------- */
+.hero{background:var(--ink);color:#fff;border-radius:28px;padding:64px 56px 56px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;
+  border:56px solid rgba(227,176,75,.12)}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,6vw,68px);line-height:1.02;letter-spacing:-.03em;margin:0 0 18px;max-width:14ch}
+.hero p.lede{font-size:19px;color:#C6D2E3;max-width:52ch;margin:0 0 36px}
+.check{display:flex;gap:10px;background:#fff;border-radius:18px;padding:8px;max-width:720px;position:relative;z-index:1}
+.check input{flex:1;min-width:0;border:0;font:500 18px var(--body);color:var(--ink);padding:14px 16px;background:transparent}
+.check input:focus{outline:none}
+.check:focus-within{box-shadow:0 0 0 4px rgba(227,176,75,.55)}
+.btn{font:700 17px var(--display);border:0;border-radius:12px;padding:14px 26px;cursor:pointer;background:var(--gold);color:var(--ink);white-space:nowrap}
+.btn:hover{background:#EDBF60}
+.btn:disabled{opacity:.6;cursor:wait}
+.device{display:flex;gap:6px;margin-top:16px;position:relative;z-index:1}
+.device button{font:600 14px var(--body);color:#C6D2E3;background:transparent;border:1.5px solid #3A5276;border-radius:999px;padding:6px 14px;cursor:pointer}
+.device button[aria-pressed="true"]{background:#fff;color:var(--ink);border-color:#fff}
+.note{font-size:14px;color:#8FA2BE;margin-top:20px;position:relative;z-index:1}
+
+/* ---------- Loading ---------- */
+.loading{display:none;padding:56px 0;text-align:left}
+.loading.on{display:block}
+.scan{height:6px;background:var(--line);border-radius:6px;overflow:hidden;max-width:560px}
+.scan i{display:block;height:100%;width:30%;background:var(--teal);border-radius:6px;animation:scan 1.4s ease-in-out infinite}
+@keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(340%)}}
+.loading h2{font-family:var(--display);font-size:26px;margin:0 0 6px}
+.loading p{color:var(--muted);margin:0 0 20px}
+
+.error{display:none;margin:40px 0;background:#fff;border-left:5px solid var(--coral);border-radius:12px;padding:22px 26px}
+.error.on{display:block}
+.error h3{margin:0 0 6px;font-family:var(--display)}
+
+/* ---------- Results ---------- */
+.results{display:none;padding:56px 0 24px}
+.results.on{display:block}
+.summary{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:48px;align-items:center}
+.gauge{position:relative;width:100%;max-width:320px;aspect-ratio:1}
+.gauge svg{width:100%;height:100%;transform:rotate(135deg)}
+.gauge .track{fill:none;stroke:var(--line);stroke-width:14;stroke-linecap:round}
+.gauge .val{fill:none;stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1)}
+.gauge .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge .num b{font-family:var(--display);font-size:88px;font-weight:800;line-height:1;letter-spacing:-.04em}
+.gauge .num small{color:var(--muted);font-weight:600;margin-top:6px}
+.verdict h2{font-family:var(--display);font-size:clamp(28px,3.6vw,40px);line-height:1.1;letter-spacing:-.02em;margin:0 0 10px}
+.verdict .site{color:var(--muted);font-weight:600;word-break:break-all;margin:0 0 22px}
+.meters{display:grid;gap:14px}
+.meter{display:grid;grid-template-columns:150px 1fr 44px;align-items:center;gap:14px}
+.meter label{font-weight:600}
+.bar{height:12px;background:var(--line);border-radius:12px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:12px;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+.meter output{font-family:var(--display);font-weight:700;font-size:20px;text-align:right}
+
+.section-title{font-family:var(--display);font-size:26px;letter-spacing:-.01em;margin:64px 0 6px}
+.section-sub{color:var(--muted);margin:0 0 22px;max-width:62ch}
+
+.vitals{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border-top:2px solid var(--ink)}
+.vital{padding:18px 18px 18px 0;border-bottom:1px solid var(--line)}
+.vital .v{font-family:var(--display);font-weight:700;font-size:30px}
+.vital .k{font-weight:600}
+.vital .d{font-size:14px;color:var(--muted)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle}
+
+.shot-row{display:grid;grid-template-columns:1fr 260px;gap:40px;align-items:start}
+.issues{list-style:none;margin:0;padding:0;counter-reset:none}
+.issue{background:#fff;border-radius:14px;padding:18px 22px;margin-bottom:10px;border:1px solid var(--line)}
+.issue h4{margin:0 0 4px;font-size:17px;display:flex;gap:10px;align-items:baseline}
+.issue p{margin:0;color:var(--muted);font-size:15.5px}
+.issue .tag{font-size:12.5px;font-weight:600;border-radius:6px;padding:2px 8px;white-space:nowrap}
+.locked{position:relative}
+.locked .issue{filter:blur(4px);user-select:none;pointer-events:none}
+.phone{background:var(--ink);border-radius:30px;padding:12px;position:sticky;top:24px}
+.phone img{width:100%;display:block;border-radius:20px;background:#fff}
+.phone figcaption{color:#C6D2E3;font-size:13px;text-align:center;padding:10px 0 2px}
+
+/* ---------- Lead form ---------- */
+.lead{margin:64px 0 0;background:var(--ink);color:#fff;border-radius:28px;padding:48px 56px;display:grid;grid-template-columns:1.1fr 1fr;gap:40px}
+.lead h3{font-family:var(--display);font-size:clamp(26px,3vw,36px);line-height:1.1;letter-spacing:-.02em;margin:0 0 12px}
+.lead p{color:#C6D2E3;margin:0 0 14px}
+.lead ul{margin:0;padding-left:20px;color:#C6D2E3}
+.lead ul li{margin-bottom:6px}
+.lead form{display:grid;gap:12px;align-content:start}
+.lead label{font-size:14px;font-weight:600;color:#C6D2E3}
+.lead input,.lead textarea{width:100%;font:500 16px var(--body);border:1.5px solid #3A5276;background:var(--navy-2);color:#fff;border-radius:12px;padding:13px 14px}
+.lead input:focus,.lead textarea:focus{outline:none;border-color:var(--gold)}
+.lead .btn{margin-top:6px}
+.lead .ok{display:none;background:rgba(28,154,148,.18);border:1.5px solid var(--teal);border-radius:14px;padding:22px}
+.lead .ok h4{margin:0 0 4px;font-family:var(--display);font-size:22px}
+
+/* ---------- How it works + footer ---------- */
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding:72px 0 24px}
+.how h4{font-family:var(--display);font-size:19px;margin:10px 0 6px}
+.how p{margin:0;color:var(--muted);font-size:15.5px}
+.how .n{font-family:var(--display);font-weight:800;font-size:15px;color:var(--ink);background:var(--gold);width:32px;height:32px;border-radius:50%;display:grid;place-items:center}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:28px 0 40px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:820px){
+  .hero{padding:44px 26px 36px;border-radius:22px}
+  .check{flex-direction:column}
+  .summary,.shot-row,.lead{grid-template-columns:1fr}
+  .gauge{margin:0 auto;max-width:260px}
+  .phone{position:static;max-width:240px}
+  .lead{padding:36px 26px}
+  .how{grid-template-columns:1fr}
+  .meter{grid-template-columns:120px 1fr 40px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./">JN Digital <span>Solution</span></a>
+    <a class="contact" href="mailto:jnmagatva@gmail.com">Talk to John</a>
+  </header>
+
+  <section class="hero">
+    <h1>Is your website losing you customers?</h1>
+    <p class="lede">Get a free check-up of your site's speed, Google visibility, and mobile experience. It takes about 30 seconds and you don't need to sign up.</p>
+    <form class="check" id="checkForm" novalidate>
+      <label for="url" class="sr" style="position:absolute;left:-9999px">Website address</label>
+      <input id="url" type="text" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" required>
+      <button class="btn" id="goBtn" type="submit">Check my website</button>
+    </form>
+    <div class="device" role="group" aria-label="Device to test">
+      <button type="button" data-s="mobile" aria-pressed="true">Phone</button>
+      <button type="button" data-s="desktop" aria-pressed="false">Computer</button>
+    </div>
+    <p class="note">Most of your visitors use their phone, so we test on phone first.</p>
+  </section>
+
+  <section class="loading" id="loading" aria-live="polite">
+    <h2>Checking your website</h2>
+    <p id="loadMsg">Loading your site the way a customer's phone would…</p>
+    <div class="scan"><i></i></div>
+  </section>
+
+  <section class="error" id="error" role="alert">
+    <h3 id="errTitle">We couldn't check that website</h3>
+    <p id="errMsg"></p>
+  </section>
+
+  <section class="results" id="results" aria-live="polite">
+    <div class="summary">
+      <div class="gauge">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="track" cx="60" cy="60" r="50" pathLength="100" stroke-dasharray="75 100"/>
+          <circle class="val" id="gaugeVal" cx="60" cy="60" r="50" pathLength="100" stroke-dasharray="75 100" stroke-dashoffset="75"/>
+        </svg>
+        <div class="num"><b id="overall">0</b><small>Overall score</small></div>
+      </div>
+      <div class="verdict">
+        <h2 id="verdictText"></h2>
+        <p class="site" id="siteName"></p>
+        <div class="meters" id="meters"></div>
+      </div>
+    </div>
+
+    <h3 class="section-title">How fast it feels to a customer</h3>
+    <p class="section-sub">These are the numbers Google uses to judge your site. Green is good, orange needs work, red is costing you visitors.</p>
+    <div class="vitals" id="vitals"></div>
+
+    <h3 class="section-title">What to fix first</h3>
+    <p class="section-sub" id="issuesSub"></p>
+    <div class="shot-row">
+      <div>
+        <ul class="issues" id="issuesFree"></ul>
+        <div class="locked"><ul class="issues" id="issuesLocked"></ul></div>
+      </div>
+      <figure class="phone" id="phone" style="margin:0;display:none">
+        <img id="shot" alt="How your homepage looks when it loads">
+        <figcaption>Your homepage, as Google saw it</figcaption>
+      </figure>
+    </div>
+
+    <section class="lead" id="lead">
+      <div>
+        <h3>Get the full report and a fix plan</h3>
+        <p>I'll go through your results personally and send you:</p>
+        <ul>
+          <li>Every issue we found, explained in plain English</li>
+          <li>Which fixes will bring you the most new customers</li>
+          <li>A clear quote if you'd like me to fix them for you</li>
+        </ul>
+      </div>
+      <div>
+        <form id="leadForm">
+          <div><label for="lname">Your name</label><input id="lname" name="name" required autocomplete="name"></div>
+          <div><label for="lemail">Email</label><input id="lemail" name="email" type="email" required autocomplete="email"></div>
+          <div><label for="lbiz">Business name</label><input id="lbiz" name="business" autocomplete="organization"></div>
+          <button class="btn" type="submit" id="leadBtn">Send me the full report</button>
+        </form>
+        <div class="ok" id="leadOk">
+          <h4>Thanks, it's on the way</h4>
+          <p style="margin:0">I'll email your full report within one business day.</p>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section class="how">
+    <div><div class="n">1</div><h4>Enter your website</h4><p>Type your web address. Nothing to install and no account needed.</p></div>
+    <div><div class="n">2</div><h4>We test it like Google does</h4><p>Your site is checked with Google's own tools for speed, search, and mobile.</p></div>
+    <div><div class="n">3</div><h4>See what to fix</h4><p>Get a clear score and the issues that matter most for your business.</p></div>
+  </section>
+
+  <footer>
+    <span>© <span id="yr"></span> JN Digital Solution. Website design, SEO and social media for small businesses.</span>
+    <span>Results powered by Google PageSpeed Insights</span>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  $("yr").textContent = new Date().getFullYear();
+  let strategy = "mobile", last = null;
+
+  document.querySelectorAll(".device button").forEach(b => b.addEventListener("click", () => {
+    strategy = b.dataset.s;
+    document.querySelectorAll(".device button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  }));
+
+  const CATS = [
+    ["performance", "Speed"],
+    ["seo", "Google search"],
+    ["accessibility", "Easy to use"],
+    ["best-practices", "Security & trust"]
+  ];
+  const color = s => s >= 90 ? "var(--teal)" : s >= 50 ? "var(--amber)" : "var(--coral)";
+
+  // Plain-English translations of Google's technical findings
+  const PLAIN = {
+    "largest-contentful-paint":["Your main content loads slowly","Visitors wait too long to see your page. Many leave before it appears."],
+    "render-blocking-resources":["Files are holding up your page","Some code loads before anything shows on screen, which makes the page feel slow."],
+    "uses-optimized-images":["Your images are too heavy","Large photos slow your site down, especially on phone data."],
+    "modern-image-formats":["Images use old file formats","Newer formats look the same but load much faster."],
+    "uses-responsive-images":["Images are bigger than needed","Phones are downloading desktop-sized photos."],
+    "offscreen-images":["Images load before they're needed","Photos lower on the page should wait until the visitor scrolls."],
+    "unused-javascript":["Unused code is slowing you down","Your site loads code it never uses."],
+    "unused-css-rules":["Unused styling code","Extra design code adds weight to every page."],
+    "unminified-javascript":["Code isn't compressed","Compressing your code makes pages load faster."],
+    "unminified-css":["Styling code isn't compressed","Compressing your styling code makes pages load faster."],
+    "server-response-time":["Your hosting is slow to respond","The server takes too long before the page even starts loading."],
+    "uses-text-compression":["Pages aren't compressed","Turning on compression can cut load times a lot."],
+    "uses-long-cache-ttl":["Returning visitors re-download everything","Browser caching would make repeat visits much faster."],
+    "total-byte-weight":["Your pages are very heavy","The total download size is large for a phone connection."],
+    "dom-size":["Your pages are overly complex","Too many page elements slow down phones."],
+    "meta-description":["Missing Google description","Google has no summary to show under your name in search results."],
+    "document-title":["Missing page title","Your page has no title for Google or browser tabs."],
+    "link-text":["Links aren't descriptive","Links like \"click here\" don't help Google understand your pages."],
+    "image-alt":["Images have no descriptions","Google and screen readers can't tell what your images show."],
+    "is-crawlable":["Google may be blocked","Your page may be hidden from Google search."],
+    "robots-txt":["Problem with your robots file","This file tells Google what to read, and yours has errors."],
+    "hreflang":["Language settings have errors","Google may show the wrong language version of your page."],
+    "canonical":["Duplicate page signals","Google may be confused about which version of your page is the real one."],
+    "tap-targets":["Buttons are too small on phones","Visitors may struggle to tap the right link."],
+    "font-size":["Text is too small on phones","Visitors have to zoom in to read."],
+    "viewport":["Not set up for phones","Your site may not fit phone screens properly."],
+    "color-contrast":["Text is hard to read","Some text doesn't stand out enough from its background."],
+    "is-on-https":["Site isn't fully secure","Browsers may warn visitors that your site is not secure."],
+    "errors-in-console":["Your site has errors in its code","Hidden errors can break features like forms or menus."],
+    "cumulative-layout-shift":["Your page jumps around while loading","Content moves as it loads, which causes mis-taps and frustration."],
+    "total-blocking-time":["Page freezes while loading","Visitors can't scroll or tap for a moment while it loads."],
+    "first-contentful-paint":["First view appears slowly","It takes a while before anything shows up on screen."],
+    "speed-index":["Page fills in slowly","The page takes a long time to look complete."],
+    "interactive":["Slow to become usable","Buttons and menus take a while to start working."]
+  };
+
+  const VITALS = [
+    ["largest-contentful-paint","Main content appears","When your page looks ready"],
+    ["first-contentful-paint","First thing on screen","When something first shows"],
+    ["total-blocking-time","Frozen time","How long taps are ignored"],
+    ["cumulative-layout-shift","Page jumping","How much things move around"],
+    ["speed-index","Fully loaded look","How fast the page fills in"]
+  ];
+
+  const loadMsgs = ["Loading your site the way a customer's phone would…","Measuring how fast your page appears…","Checking what Google can see…","Looking for issues that cost you visitors…","Putting your report together…"];
+
+  function normalize(raw){
+    let u = raw.trim();
+    if(!u) return null;
+    if(!/^https?:\/\//i.test(u)) u = "https://" + u;
+    try { const p = new URL(u); if(!p.hostname.includes(".")) return null; return p.href; } catch { return null; }
+  }
+
+  function show(id, on){ $(id).classList.toggle("on", on); }
+
+  $("checkForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const url = normalize($("url").value);
+    show("error", false);
+    if(!url){ fail("Check the web address", "Enter your website like this: yourbusiness.com"); return; }
+    $("goBtn").disabled = true; $("goBtn").textContent = "Checking…";
+    show("results", false); show("loading", true);
+    $("loading").scrollIntoView({behavior:"smooth", block:"center"});
+    let i = 0; const t = setInterval(() => { i = (i+1) % loadMsgs.length; $("loadMsg").textContent = loadMsgs[i]; }, 4500);
+
+    const q = new URLSearchParams({url, strategy});
+    CATS.forEach(c => q.append("category", c[0].toUpperCase().replace("-", "_")));
+    if(PSI_KEY) q.set("key", PSI_KEY);
+
+    try{
+      const r = await fetch("https://www.googleapis.com/pagespeedonline/v5/runPagespeed?" + q);
+      const data = await r.json();
+      if(!r.ok){
+        const msg = data?.error?.message || "";
+        if(r.status === 429) throw new Error("Too many people are checking sites right now. Wait a minute and try again.");
+        if(/FAILED_DOCUMENT_REQUEST|ERRORED_DOCUMENT_REQUEST|DNS/i.test(msg)) throw new Error("We couldn't reach that website. Check the address is spelled correctly and the site is online.");
+        throw new Error("Google couldn't test this site right now. Try again in a minute.");
+      }
+      render(url, data.lighthouseResult);
+    }catch(err){
+      fail("We couldn't check that website", err.message || "Check your internet connection and try again.");
+    }finally{
+      clearInterval(t); show("loading", false);
+      $("goBtn").disabled = false; $("goBtn").textContent = "Check my website";
+    }
+  });
+
+  function fail(title, msg){ $("errTitle").textContent = title; $("errMsg").textContent = msg; show("error", true); }
+
+  function render(url, lh){
+    const scores = {};
+    CATS.forEach(([k]) => scores[k] = Math.round((lh.categories[k]?.score ?? 0) * 100));
+    const overall = Math.round(scores.performance*.4 + scores.seo*.3 + scores.accessibility*.15 + scores["best-practices"]*.15);
+    last = {url, strategy, scores, overall};
+
+    $("siteName").textContent = new URL(url).hostname + (strategy === "mobile" ? " on a phone" : " on a computer");
+    $("verdictText").textContent =
+      overall >= 90 ? "Your website is in great shape." :
+      overall >= 70 ? "Good foundation, with a few things holding you back." :
+      overall >= 50 ? "Your website is likely losing you customers." :
+                      "Your website needs urgent attention.";
+
+    $("meters").innerHTML = CATS.map(([k,l]) =>
+      `<div class="meter"><label>${l}</label><div class="bar"><i data-w="${scores[k]}" style="background:${color(scores[k])}"></i></div><output>${scores[k]}</output></div>`).join("");
+
+    // Vitals
+    $("vitals").innerHTML = VITALS.map(([id,k,d]) => {
+      const a = lh.audits[id]; if(!a) return "";
+      const s = a.score ?? 0;
+      const c = s >= .9 ? "var(--teal)" : s >= .5 ? "var(--amber)" : "var(--coral)";
+      return `<div class="vital"><div class="v"><span class="dot" style="background:${c}"></span>${a.displayValue || "–"}</div><div class="k">${k}</div><div class="d">${d}</div></div>`;
+    }).join("");
+
+    // Issues: failing audits, weighted by importance
+    const weight = {};
+    Object.values(lh.categories).forEach(cat => cat.auditRefs.forEach(ref => weight[ref.id] = Math.max(weight[ref.id]||0, ref.weight || 0)));
+    const failing = Object.values(lh.audits)
+      .filter(a => a.score !== null && a.score < 0.9 && a.scoreDisplayMode !== "notApplicable" && a.scoreDisplayMode !== "informative" && a.scoreDisplayMode !== "manual")
+      .map(a => ({a, w:(weight[a.id]||0.5) + (a.details?.overallSavingsMs ? a.details.overallSavingsMs/1000 : 0) + (1 - a.score)}))
+      .sort((x,y) => y.w - x.w);
+
+    const item = ({a}) => {
+      const [t, d] = PLAIN[a.id] || [a.title, "This affects how your site performs for visitors and Google."];
+      const sev = a.score < .5 ? ["High impact","rgba(217,83,74,.12)","var(--coral)"] : ["Worth fixing","rgba(224,142,43,.14)","#A9640F"];
+      return `<li class="issue"><h4>${esc(t)} <span class="tag" style="background:${sev[1]};color:${sev[2]}">${sev[0]}</span></h4><p>${esc(d)}</p></li>`;
+    };
+    const free = failing.slice(0,3), locked = failing.slice(3,6);
+    $("issuesSub").textContent = failing.length
+      ? `We found ${failing.length} issue${failing.length>1?"s":""}. Here are the ${Math.min(3,failing.length)} that matter most.`
+      : "We didn't find any major issues. Nice work.";
+    $("issuesFree").innerHTML = free.map(item).join("");
+    $("issuesLocked").innerHTML = locked.map(item).join("");
+    $("issuesLocked").parentElement.style.display = locked.length ? "" : "none";
+
+    const shot = lh.audits["final-screenshot"]?.details?.data;
+    if(shot && strategy === "mobile"){ $("shot").src = shot; $("phone").style.display = ""; } else { $("phone").style.display = "none"; }
+
+    show("results", true);
+    $("leadForm").style.display = ""; $("leadOk").style.display = "none";
+    $("results").scrollIntoView({behavior:"smooth", block:"start"});
+
+    // One orchestrated reveal: gauge sweep + bars + count-up
+    requestAnimationFrame(() => {
+      const g = $("gaugeVal");
+      g.style.stroke = color(overall);
+      g.style.strokeDashoffset = 75 - (overall/100)*75;
+      document.querySelectorAll(".bar i").forEach(b => b.style.width = b.dataset.w + "%");
+      countUp($("overall"), overall);
+    });
+  }
+
+  function countUp(el, to){
+    if(matchMedia("(prefers-reduced-motion: reduce)").matches){ el.textContent = to; return; }
+    const start = performance.now(), dur = 1600;
+    const tick = now => { const p = Math.min(1,(now-start)/dur); el.textContent = Math.round(to*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+  // Lead capture
+  $("leadForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const f = e.target;
+    if(!f.reportValidity()) return;
+    const s = last?.scores || {};
+    const summary = last ? `Site: ${last.url} (${last.strategy})\nOverall: ${last.overall}\nSpeed: ${s.performance} | SEO: ${s.seo} | Easy to use: ${s.accessibility} | Security: ${s["best-practices"]}` : "";
+    const body = {name:f.name.value, email:f.email.value, business:f.business.value, report:summary};
+
+    if(!WEB3FORMS_KEY){
+      location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Full website report request")}&body=${encodeURIComponent(`Name: ${body.name}\nEmail: ${body.email}\nBusiness: ${body.business}\n\n${summary}`)}`;
+      return;
+    }
+    $("leadBtn").disabled = true; $("leadBtn").textContent = "Sending…";
+    try{
+      const r = await fetch("https://api.web3forms.com/submit", {method:"POST", headers:{"Content-Type":"application/json", Accept:"application/json"},
+        body: JSON.stringify({access_key:WEB3FORMS_KEY, subject:"New website audit lead: " + (body.business || body.name), from_name:"JN Website Check-Up", ...body})});
+      const d = await r.json();
+      if(!d.success) throw 0;
+      f.style.display = "none"; $("leadOk").style.display = "block";
+    }catch{
+      $("leadBtn").textContent = "Couldn't send. Try again";
+    }finally{ $("leadBtn").disabled = false; if($("leadBtn").textContent === "Sending…") $("leadBtn").textContent = "Send me the full report"; }
+  });
+})();
+</script>
+</body>
+</html>
