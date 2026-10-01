@@ -913,6 +913,14 @@ footer.spot-on>.sec-spot{left:0;width:100%}
 .clock-sec .pain{color:var(--ink);background:rgba(255,255,255,.92);border-color:rgba(255,255,255,.6);box-shadow:0 30px 70px -36px rgba(0,0,0,.85)}
 .clock-sec .pain h3{color:var(--ink)}
 .clock-sec .pain p{color:var(--ink-2)}
+
+/* Leadership: the leader-in-front photo, kept visible on the right */
+#leadership.photo-sec::after{background:radial-gradient(520px 420px at 66% 28%,rgba(245,179,1,.14),transparent 70%),
+  linear-gradient(90deg,rgba(19,33,60,.96) 0%,rgba(19,33,60,.88) 45%,rgba(19,33,60,.72) 100%),linear-gradient(0deg,rgba(11,18,34,.8),transparent 50%)}
+#leadership .lead-creds{color:#D6DCE8;border-top-color:rgba(255,255,255,.18)}
+#leadership .pain,#leadership .shot{color:var(--ink);background:rgba(255,255,255,.94);border-color:rgba(255,255,255,.6);box-shadow:0 30px 70px -36px rgba(0,0,0,.85)}
+#leadership .pain h3{color:var(--ink)}
+#leadership .pain p{color:var(--ink-2)}
 /* White cards keep the site's dark text */
 #services .tabs,#schedule .booking,#schedule .avail{color:var(--ink)}
 #services .tabs .lead,#schedule .booking .lead,#schedule .avail .lead,#schedule .booking .sub{color:var(--ink-2)}
@@ -1210,7 +1218,7 @@ footer.spot-on>.sec-spot{left:0;width:100%}
 </section>
 
 <!-- ================= LEADERSHIP ================= -->
-<section id="leadership" class="wrap section" style="padding-top:0">
+<section id="leadership" class="wrap section photo-sec" style="--photo:url('leadership-bg.jpg');--photo-pos:center 30%">
   <div class="lead-wrap">
     <div>
       <p class="kicker">Leadership</p>
