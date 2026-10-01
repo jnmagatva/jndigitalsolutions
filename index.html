@@ -136,7 +136,8 @@ a{color:inherit}
 .portfolio-shot figcaption a{color:var(--ink);font-weight:700}
 /* Portfolio case study links */
 .case-card a.shot-btn{position:relative;cursor:pointer;text-decoration:none}
-.case-card .shot-btn::before{content:"View case study";background:var(--cta);color:var(--cta-ink)}
+.case-card .shot-btn{cursor:zoom-in}
+.case-card .shot-btn::before{content:"View full image";background:var(--cta);color:var(--cta-ink)}
 @media (hover:none){.case-card .shot-btn::before{opacity:1;transform:none}}
 .case-card .case-title{text-decoration:none;font-weight:inherit}
 .case-card .case-title:hover{text-decoration:underline}
@@ -662,7 +663,13 @@ footer.site-foot{background:#0B1222;color:#9AA6BC;padding:clamp(56px,7vw,88px) 0
 
 /* ===== Mobile swipe hint for industry tabs ===== */
 .tabs{position:relative}
-.tab-fade{position:absolute;top:0;right:0;height:60px;width:64px;pointer-events:none;z-index:2;background:linear-gradient(90deg,rgba(255,255,255,0),#fff 70%);display:none}
+.tab-fade{position:absolute;top:0;right:0;height:60px;width:64px;z-index:2;border:0;padding:0;cursor:pointer;background:linear-gradient(90deg,rgba(255,255,255,0),#fff 55%);display:none}
+.tab-fade:focus-visible{outline:3px solid var(--cta);outline-offset:-3px}
+.tab-fade:hover svg{color:var(--ink)}
+.tab-fade.tab-prev{right:auto;left:0;background:linear-gradient(270deg,rgba(255,255,255,0),#fff 55%)}
+.tab-fade.tab-prev svg{right:auto;left:10px;transform:scaleX(-1);animation:none}
+.tabs.can-scroll .tab-prev{display:none}
+.tabs.can-scroll.past-start .tab-prev{display:block}
 .tab-hint{display:none;align-items:center;justify-content:center;gap:8px;padding:9px 12px;border-bottom:1px solid var(--line);background:#FFFBEF;color:var(--ink-2);font-size:13px;font-weight:600}
 .tab-hint svg{width:16px;height:16px;color:var(--cta-ink);animation:swipeNudge 1.4s ease-in-out infinite}
 @keyframes swipeNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
@@ -846,6 +853,16 @@ html,body{overflow-x:clip}
 .ad-bars b{text-align:right;font-weight:700}
 @media (max-width:900px){.auto-case{grid-template-columns:1fr}.auto-demo{max-width:420px}}
 @media (max-width:780px){.auto-actions .btn{width:100%;text-align:center}}
+
+/* Package badges on portfolio cards */
+.pkg-tag{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;border-radius:999px;padding:5px 12px;margin-bottom:10px}
+.pkg-tag a{color:inherit!important;text-decoration:underline;text-underline-offset:2px;font-weight:800}
+.pkg-basic{background:#E7F3EC;color:#1E5E3F}
+.pkg-pro{background:var(--navy);color:#fff}
+.pkg-pro a{color:var(--cta)!important}
+.portfolio-shot figcaption .pkg-tag{display:flex;width:max-content;max-width:100%}
+.pkg-addons{display:block;margin-top:8px;font-size:15px;color:var(--ink-2)}
+.pkg-addons b{color:var(--ink)}
 </style>
 <style id="sec-glow-css">
 /* Cursor glow on every section (not the hero) */
@@ -1102,17 +1119,17 @@ footer.spot-on>.sec-spot{left:0;width:100%}
 <div class="fx-layer fx-golden-layer" aria-hidden="true"><span class="fx-rays"></span><span class="fx-bokeh"><i style="--x:59.3%;--y:21.7%;--s:48px;--d:28.7s;--dl:-14.2s;--o:0.37;--h:255,255,255"></i><i style="--x:90.9%;--y:52.2%;--s:19px;--d:22.8s;--dl:-5.8s;--o:0.41;--h:255,255,255"></i><i style="--x:47.6%;--y:67.5%;--s:88px;--d:16.4s;--dl:-19.0s;--o:0.46;--h:255,255,255"></i><i style="--x:74.1%;--y:70.4%;--s:67px;--d:15.0s;--dl:-22.7s;--o:0.37;--h:255,214,140"></i><i style="--x:82.4%;--y:34.2%;--s:21px;--d:23.5s;--dl:-27.6s;--o:0.30;--h:255,214,140"></i><i style="--x:72.8%;--y:61.9%;--s:68px;--d:29.4s;--dl:-4.0s;--o:0.30;--h:245,179,1"></i><i style="--x:49.5%;--y:33.2%;--s:35px;--d:24.8s;--dl:-23.4s;--o:0.45;--h:255,214,140"></i><i style="--x:83.3%;--y:61.7%;--s:82px;--d:22.5s;--dl:-12.2s;--o:0.25;--h:255,214,140"></i><i style="--x:85.6%;--y:99.2%;--s:21px;--d:24.7s;--dl:-4.9s;--o:0.46;--h:255,255,255"></i><i style="--x:10.4%;--y:69.0%;--s:90px;--d:24.1s;--dl:-29.6s;--o:0.27;--h:245,179,1"></i><i style="--x:48.2%;--y:67.5%;--s:26px;--d:21.7s;--dl:-10.3s;--o:0.20;--h:245,179,1"></i><i style="--x:29.4%;--y:79.2%;--s:20px;--d:28.0s;--dl:-1.3s;--o:0.38;--h:245,179,1"></i><i style="--x:71.8%;--y:39.8%;--s:66px;--d:28.1s;--dl:-29.4s;--o:0.34;--h:245,179,1"></i><i style="--x:0.7%;--y:19.7%;--s:57px;--d:22.6s;--dl:-28.5s;--o:0.49;--h:255,214,140"></i><i style="--x:15.6%;--y:13.8%;--s:51px;--d:27.9s;--dl:-9.4s;--o:0.49;--h:255,214,140"></i><i style="--x:46.0%;--y:56.8%;--s:66px;--d:24.3s;--dl:-17.9s;--o:0.36;--h:255,255,255"></i></span></div>
 
   <p class="kicker">What I handle</p>
-  <h2 class="display h2">Pick your industry. See exactly what comes off your plate.</h2>
+  <h2 class="display h2">Pick a service. See exactly what comes off your plate.</h2>
   <div class="tabs">
-    <div class="tablist" role="tablist" aria-label="Industries">
-      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">Insurance restoration</button>
+    <div class="tablist" role="tablist" aria-label="Services">
+      <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="true">Websites, SEO &amp; social media</button>
+      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="false" tabindex="-1">Insurance restoration</button>
+      <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1">Admin &amp; client support</button>
       <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Real estate</button>
       <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">Law firms</button>
       <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">Vacation rentals</button>
-      <button class="tab" role="tab" id="t6" aria-controls="p6" aria-selected="false" tabindex="-1">Websites, SEO &amp; social media</button>
-      <button class="tab" role="tab" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1">Any small business</button>
     </div>
-    <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1">
+    <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1" hidden>
       <div><h3>From first call to final check</h3><p class="lead">I've carried 40–60+ water, mold and rebuild files at once. I know where claims stall and how to unstick them.</p></div>
       <ul class="checks">
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Intake calls, lead qualification and fast follow-up that turns inquiries into signed jobs</span></li>
@@ -1150,7 +1167,7 @@ footer.spot-on>.sec-spot{left:0;width:100%}
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Monthly income and expense tracking in Google Sheets or Excel</span></li>
       </ul>
     </div>
-    <div class="panel" role="tabpanel" id="p6" aria-labelledby="t6" hidden>
+    <div class="panel" role="tabpanel" id="p6" aria-labelledby="t6">
       <div><h3>Get found on Google. Get the call.</h3><p class="lead">As a Web Designer &amp; Local SEO Specialist, I build sites that load fast, rank locally and turn visitors into calls, then keep your Google presence working for you. That includes an ongoing 1-to-7-page redesign for a South Florida remodeling contractor. This page is my own work too.</p></div>
       <ul class="checks">
         <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Custom websites and redesigns: fast, mobile-first and written to turn visitors into calls and quote requests</span></li>
@@ -1227,16 +1244,16 @@ footer.spot-on>.sec-spot{left:0;width:100%}
   <ul class="marquee-track" aria-hidden="true"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Web Designer &amp; Local SEO Specialist</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
 </div></div>
 <section id="portfolio" class="wrap section photo-sec" style="--photo:url('ai-bg.jpg');--photo-pos:30% center">
-  <p class="kicker">Web design portfolio</p>
-  <h2 class="display h2">From a single page to a full website.</h2>
-  <p class="sub">A complete redesign for a South Florida remodeling contractor. I rebuilt the site around their real project photos, gave every service its own page, and added a browsable project gallery.</p>
+  <p class="kicker">Web design, SEO &amp; automation portfolio</p>
+  <h2 class="display h2">From a single page to a full growth system.</h2>
+  <p class="sub">Real projects that help businesses get found, win trust and save time: a complete website redesign for a South Florida remodeling contractor, my own business site built from scratch, and an automated website check-up that finds SEO issues and turns visitors into leads.</p>
   <figure class="shot portfolio-shot case-card">
-    <a class="shot-btn" href="work-hc-remodeling.html" aria-label="View the case study: HC Remodeling &amp; Renovation"><img src="hc-remodeling-case.jpg" alt="Before and after desktop views and the live mobile view of the HC Remodeling &amp; Renovation website" loading="lazy"></a>
-    <figcaption><strong><a class="case-title" href="work-hc-remodeling.html">HC Remodeling &amp; Renovation</a></strong>Full redesign for a South Florida remodeling contractor: 1 page expanded to 7, with real project photos. <span class="case-links"><a href="work-hc-remodeling.html">View the case study</a><a href="https://homeconstructionremodeling.com" target="_blank" rel="noopener">Visit the live site</a></span></figcaption>
+    <button type="button" class="shot-btn" data-full="hc-remodeling-case.jpg" data-cap="HC Remodeling &amp; Renovation: Full redesign for a South Florida remodeling contractor: 1 page expanded to 7, with real project photos." aria-label="Enlarge screenshot: HC Remodeling &amp; Renovation"><img src="hc-remodeling-case.jpg" alt="Before and after desktop views and the live mobile view of the HC Remodeling &amp; Renovation website" loading="lazy"></button>
+    <figcaption><span class="pkg-tag pkg-basic"><a href="pricing.html#packages">Basic package</a> + add-ons</span><strong><a class="case-title" href="work-hc-remodeling.html">HC Remodeling &amp; Renovation</a></strong>Full redesign for a South Florida remodeling contractor: 1 page expanded to 7, with real project photos. <span class="pkg-addons"><b>Add-ons:</b> Google Business Profile setup, review growth, LinkedIn and Instagram business pages, and site-wide motion effects.</span> <span class="case-links"><a href="work-hc-remodeling.html">View the case study</a><a href="https://homeconstructionremodeling.com" target="_blank" rel="noopener">Visit the live site</a></span></figcaption>
   </figure>
   <figure class="shot portfolio-shot case-card">
-    <a class="shot-btn" href="work-jn-digital-solutions.html" aria-label="View the case study: JN Digital Solutions"><img src="jn-digital-solutions-case.jpg" alt="Desktop and mobile views of the JN Digital Solutions website" loading="lazy"></a>
-    <figcaption><strong><a class="case-title" href="work-jn-digital-solutions.html">JN Digital Solutions</a></strong>My own business website, built from scratch: intro animation, live booking calendar, client reviews and a mobile-first layout. <span class="case-links"><a href="work-jn-digital-solutions.html">View the case study</a><a href="https://jnmagatva.github.io/jndigitalsolutions/" target="_blank" rel="noopener">Visit the live site</a></span></figcaption>
+    <button type="button" class="shot-btn" data-full="jn-digital-solutions-case.jpg" data-cap="JN Digital Solutions: My own business website, built from scratch: intro animation, live booking calendar, client reviews and a mobile-first layout." aria-label="Enlarge screenshot: JN Digital Solutions"><img src="jn-digital-solutions-case.jpg" alt="Desktop and mobile views of the JN Digital Solutions website" loading="lazy"></button>
+    <figcaption><span class="pkg-tag pkg-pro"><a href="pricing.html#packages">Professional package</a> + automation add-ons</span><strong><a class="case-title" href="work-jn-digital-solutions.html">JN Digital Solutions</a></strong>My own business website, built from scratch: intro animation, live booking calendar, client reviews and a mobile-first layout. <span class="pkg-addons"><b>Automation add-ons:</b> an automated website check-up with built-in lead capture, a self-serve booking calendar and a built-in client review form.</span> <span class="case-links"><a href="work-jn-digital-solutions.html">View the case study</a><a href="https://jnmagatva.github.io/jndigitalsolutions/" target="_blank" rel="noopener">Visit the live site</a></span></figcaption>
   </figure>
   <article class="auto-case" aria-labelledby="auto-title">
     <div class="auto-copy">
@@ -1882,11 +1899,14 @@ var CAL_OPEN_DAYS=[1,2,3,4,5], CAL_REQUEST_DAYS=[6,7], CAL_MONTHS_AHEAD=3;
 (function(){
   var tabs=document.querySelector('.tabs'),list=tabs&&tabs.querySelector('.tablist');if(!list)return;
   var arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-  var fade=document.createElement('div');fade.className='tab-fade';fade.setAttribute('aria-hidden','true');fade.innerHTML=arrow;tabs.appendChild(fade);
-  var hint=document.createElement('div');hint.className='tab-hint';hint.innerHTML='Swipe left to see more industries '+arrow;tabs.insertBefore(hint,list);
+  var fade=document.createElement('button');fade.type='button';fade.className='tab-fade';fade.setAttribute('aria-label','Show more services');fade.innerHTML=arrow;tabs.appendChild(fade);
+  var prev=document.createElement('button');prev.type='button';prev.className='tab-fade tab-prev';prev.setAttribute('aria-label','Show previous services');prev.innerHTML=arrow;tabs.appendChild(prev);
+  fade.addEventListener('click',function(){hint.style.display='none';list.scrollBy({left:Math.max(160,list.clientWidth*.6),behavior:'smooth'});});
+  prev.addEventListener('click',function(){list.scrollBy({left:-Math.max(160,list.clientWidth*.6),behavior:'smooth'});});
+  var hint=document.createElement('div');hint.className='tab-hint';hint.innerHTML='Swipe left to see more services '+arrow;tabs.insertBefore(hint,list);
   function upd(){var can=list.scrollWidth>list.clientWidth+4;tabs.classList.toggle('can-scroll',can);
-    tabs.classList.toggle('at-end',list.scrollLeft+list.clientWidth>=list.scrollWidth-4);
-    fade.style.top=(list.offsetTop)+'px';fade.style.height=list.offsetHeight+'px';}
+    tabs.classList.toggle('at-end',list.scrollLeft+list.clientWidth>=list.scrollWidth-4);tabs.classList.toggle('past-start',list.scrollLeft>4);
+    fade.style.top=prev.style.top=(list.offsetTop)+'px';fade.style.height=prev.style.height=list.offsetHeight+'px';}
   var user=false;['touchstart','pointerdown','wheel'].forEach(function(ev){list.addEventListener(ev,function(){user=true;},{passive:true});});
   list.addEventListener('scroll',function(){upd();if(user&&list.scrollLeft>20)hint.style.display='none';},{passive:true});
   window.addEventListener('resize',upd);upd();
