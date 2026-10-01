@@ -13,6 +13,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="case-study.css?v=6">
+<style id="sec-glow-css">
+/* Cursor glow on every section (not the hero) */
+.spot-on{position:relative;isolation:isolate}
+.spot-lift{position:relative;z-index:1}
+.spot-z{z-index:1}
+.sec-spot{position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:0;pointer-events:none;opacity:0;transition:opacity .45s ease;
+  background:radial-gradient(560px circle at var(--mx,50%) var(--my,50%),rgba(245,179,1,.15),transparent 62%)}
+.spot-on:hover>.sec-spot{opacity:1}
+footer.spot-on>.sec-spot{left:0;width:100%}
+@media (prefers-reduced-motion:reduce){.sec-spot{display:none}}
+</style>
 </head>
 <body>
 <div class="progress" aria-hidden="true"></div>
@@ -196,6 +207,24 @@
     sec.addEventListener('pointermove',function(e){var r=s.getBoundingClientRect();
       s.style.setProperty('--mx',(e.clientX-r.left)+'px');s.style.setProperty('--my',(e.clientY-r.top)+'px');});
   });
+})();
+</script>
+<script id="sec-glow-js">
+/* Cursor glow on every section below the hero */
+(function(){
+  if(!window.matchMedia||!matchMedia('(pointer: fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  function init(){
+    document.querySelectorAll('main section, body > section, footer').forEach(function(sec){
+      if(sec.matches('.hero,.c-hero')||sec.classList.contains('spot-on')||sec.parentElement.closest('section'))return;
+      sec.classList.add('spot-on');
+      [].forEach.call(sec.children,function(c){var st=getComputedStyle(c);
+        if(st.position==='static')c.classList.add('spot-lift');else if((st.position==='relative'||st.position==='sticky')&&st.zIndex==='auto')c.classList.add('spot-z');});
+      var s=document.createElement('span');s.className='sec-spot';s.setAttribute('aria-hidden','true');sec.insertBefore(s,sec.firstChild);
+      sec.addEventListener('pointermove',function(e){var r=s.getBoundingClientRect();
+        s.style.setProperty('--mx',(e.clientX-r.left)+'px');s.style.setProperty('--my',(e.clientY-r.top)+'px');});
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
 </body>

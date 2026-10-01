@@ -314,3 +314,9 @@ html,body{overflow-x:clip}
 .cta-photo .cta{background:rgba(19,33,60,.62);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2);box-shadow:0 40px 90px -40px rgba(0,0,0,.9)}
 .cta-photo .next{color:var(--ink);box-shadow:0 40px 90px -40px rgba(0,0,0,.9);border-color:transparent}
 .cta-photo .next:hover{box-shadow:0 40px 90px -36px rgba(0,0,0,.95),0 0 0 2px var(--client)}
+
+/* Photo background on Where it started, Beyond the website and the last section */
+.theme-dark .beyond-sec .extra-h{margin-top:0}
+.theme-dark .photo-sec .goals li,.theme-dark .photo-sec .extra div{background:rgba(27,28,25,.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 24px 60px -30px rgba(0,0,0,.8)}
+.theme-dark .photo-sec .extra-h,.theme-dark .photo-sec .extra h3{color:#fff}
+.theme-dark .photo-sec .extra p,.theme-dark .photo-sec .story .body p,.theme-dark .story.photo-sec .body p{color:#D2CCC1}

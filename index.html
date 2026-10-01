@@ -814,6 +814,73 @@ html,body{overflow-x:clip}
 .photo-sec .pain h3{color:var(--ink)}
 .photo-sec + *{margin-top:0}
 #ai.photo-sec + *,#ai.photo-sec ~ .marquee{margin-top:0}
+
+/* Portfolio on the same photo background as "How I use AI" */
+#portfolio.photo-sec .portfolio-shot{box-shadow:0 30px 80px -34px rgba(0,0,0,.85);border-color:transparent}
+#portfolio.photo-sec .quote-cta{box-shadow:0 30px 80px -34px rgba(0,0,0,.85)}
+#portfolio.photo-sec .quote-cta h3{color:var(--ink)}
+</style>
+<style id="sec-glow-css">
+/* Cursor glow on every section (not the hero) */
+.spot-on{position:relative;isolation:isolate}
+.spot-lift{position:relative;z-index:1}
+.spot-z{z-index:1}
+.sec-spot{position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:0;pointer-events:none;opacity:0;transition:opacity .45s ease;
+  background:radial-gradient(560px circle at var(--mx,50%) var(--my,50%),rgba(245,179,1,.15),transparent 62%)}
+.spot-on:hover>.sec-spot{opacity:1}
+footer.spot-on>.sec-spot{left:0;width:100%}
+@media (prefers-reduced-motion:reduce){.sec-spot{display:none}}
+</style>
+<style id="fx-photo-css">
+/* ===== Photo sections with living effects: What I handle, Book a call, Final CTA ===== */
+.fx-sec{position:relative;isolation:isolate}
+.fx-sec>:not(.fx-layer):not(.sec-spot){position:relative;z-index:1}
+.fx-layer{position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:0;overflow:hidden;pointer-events:none}
+
+/* Golden hour: warm overlay, slow light rays, drifting bokeh */
+#services.photo-sec::after{background:
+  radial-gradient(900px 520px at 78% 8%,rgba(245,179,1,.22),transparent 65%),
+  linear-gradient(90deg,rgba(19,33,60,.95) 0%,rgba(19,33,60,.86) 52%,rgba(19,33,60,.7) 100%),
+  linear-gradient(0deg,rgba(11,18,34,.75),transparent 45%)}
+.fx-rays{position:absolute;right:-20%;top:-60%;width:120vw;height:180%;opacity:.35;mix-blend-mode:screen;
+  background:repeating-conic-gradient(from 200deg at 80% 0%,rgba(255,214,140,.0) 0deg 6deg,rgba(255,214,140,.16) 8deg 10deg,rgba(255,214,140,0) 13deg 22deg);
+  -webkit-mask-image:radial-gradient(70% 60% at 80% 0%,#000,transparent 75%);mask-image:radial-gradient(70% 60% at 80% 0%,#000,transparent 75%);
+  transform-origin:80% 0%;animation:fxRays 22s ease-in-out infinite alternate}
+@keyframes fxRays{from{transform:rotate(-4deg);opacity:.25}to{transform:rotate(5deg);opacity:.42}}
+.fx-bokeh i{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);border-radius:50%;opacity:0;
+  background:radial-gradient(circle,rgba(var(--h),.9) 0%,rgba(var(--h),.35) 45%,transparent 70%);filter:blur(2px);mix-blend-mode:screen;
+  animation:fxFloat var(--d) linear var(--dl) infinite}
+@keyframes fxFloat{0%{opacity:0;transform:translate3d(0,40px,0) scale(.8)}15%{opacity:var(--o)}85%{opacity:var(--o)}100%{opacity:0;transform:translate3d(30px,-260px,0) scale(1.15)}}
+#services .tabs{background:rgba(255,255,255,.93);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
+  border-color:rgba(255,255,255,.6);box-shadow:0 40px 90px -40px rgba(0,0,0,.85),0 0 0 1px rgba(245,179,1,.12)}
+
+/* Connected: handshake photo with live circuit traces and travelling light pulses */
+#schedule.photo-sec::after,#book.photo-sec::after{background:
+  radial-gradient(700px 420px at 50% 55%,rgba(245,179,1,.12),transparent 65%),
+  linear-gradient(90deg,rgba(19,33,60,.94) 0%,rgba(19,33,60,.86) 55%,rgba(19,33,60,.78) 100%),
+  linear-gradient(0deg,rgba(11,18,34,.7),transparent 45%)}
+.fx-circuit-svg{position:absolute;inset:0;width:100%;height:100%}
+.fx-traces path{fill:none;stroke:rgba(174,185,204,.16);stroke-width:1.2}
+.fx-pulses path{fill:none;stroke:#F5B301;stroke-width:2;stroke-linecap:round;stroke-dasharray:60 940;stroke-dashoffset:1000;opacity:.9;
+  filter:drop-shadow(0 0 6px rgba(245,179,1,.9));animation:fxPulse var(--du,7s) linear var(--dl,0s) infinite}
+@keyframes fxPulse{to{stroke-dashoffset:0}}
+.fx-nodes circle{fill:#F5B301;opacity:.35;transform-box:fill-box;transform-origin:center;animation:fxNode 3.2s ease-in-out var(--dl,0s) infinite}
+@keyframes fxNode{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:.9;transform:scale(1.5)}}
+.fx-flare{position:absolute;left:50%;top:58%;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;mix-blend-mode:screen;
+  background:radial-gradient(circle,rgba(255,214,140,.28),rgba(245,179,1,.08) 40%,transparent 70%);animation:fxBreath 6s ease-in-out infinite}
+@keyframes fxBreath{0%,100%{opacity:.55;transform:scale(.92)}50%{opacity:1;transform:scale(1.08)}}
+#schedule .booking,#schedule .avail{background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
+  border-color:rgba(255,255,255,.6);box-shadow:0 40px 90px -40px rgba(0,0,0,.85)}
+#book .final{background:rgba(19,33,60,.72);-webkit-backdrop-filter:blur(16px) saturate(1.25);backdrop-filter:blur(16px) saturate(1.25);
+  border:1px solid rgba(255,255,255,.12);border-top:2px solid #F5B301;box-shadow:0 40px 100px -40px rgba(0,0,0,.9)}
+#book .final .contact a:not(.btn){background:rgba(11,18,34,.45)}
+
+/* White cards keep the site's dark text */
+#services .tabs,#schedule .booking,#schedule .avail{color:var(--ink)}
+#services .tabs .lead,#schedule .booking .lead,#schedule .avail .lead,#schedule .booking .sub{color:var(--ink-2)}
+#services .tabs h3,#schedule .booking h3,#schedule .booking strong,#schedule .avail h3,#schedule .avail strong{color:var(--ink)}
+@media (max-width:780px){.fx-bokeh i:nth-child(n+9){display:none}.fx-pulses path:nth-child(n+6){display:none}}
+@media (prefers-reduced-motion:reduce){.fx-rays,.fx-bokeh i,.fx-pulses path,.fx-nodes circle,.fx-flare{animation:none!important}.fx-bokeh i{opacity:.25}}
 </style>
 </head>
 <body>
@@ -955,7 +1022,9 @@ html,body{overflow-x:clip}
   <ul class="marquee-track"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
   <ul class="marquee-track" aria-hidden="true"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
 </div></div>
-<section id="services" class="wrap section" style="padding-top:0">
+<section id="services" class="wrap section photo-sec fx-sec" style="--photo:url('industry-bg.jpg');--photo-pos:center">
+<div class="fx-layer fx-golden-layer" aria-hidden="true"><span class="fx-rays"></span><span class="fx-bokeh"><i style="--x:59.3%;--y:21.7%;--s:48px;--d:28.7s;--dl:-14.2s;--o:0.37;--h:255,255,255"></i><i style="--x:90.9%;--y:52.2%;--s:19px;--d:22.8s;--dl:-5.8s;--o:0.41;--h:255,255,255"></i><i style="--x:47.6%;--y:67.5%;--s:88px;--d:16.4s;--dl:-19.0s;--o:0.46;--h:255,255,255"></i><i style="--x:74.1%;--y:70.4%;--s:67px;--d:15.0s;--dl:-22.7s;--o:0.37;--h:255,214,140"></i><i style="--x:82.4%;--y:34.2%;--s:21px;--d:23.5s;--dl:-27.6s;--o:0.30;--h:255,214,140"></i><i style="--x:72.8%;--y:61.9%;--s:68px;--d:29.4s;--dl:-4.0s;--o:0.30;--h:245,179,1"></i><i style="--x:49.5%;--y:33.2%;--s:35px;--d:24.8s;--dl:-23.4s;--o:0.45;--h:255,214,140"></i><i style="--x:83.3%;--y:61.7%;--s:82px;--d:22.5s;--dl:-12.2s;--o:0.25;--h:255,214,140"></i><i style="--x:85.6%;--y:99.2%;--s:21px;--d:24.7s;--dl:-4.9s;--o:0.46;--h:255,255,255"></i><i style="--x:10.4%;--y:69.0%;--s:90px;--d:24.1s;--dl:-29.6s;--o:0.27;--h:245,179,1"></i><i style="--x:48.2%;--y:67.5%;--s:26px;--d:21.7s;--dl:-10.3s;--o:0.20;--h:245,179,1"></i><i style="--x:29.4%;--y:79.2%;--s:20px;--d:28.0s;--dl:-1.3s;--o:0.38;--h:245,179,1"></i><i style="--x:71.8%;--y:39.8%;--s:66px;--d:28.1s;--dl:-29.4s;--o:0.34;--h:245,179,1"></i><i style="--x:0.7%;--y:19.7%;--s:57px;--d:22.6s;--dl:-28.5s;--o:0.49;--h:255,214,140"></i><i style="--x:15.6%;--y:13.8%;--s:51px;--d:27.9s;--dl:-9.4s;--o:0.49;--h:255,214,140"></i><i style="--x:46.0%;--y:56.8%;--s:66px;--d:24.3s;--dl:-17.9s;--o:0.36;--h:255,255,255"></i></span></div>
+
   <p class="kicker">What I handle</p>
   <h2 class="display h2">Pick your industry. See exactly what comes off your plate.</h2>
   <div class="tabs">
@@ -1078,7 +1147,7 @@ html,body{overflow-x:clip}
   <ul class="marquee-track"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
   <ul class="marquee-track" aria-hidden="true"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Website Creation</li><li>Social Media Management</li><li>Customer &amp; Client Support</li></ul>
 </div></div>
-<section id="portfolio" class="wrap section" style="padding-top:0">
+<section id="portfolio" class="wrap section photo-sec" style="--photo:url('ai-bg.jpg');--photo-pos:30% center">
   <p class="kicker">Web design portfolio</p>
   <h2 class="display h2">From a single page to a full website.</h2>
   <p class="sub">A complete redesign for a South Florida remodeling contractor. I rebuilt the site around their real project photos, gave every service its own page, and added a browsable project gallery.</p>
@@ -1320,7 +1389,9 @@ html,body{overflow-x:clip}
 </section>
 
 <!-- ================= BOOK A CALL (Google Calendar) ================= -->
-<section id="schedule" class="wrap section" style="padding-top:0">
+<section id="schedule" class="wrap section photo-sec fx-sec" style="--photo:url('handshake-bg.jpg');--photo-pos:center 60%">
+<div class="fx-layer fx-circuit-layer" aria-hidden="true"><svg class="fx-circuit-svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="fx-traces"><path d="M1620,503 L1350,503 L1162,503 L1042,580 L745,580 L581,580 L530,529"/><path d="M1620,82 L1313,82 L1007,82 L900,20 L744,20 L674,20 L381,20 L300,101"/><path d="M-20,491 L179,491 L219,531 L528,531 L620,580 L901,580 L1256,580 L1336,580 L1670,580 L1713,580"/><path d="M-20,111 L147,111 L385,111 L425,71 L619,71 L719,20 L955,20"/><path d="M1620,446 L1336,446 L1253,529 L1091,529 L999,437 L665,437"/><path d="M-20,177 L145,177 L247,279 L432,279 L529,182 L799,182 L892,89 L1196,89 L1289,182 L1483,182 L1525,224"/><path d="M-20,255 L338,255 L383,210 L560,210 L601,251 L938,251 L1027,340 L1185,340 L1299,226"/><path d="M-20,288 L214,288 L270,344 L560,344 L649,255 L835,255 L904,324 L1253,324 L1313,264 L1642,264 L1731,175"/><path d="M-20,534 L132,534 L237,429 L442,429 L514,501 L761,501 L1053,501 L1101,453"/><path d="M-20,169 L263,169 L338,94 L532,94 L724,94 L881,94 L952,165"/><path d="M-20,101 L192,101 L243,50 L475,50 L557,132 L865,132"/><path d="M-20,183 L241,183 L560,183 L602,141 L895,141 L943,189"/><path d="M1620,358 L1462,358 L1417,403 L1047,403 L719,403"/><path d="M1620,389 L1305,389 L1212,296 L870,296 L757,409 L614,409 L526,497"/></g><g class="fx-pulses"><path d="M1620,503 L1350,503 L1162,503 L1042,580 L745,580 L581,580 L530,529" pathLength="1000" style="--dl:5.2s;--du:7.4s"/><path d="M-20,491 L179,491 L219,531 L528,531 L620,580 L901,580 L1256,580 L1336,580 L1670,580 L1713,580" pathLength="1000" style="--dl:0.7s;--du:7.6s"/><path d="M1620,446 L1336,446 L1253,529 L1091,529 L999,437 L665,437" pathLength="1000" style="--dl:8.9s;--du:8.5s"/><path d="M-20,255 L338,255 L383,210 L560,210 L601,251 L938,251 L1027,340 L1185,340 L1299,226" pathLength="1000" style="--dl:6.6s;--du:6.6s"/><path d="M-20,534 L132,534 L237,429 L442,429 L514,501 L761,501 L1053,501 L1101,453" pathLength="1000" style="--dl:6.6s;--du:7.3s"/><path d="M-20,101 L192,101 L243,50 L475,50 L557,132 L865,132" pathLength="1000" style="--dl:4.0s;--du:8.4s"/><path d="M1620,358 L1462,358 L1417,403 L1047,403 L719,403" pathLength="1000" style="--dl:0.8s;--du:8.0s"/><path d="M1620,82 L1313,82 L1007,82 L900,20 L744,20 L674,20 L381,20 L300,101" pathLength="1000" style="--dl:0.3s;--du:7.4s"/><path d="M1620,446 L1336,446 L1253,529 L1091,529 L999,437 L665,437" pathLength="1000" style="--dl:4.3s;--du:5.9s"/><path d="M-20,288 L214,288 L270,344 L560,344 L649,255 L835,255 L904,324 L1253,324 L1313,264 L1642,264 L1731,175" pathLength="1000" style="--dl:6.3s;--du:7.0s"/><path d="M-20,101 L192,101 L243,50 L475,50 L557,132 L865,132" pathLength="1000" style="--dl:5.5s;--du:8.7s"/><path d="M1620,389 L1305,389 L1212,296 L870,296 L757,409 L614,409 L526,497" pathLength="1000" style="--dl:2.3s;--du:5.0s"/></g><g class="fx-nodes"><circle cx="530" cy="529" r="3.2" style="--dl:1.2s"/><circle cx="300" cy="101" r="3.2" style="--dl:2.7s"/><circle cx="955" cy="20" r="3.2" style="--dl:0.8s"/><circle cx="665" cy="437" r="3.2" style="--dl:0.7s"/><circle cx="1525" cy="224" r="3.2" style="--dl:3.6s"/><circle cx="1299" cy="226" r="3.2" style="--dl:2.6s"/><circle cx="1101" cy="453" r="3.2" style="--dl:1.8s"/><circle cx="952" cy="165" r="3.2" style="--dl:3.6s"/><circle cx="865" cy="132" r="3.2" style="--dl:1.3s"/><circle cx="943" cy="189" r="3.2" style="--dl:2.7s"/><circle cx="719" cy="403" r="3.2" style="--dl:0.8s"/><circle cx="526" cy="497" r="3.2" style="--dl:1.7s"/></g></svg><span class="fx-flare"></span></div>
+
   <p class="kicker">Book a call</p>
   <h2 class="display h2">Pick a time that works for you.</h2>
   <p class="sub">Choose any open slot for a free 20-minute call. You'll get an instant confirmation and a Google Meet link by email, and it goes straight onto my calendar.</p>
@@ -1350,7 +1421,9 @@ html,body{overflow-x:clip}
 </section>
 
 <!-- ================= FINAL CTA ================= -->
-<section id="book" class="wrap" style="padding-bottom:clamp(56px,7vw,96px)">
+<section id="book" class="wrap photo-sec fx-sec" style="--photo:url('handshake-bg.jpg');--photo-pos:center 60%">
+<div class="fx-layer fx-circuit-layer" aria-hidden="true"><svg class="fx-circuit-svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="fx-traces"><path d="M1620,117 L1264,117 L1159,20 L782,20 L740,62 L592,62 L524,130 L179,130 L97,212 L-277,212 L-342,277"/><path d="M-20,497 L231,497 L543,497 L827,497 L905,575"/><path d="M-20,324 L321,324 L400,245 L733,245 L823,335 L1173,335 L1260,248 L1619,248 L1702,165"/><path d="M1620,110 L1374,110 L1275,209 L1063,209 L755,209 L680,134"/><path d="M-20,55 L356,55 L451,20 L629,20 L675,20 L1000,20 L1055,75 L1196,75"/><path d="M-20,99 L315,99 L412,20 L646,20 L710,20 L915,20 L979,20 L1147,20 L1503,20 L1571,88"/><path d="M-20,246 L342,246 L544,246 L742,246 L1077,246 L1190,133 L1394,133 L1441,180"/><path d="M1620,369 L1333,369 L1120,369 L1025,274 L872,274 L829,317 L521,317 L462,258"/><path d="M1620,214 L1360,214 L1279,133 L1089,133 L716,133 L601,20 L402,20 L148,20 L87,81"/><path d="M-20,220 L236,220 L315,299 L468,299 L537,368 L758,368 L875,251 L1057,251 L1224,251"/><path d="M1620,365 L1442,365 L1347,270 L1151,270 L947,270 L867,350"/><path d="M1620,441 L1427,441 L1312,326 L1028,326 L979,375 L632,375 L298,375"/><path d="M-20,249 L190,249 L541,249 L774,249"/><path d="M-20,366 L282,366 L375,459 L608,459 L684,535 L1055,535 L1353,535 L1409,580"/></g><g class="fx-pulses"><path d="M1620,117 L1264,117 L1159,20 L782,20 L740,62 L592,62 L524,130 L179,130 L97,212 L-277,212 L-342,277" pathLength="1000" style="--dl:8.2s;--du:8.2s"/><path d="M-20,324 L321,324 L400,245 L733,245 L823,335 L1173,335 L1260,248 L1619,248 L1702,165" pathLength="1000" style="--dl:1.6s;--du:5.1s"/><path d="M-20,55 L356,55 L451,20 L629,20 L675,20 L1000,20 L1055,75 L1196,75" pathLength="1000" style="--dl:2.1s;--du:8.8s"/><path d="M-20,246 L342,246 L544,246 L742,246 L1077,246 L1190,133 L1394,133 L1441,180" pathLength="1000" style="--dl:6.9s;--du:7.8s"/><path d="M1620,214 L1360,214 L1279,133 L1089,133 L716,133 L601,20 L402,20 L148,20 L87,81" pathLength="1000" style="--dl:1.9s;--du:5.8s"/><path d="M1620,365 L1442,365 L1347,270 L1151,270 L947,270 L867,350" pathLength="1000" style="--dl:4.0s;--du:7.1s"/><path d="M-20,249 L190,249 L541,249 L774,249" pathLength="1000" style="--dl:5.5s;--du:5.2s"/><path d="M-20,497 L231,497 L543,497 L827,497 L905,575" pathLength="1000" style="--dl:7.6s;--du:6.0s"/><path d="M-20,55 L356,55 L451,20 L629,20 L675,20 L1000,20 L1055,75 L1196,75" pathLength="1000" style="--dl:6.4s;--du:6.3s"/><path d="M1620,369 L1333,369 L1120,369 L1025,274 L872,274 L829,317 L521,317 L462,258" pathLength="1000" style="--dl:2.7s;--du:8.5s"/><path d="M1620,365 L1442,365 L1347,270 L1151,270 L947,270 L867,350" pathLength="1000" style="--dl:2.0s;--du:7.0s"/><path d="M-20,366 L282,366 L375,459 L608,459 L684,535 L1055,535 L1353,535 L1409,580" pathLength="1000" style="--dl:7.9s;--du:8.3s"/></g><g class="fx-nodes"><circle cx="905" cy="575" r="3.2" style="--dl:2.9s"/><circle cx="680" cy="134" r="3.2" style="--dl:1.0s"/><circle cx="1196" cy="75" r="3.2" style="--dl:2.5s"/><circle cx="1571" cy="88" r="3.2" style="--dl:1.9s"/><circle cx="1441" cy="180" r="3.2" style="--dl:1.2s"/><circle cx="462" cy="258" r="3.2" style="--dl:3.1s"/><circle cx="87" cy="81" r="3.2" style="--dl:2.7s"/><circle cx="1224" cy="251" r="3.2" style="--dl:3.6s"/><circle cx="867" cy="350" r="3.2" style="--dl:1.7s"/><circle cx="298" cy="375" r="3.2" style="--dl:0.6s"/><circle cx="774" cy="249" r="3.2" style="--dl:1.1s"/><circle cx="1409" cy="580" r="3.2" style="--dl:3.0s"/></g></svg></div>
+
   <div class="final">
     <div>
       <h2 class="display">Let's find the first 10 hours you can hand off.</h2>
@@ -1786,6 +1859,24 @@ var CAL_OPEN_DAYS=[1,2,3,4,5], CAL_REQUEST_DAYS=[6,7], CAL_MONTHS_AHEAD=3;
   function go(){var t=document.getElementById(id);if(!t)return;t.scrollIntoView({block:'start'});
     if(id==='review-form'){var f=t.querySelector('input,select,textarea');if(f)try{f.focus({preventScroll:true})}catch(e){}}}
   window.addEventListener('load',function(){go();setTimeout(go,400);setTimeout(go,1200);});})();
+</script>
+<script id="sec-glow-js">
+/* Cursor glow on every section below the hero */
+(function(){
+  if(!window.matchMedia||!matchMedia('(pointer: fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  function init(){
+    document.querySelectorAll('main section, body > section, footer').forEach(function(sec){
+      if(sec.matches('.hero,.c-hero')||sec.classList.contains('spot-on')||sec.parentElement.closest('section'))return;
+      sec.classList.add('spot-on');
+      [].forEach.call(sec.children,function(c){var st=getComputedStyle(c);
+        if(st.position==='static')c.classList.add('spot-lift');else if((st.position==='relative'||st.position==='sticky')&&st.zIndex==='auto')c.classList.add('spot-z');});
+      var s=document.createElement('span');s.className='sec-spot';s.setAttribute('aria-hidden','true');sec.insertBefore(s,sec.firstChild);
+      sec.addEventListener('pointermove',function(e){var r=s.getBoundingClientRect();
+        s.style.setProperty('--mx',(e.clientX-r.left)+'px');s.style.setProperty('--my',(e.clientY-r.top)+'px');});
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
 </script>
 </body>
 </html>
