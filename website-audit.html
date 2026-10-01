@@ -114,6 +114,7 @@ a{color:inherit}
 .issue{background:#fff;border-radius:14px;padding:18px 22px;margin-bottom:10px;border:1px solid var(--line)}
 .issue h4{margin:0 0 4px;font-size:17px;display:flex;gap:10px;align-items:baseline}
 .issue p{margin:0;color:var(--muted);font-size:15.5px}
+.issue .tech{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:14px;color:var(--ink);line-height:1.5}
 .issue .tag{font-size:12.5px;font-weight:600;border-radius:6px;padding:2px 8px;white-space:nowrap}
 .locked{position:relative}
 .locked .issue{filter:blur(4px);user-select:none;pointer-events:none}
@@ -265,6 +266,7 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:28px 0 40px;colo
   const $ = id => document.getElementById(id);
   $("yr").textContent = new Date().getFullYear();
   let strategy = "mobile", last = null;
+  const OWNER = new URLSearchParams(location.search).get("owner") === "1";
 
   document.querySelectorAll(".device button").forEach(b => b.addEventListener("click", () => {
     strategy = b.dataset.s;
@@ -317,6 +319,13 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:28px 0 40px;colo
     "interactive":["Slow to become usable","Buttons and menus take a while to start working."]
   };
 
+  const GENERIC = {
+    "accessibility":["Parts of your site are hard to use for some visitors","Some buttons, menus or sections aren't labeled clearly, so screen readers and older visitors can struggle. Google rewards sites that are easy for everyone to use."],
+    "seo":["Google can't fully understand some of your pages","A search setting is missing or incorrect, which can keep your pages lower in Google results."],
+    "performance":["Something is slowing your page down","Part of your site takes longer to load than it should, and slow pages lose visitors."],
+    "best-practices":["A security or trust setting needs attention","Something on your site doesn't follow current web standards, which can hurt trust and reliability."],
+    "other":["Your site has a technical issue to fix","This affects how your site works for visitors and how Google ranks it."]
+  };
   const VITALS = [
     ["largest-contentful-paint","Main content appears","When your page looks ready"],
     ["first-contentful-paint","First thing on screen","When something first shows"],
@@ -395,7 +404,8 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:28px 0 40px;colo
     }).join("");
 
     // Issues: failing audits, weighted by importance
-    const weight = {};
+    const weight = {}, catOf = {};
+    Object.entries(lh.categories).forEach(([k,cat]) => cat.auditRefs.forEach(ref => { if(!catOf[ref.id]) catOf[ref.id] = k; }));
     Object.values(lh.categories).forEach(cat => cat.auditRefs.forEach(ref => weight[ref.id] = Math.max(weight[ref.id]||0, ref.weight || 0)));
     const failing = Object.values(lh.audits)
       .filter(a => a.score !== null && a.score < 0.9 && a.scoreDisplayMode !== "notApplicable" && a.scoreDisplayMode !== "informative" && a.scoreDisplayMode !== "manual")
@@ -403,13 +413,19 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:28px 0 40px;colo
       .sort((x,y) => y.w - x.w);
 
     const item = ({a}) => {
-      const [t, d] = PLAIN[a.id] || [a.title, "This affects how your site performs for visitors and Google."];
+      const [t, d] = PLAIN[a.id] || GENERIC[catOf[a.id]] || GENERIC.other;
       const sev = a.score < .5 ? ["High impact","rgba(217,83,74,.12)","var(--coral)"] : ["Worth fixing","rgba(224,142,43,.14)","#A9640F"];
-      return `<li class="issue"><h4>${esc(t)} <span class="tag" style="background:${sev[1]};color:${sev[2]}">${sev[0]}</span></h4><p>${esc(d)}</p></li>`;
+      const tech = OWNER ? `<div class="tech"><b>Technical name:</b> ${esc(a.title)}${a.displayValue ? ` (${esc(a.displayValue)})` : ""}<br><b>How to fix:</b> ${esc((a.description||"").replace(/\[([^\]]+)\]\([^)]+\)/g,"$1"))}</div>` : "";
+      return `<li class="issue"><h4>${esc(t)} <span class="tag" style="background:${sev[1]};color:${sev[2]}">${sev[0]}</span></h4><p>${esc(d)}</p>${tech}</li>`;
     };
-    const free = failing.slice(0,3), locked = failing.slice(3,6);
+    const seen = new Set();
+    const unique = failing.filter(({a}) => { const key = (PLAIN[a.id] || GENERIC[catOf[a.id]] || GENERIC.other)[0]; if(seen.has(key)) return false; seen.add(key); return true; });
+    const plainOf = a => PLAIN[a.id] || GENERIC[catOf[a.id]] || GENERIC.other;
+    const CATNAME = {"performance":"Speed","seo":"Google search","accessibility":"Easy to use","best-practices":"Security & trust"};
+    last.issues = failing.map(({a}) => ({plain:plainOf(a)[0], tech:a.title, area:CATNAME[catOf[a.id]]||"Other", value:a.displayValue||"", sev:a.score < .5 ? "High" : "Medium", how:(a.description||"").replace(/\[([^\]]+)\]\([^)]+\)/g,"$1")}));
+    const free = OWNER ? unique : unique.slice(0,3), locked = OWNER ? [] : unique.slice(3,6);
     $("issuesSub").textContent = failing.length
-      ? `We found ${failing.length} issue${failing.length>1?"s":""}. Here are the ${Math.min(3,failing.length)} that matter most.`
+      ? (OWNER ? `Owner view: all ${unique.length} grouped issues, with technical names and how to fix them.` : `We found ${failing.length} issue${failing.length>1?"s":""}. Here are the ${Math.min(3,failing.length)} that matter most.`)
       : "We didn't find any major issues. Nice work.";
     $("issuesFree").innerHTML = free.map(item).join("");
     $("issuesLocked").innerHTML = locked.map(item).join("");
@@ -448,7 +464,8 @@ footer{border-top:1px solid var(--line);margin-top:40px;padding:28px 0 40px;colo
     if(!f.reportValidity()) return;
     const s = last?.scores || {};
     const summary = last ? `Site: ${last.url} (${last.strategy})\nOverall: ${last.overall}\nSpeed: ${s.performance} | SEO: ${s.seo} | Easy to use: ${s.accessibility} | Security: ${s["best-practices"]}` : "";
-    const body = {name:f.name.value, email:f.email.value, business:f.business.value, report:summary};
+    const issueList = (last?.issues || []).map((x,i) => `${i+1}. [${x.sev}] ${x.plain} (${x.area})\n   Technical: ${x.tech}${x.value ? " - " + x.value : ""}\n   How to fix: ${x.how}`).join("\n\n");
+    const body = {name:f.name.value, email:f.email.value, business:f.business.value, report:summary, all_issues:issueList};
 
     if(!WEB3FORMS_KEY){
       location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Full website report request")}&body=${encodeURIComponent(`Name: ${body.name}\nEmail: ${body.email}\nBusiness: ${body.business}\n\n${summary}`)}`;
