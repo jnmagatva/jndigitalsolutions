@@ -863,6 +863,9 @@ html,body{overflow-x:clip}
 .portfolio-shot figcaption .pkg-tag{display:flex;width:max-content;max-width:100%}
 .pkg-addons{display:block;margin-top:8px;font-size:15px;color:var(--ink-2)}
 .pkg-addons b{color:var(--ink)}
+.review-card .rv-blur{filter:blur(5px);user-select:none;display:inline-block}
+.reviews-grid>.review-card:only-child{grid-column:1/-1;max-width:780px}
+.review-card .rv-src{display:block;margin-top:2px;font-size:12.5px;color:var(--ink-3)}
 </style>
 <style id="sec-glow-css">
 /* Cursor glow on every section (not the hero) */
@@ -1746,13 +1749,15 @@ footer.spot-on>.sec-spot{left:0;width:100%}
 // TO PUBLISH A REVIEW: copy it into this list and re-upload index.html. Example:
 // {name:"Maria S.", role:"Owner, ABC Realty", service:"Virtual assistant support", rating:5, text:"JN kept our CRM spotless..."},
 var REVIEWS=[
+{name:"Multi-Media", blur:"Works", role:"Local Guide \u00b7 28 reviews \u00b7 5 photos", service:"Water dry out & mold remediation", rating:5, source:"Google", when:"4 months ago",
+ text:"John, my contact person, was the best. They worked with me, followed up and made a special accommodation for my unique situation. I signed a contract to have them do water dry out and mold remediation in the kitchen after a sink faucet cable split open. They came immediately, but in the end I could not do either because my husband was in home hospice at the time. He is very professional, accommodating to my situation, always polite and even had a mold test done and sent results. He worked with me, followed up and made a special accommodation for my unique situation. I highly recommend."}
 ];
 (function(){
   var list=document.getElementById('reviews-list'),form=document.getElementById('review-form');if(!list||!form)return;
   function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
   if(!REVIEWS.length){list.innerHTML='<div class="reviews-empty"><strong>Be the first featured review.</strong>Reviews from clients will appear here once they\'re approved.</div>';}
   else list.innerHTML=REVIEWS.map(function(r){var n=Math.max(1,Math.min(5,r.rating|0));
-    return '<article class="review-card"><div class="rs" aria-label="'+n+' out of 5 stars">'+'&#9733;'.repeat(n)+'<span>'+'&#9733;'.repeat(5-n)+'</span></div><blockquote>&ldquo;'+esc(r.text)+'&rdquo;</blockquote><footer><span class="av" aria-hidden="true">'+esc((r.name||'?').charAt(0))+'</span><span><b>'+esc(r.name)+'</b>'+esc([r.role,r.service].filter(Boolean).join(' · '))+'</span></footer></article>';}).join('');
+    return '<article class="review-card"><div class="rs" aria-label="'+n+' out of 5 stars">'+'&#9733;'.repeat(n)+'<span>'+'&#9733;'.repeat(5-n)+'</span></div><blockquote>&ldquo;'+esc(r.text)+'&rdquo;</blockquote><footer><span class="av" aria-hidden="true">'+esc((r.name||'?').charAt(0))+'</span><span><b>'+esc(r.name)+(r.blur?' <span class="rv-blur" aria-hidden="true">'+esc(r.blur)+'</span>':'')+'</b>'+esc([r.role,r.service].filter(Boolean).join(' · '))+(r.source?'<small class="rv-src">'+esc(r.source)+' review'+(r.when?' · '+esc(r.when):'')+'</small>':'')+'</span></footer></article>';}).join('');
   var via='wa';form.querySelectorAll('button[data-via]').forEach(function(b){b.addEventListener('click',function(){via=b.dataset.via;});});
   form.addEventListener('submit',function(e){e.preventDefault();var f=new FormData(form),err=document.getElementById('rf-error');
     var name=(f.get('name')||'').trim(),text=(f.get('text')||'').trim(),service=f.get('service'),rating=f.get('rating');
