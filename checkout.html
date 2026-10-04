@@ -191,7 +191,9 @@
   var KEY='jn-cart-v1';
   var CATALOG={
     starter:{name:'Starter website',desc:'Up to 7 pages, mobile-responsive, contact form, gallery and CMS',price:100},
-    growth:{name:'Growth website',desc:'Up to 12 pages, service sub-menus, testimonials and homepage SEO setup',price:400}
+    growth:{name:'Growth website',desc:'Up to 12 pages, service sub-menus, testimonials and homepage SEO setup',price:400},
+    'ecard-basic':{name:'Basic e-business card',desc:'QR digital business card on a ready-made landing page layout',price:20},
+    'ecard-custom':{name:'Custom e-business card',desc:'QR digital business card on a landing page designed around your brand',price:50}
   };
   function read(){try{var c=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(c)?c.filter(function(id){return CATALOG[id];}):[];}catch(e){return [];}}
   function write(c){try{localStorage.setItem(KEY,JSON.stringify(c));}catch(e){}render();}
