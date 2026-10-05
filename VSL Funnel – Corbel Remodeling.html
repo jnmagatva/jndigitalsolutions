@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corbel Remodeling – VSL Funnel Sample</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F4F2; --surface:#FFFFFF; --ink:#1C2630; --muted:#56626C;
+  --concrete:#D9DDD8; --slate:#24323F; --slate-2:#2E3F4E; --line:#C8962E;
+  --brass:#C8962E; --brass-hover:#B5841F; --on-brass:#1C2630; --sage:#3E6B5A;
+  --error:#A33A2B; --demo:#1C2630; --on-demo:#E8EAE6;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#12181E; --surface:#1A222A; --ink:#E8EAE6; --muted:#9AA4AC;
+    --concrete:#2C363F; --slate:#0E141A; --slate-2:#18222B; --sage:#7FB39E;
+    --error:#E58B7C; --demo:#0A0F14; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12181E; --surface:#1A222A; --ink:#E8EAE6; --muted:#9AA4AC;
+  --concrete:#2C363F; --slate:#0E141A; --slate-2:#18222B; --sage:#7FB39E;
+  --error:#E58B7C; --demo:#0A0F14; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--brass);outline-offset:3px}
+button{font:inherit;cursor:pointer}
+
+/* Demo bar */
+.demo{background:var(--demo);color:var(--on-demo);font-size:14px;position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.demo-in{max-width:1080px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
+.demo strong{font-family:var(--display);font-stretch:110%;font-weight:700;letter-spacing:.01em}
+.steps{display:flex;gap:4px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.steps a{display:block;text-decoration:none;padding:5px 10px;border-radius:4px;color:#AEB7BE}
+.steps a[aria-current="page"]{background:#2E3F4E;color:#fff}
+.steps a:hover{color:#fff}
+.demo .script-btn{background:transparent;border:1px solid #56626C;color:#E8EAE6;padding:5px 12px;border-radius:4px}
+.demo .script-btn:hover{border-color:var(--brass)}
+
+/* Brand header */
+.brand{max-width:1080px;margin:0 auto;padding:22px 20px 0;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.logo{font-family:var(--display);font-stretch:125%;font-weight:800;font-size:19px;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.logo svg{width:26px;height:26px}
+.brand .phone{font-weight:600;font-size:15px;text-decoration:none}
+
+main{min-height:60vh}
+.view{display:none}
+.view.active{display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.narrow{max-width:760px;margin:0 auto;padding:0 20px}
+
+h1,h2,h3{font-family:var(--display);line-height:1.08;margin:0}
+h1{font-size:clamp(32px,5.2vw,56px);font-weight:800;font-stretch:72%;letter-spacing:-.005em}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:750;font-stretch:80%}
+h3{font-size:20px;font-weight:700;font-stretch:95%}
+.lede{color:var(--muted);font-size:19px;max-width:62ch}
+
+/* VSL hero */
+.vsl-head{text-align:center;padding:44px 20px 28px;max-width:900px;margin:0 auto}
+.vsl-head .pre{color:var(--muted);font-size:16px;margin:0 0 14px}
+.vsl-head .lede{margin:18px auto 0}
+
+.player{max-width:900px;margin:0 auto;padding:0 20px}
+.screen{position:relative;aspect-ratio:16/9;background:var(--slate);border-radius:6px 6px 0 0;overflow:hidden;color:#E8EAE6}
+.screen svg.plan{position:absolute;inset:0;width:100%;height:100%}
+.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:88px;height:88px;border-radius:50%;border:0;background:var(--brass);color:var(--on-brass);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(200,150,46,.22)}
+.play:hover{background:var(--brass-hover)}
+.play svg{width:30px;height:30px;margin-left:5px}
+.screen .tag{position:absolute;left:18px;top:16px;font-size:13px;color:#AEB7BE}
+.caption{position:absolute;left:0;right:0;bottom:0;padding:18px 24px 20px;background:linear-gradient(transparent,rgba(14,20,26,.92) 40%);font-size:clamp(15px,2.1vw,20px);line-height:1.45;min-height:40%;display:flex;align-items:flex-end;opacity:0;transition:opacity .3s}
+.screen.playing .caption{opacity:1}
+.screen.playing .play,.screen.done .play{display:none}
+.chapter{position:absolute;right:18px;top:16px;font-size:13px;background:rgba(14,20,26,.7);padding:3px 10px;border-radius:3px;opacity:0}
+.screen.playing .chapter{opacity:1}
+
+/* Tape-measure progress */
+.tape{position:relative;height:30px;background:var(--brass);border-radius:0 0 6px 6px;overflow:hidden}
+.tape::before{content:"";position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(90deg,rgba(28,38,48,.75) 0 2px,transparent 2px 60px),
+    repeating-linear-gradient(90deg,rgba(28,38,48,.55) 0 1px,transparent 1px 30px) 0 0/100% 50% no-repeat,
+    repeating-linear-gradient(90deg,rgba(28,38,48,.35) 0 1px,transparent 1px 7.5px) 0 0/100% 30% no-repeat}
+.tape .fill{position:absolute;inset:0 auto 0 0;width:0;background:rgba(28,38,48,.82);transition:width .25s linear}
+.tape .time{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;color:var(--on-brass);background:var(--brass);padding:1px 6px;border-radius:3px;font-variant-numeric:tabular-nums}
+.player-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:10px}
+.linkish{background:none;border:0;padding:0;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+
+.reveal{max-width:900px;margin:28px auto 0;padding:0 20px;text-align:center}
+.reveal[hidden]{display:none}
+.reveal.show{animation:rise .5s ease-out both}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:5px;background:var(--brass);color:var(--on-brass);font-family:var(--display);font-stretch:100%;font-weight:750;font-size:20px;padding:18px 34px;text-decoration:none;min-height:56px}
+.btn:hover{background:var(--brass-hover)}
+.btn small{display:block;font-family:var(--body);font-weight:500;font-size:13px}
+.btn-stack{flex-direction:column;gap:2px;line-height:1.2}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--concrete);font-size:16px;padding:14px 22px}
+.btn-ghost:hover{background:var(--surface)}
+.reveal .note{color:var(--muted);font-size:14px;margin-top:10px}
+
+/* Sections */
+section.band{padding:64px 0}
+section.band + section.band{border-top:1px solid var(--concrete)}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:32px}
+.three p{color:var(--muted);margin:8px 0 0}
+.three .num{font-family:var(--display);font-stretch:62%;font-weight:800;font-size:44px;line-height:1;color:var(--brass)}
+.quotes{display:grid;grid-template-columns:1.3fr 1fr;gap:36px;margin-top:32px;align-items:start}
+blockquote{margin:0}
+blockquote p{font-family:var(--display);font-stretch:85%;font-weight:600;font-size:clamp(22px,2.6vw,28px);line-height:1.25;margin:0}
+blockquote footer{color:var(--muted);margin-top:14px;font-size:15px}
+.quote-sm p{font-size:19px;font-weight:550}
+.quote-sm + .quote-sm{margin-top:28px;padding-top:28px;border-top:1px solid var(--concrete)}
+.guarantee{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;background:var(--surface);border:1px solid var(--concrete);border-radius:6px;padding:28px}
+.guarantee svg{width:72px;height:72px}
+.guarantee p{margin:8px 0 0;color:var(--muted)}
+.final{text-align:center}
+.final p{color:var(--muted)}
+
+/* Booking */
+.book{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;padding:44px 0 72px;align-items:start}
+.stack{margin:24px 0 0;padding:0;list-style:none;border-top:1px solid var(--concrete)}
+.stack li{display:grid;grid-template-columns:1fr auto;gap:16px;padding:16px 0;border-bottom:1px solid var(--concrete)}
+.stack li span{color:var(--muted);font-size:15px;display:block}
+.stack .val{font-family:var(--display);font-weight:700;font-stretch:90%;white-space:nowrap}
+.stack .total{border-bottom:0}
+.stack .total .val{color:var(--sage)}
+form.card{background:var(--surface);border:1px solid var(--concrete);border-radius:6px;padding:28px}
+.progress{font-size:14px;color:var(--muted);margin:0 0 16px}
+.field{margin-bottom:16px}
+.field label,.field legend{display:block;font-weight:600;font-size:15px;margin-bottom:6px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+input,select{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid var(--concrete);border-radius:4px;padding:12px}
+input:focus,select:focus{outline:2px solid var(--brass);outline-offset:0;border-color:var(--brass)}
+fieldset{border:0;margin:0 0 16px;padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips label{margin:0;font-weight:500;border:1px solid var(--concrete);border-radius:4px;padding:9px 14px;cursor:pointer;background:var(--paper)}
+.chips input:checked + label{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chips input:focus-visible + label{outline:3px solid var(--brass);outline-offset:2px}
+.err{color:var(--error);font-size:14px;margin-top:6px;display:none}
+.invalid .err{display:block}
+.invalid input,.invalid select{border-color:var(--error)}
+form .btn{width:100%;margin-top:6px}
+.fine{font-size:13px;color:var(--muted);margin:12px 0 0;text-align:center}
+
+/* Upgrade */
+.oto{max-width:820px;margin:0 auto;padding:44px 20px 72px}
+.oto .alert{background:var(--surface);border-left:4px solid var(--brass);padding:14px 18px;border-radius:0 4px 4px 0;font-weight:600;margin-bottom:28px}
+.oto-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin:28px 0;align-items:center}
+.render{aspect-ratio:4/3;background:var(--slate);border-radius:6px;overflow:hidden}
+.render svg{width:100%;height:100%;display:block}
+.oto ul{padding-left:20px;margin:12px 0 0}
+.oto li{margin:6px 0}
+.price{font-family:var(--display);font-stretch:70%;font-weight:800;font-size:48px;line-height:1}
+.price s{color:var(--muted);font-size:26px;font-weight:600;margin-left:10px}
+.oto-actions{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:28px}
+
+/* Thanks */
+.thanks{max-width:760px;margin:0 auto;padding:56px 20px 80px}
+.check{width:64px;height:64px;border-radius:50%;background:var(--sage);display:grid;place-items:center;margin-bottom:22px}
+.check svg{width:30px;height:30px}
+.summary{background:var(--surface);border:1px solid var(--concrete);border-radius:6px;padding:8px 24px;margin:28px 0}
+.summary dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:0 24px}
+.summary dt,.summary dd{padding:12px 0;border-bottom:1px solid var(--concrete);margin:0}
+.summary dt{color:var(--muted)}
+.summary dd{font-weight:600}
+.summary dt:last-of-type,.summary dd:last-of-type{border-bottom:0}
+ol.next{padding:0;margin:20px 0 0;list-style:none;counter-reset:n}
+ol.next li{counter-increment:n;display:grid;grid-template-columns:44px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--concrete)}
+ol.next li::before{content:counter(n);font-family:var(--display);font-stretch:62%;font-weight:800;font-size:34px;line-height:1;color:var(--brass)}
+ol.next p{margin:4px 0 0;color:var(--muted)}
+
+footer.site{border-top:1px solid var(--concrete);padding:28px 20px;text-align:center;font-size:13px;color:var(--muted)}
+
+/* Script drawer */
+dialog{border:0;padding:0;max-width:680px;width:calc(100% - 32px);max-height:85vh;border-radius:8px;background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(14,20,26,.6)}
+.dlg-head{position:sticky;top:0;background:var(--surface);display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--concrete)}
+.dlg-body{padding:8px 24px 28px}
+.beat{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--concrete)}
+.beat:last-child{border-bottom:0}
+.beat time{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px;padding-top:3px}
+.beat h3{font-size:17px}
+.beat p{margin:6px 0 0}
+.close{background:none;border:1px solid var(--concrete);border-radius:4px;padding:6px 12px;color:var(--ink)}
+
+@media (max-width:820px){
+  .three,.quotes,.book,.oto-grid{grid-template-columns:1fr}
+  .book{gap:32px}
+  .guarantee{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .row{grid-template-columns:1fr}
+  .play{width:68px;height:68px}
+  .caption{padding:12px 14px 14px}
+  .btn{font-size:18px;padding:16px 22px}
+  .brand .phone{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="demo" role="region" aria-label="Sample funnel navigation">
+  <div class="demo-in">
+    <strong>VSL funnel sample by Vertex Juan</strong>
+    <nav aria-label="Funnel steps">
+      <ul class="steps">
+        <li><a href="#vsl" data-step="vsl">1. Video page</a></li>
+        <li><a href="#book" data-step="book">2. Booking</a></li>
+        <li><a href="#upgrade" data-step="upgrade">3. Upgrade offer</a></li>
+        <li><a href="#thanks" data-step="thanks">4. Confirmation</a></li>
+      </ul>
+    </nav>
+    <button class="script-btn" type="button" id="openScript">Read the video script</button>
+  </div>
+</div>
+
+<header class="brand">
+  <div class="logo">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 28V12L16 4l12 8v16" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M11 28V18h10v10" fill="none" stroke="#C8962E" stroke-width="2.4"/></svg>
+    Corbel Remodeling
+  </div>
+  <a class="phone" href="#book">(561) 555-0142</a>
+</header>
+
+<main>
+
+<!-- STEP 1: VSL -->
+<div class="view" id="view-vsl">
+  <div class="vsl-head">
+    <p class="pre">For Palm Beach County homeowners planning a kitchen or bathroom remodel</p>
+    <h1>Watch this before you sign any remodeling quote</h1>
+    <p class="lede">Two minutes on why most remodels run over budget, and how our fixed-scope estimate keeps the price you sign the price you pay.</p>
+  </div>
+
+  <div class="player">
+    <div class="screen" id="screen">
+      <svg class="plan" viewBox="0 0 900 506" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+        <g fill="none" stroke="#C8962E" stroke-width="1.4" opacity=".75">
+          <line x1="60" y1="420" x2="840" y2="420"/>
+          <rect x="110" y="270" width="300" height="150"/>
+          <line x1="110" y1="300" x2="410" y2="300"/>
+          <line x1="210" y1="300" x2="210" y2="420"/><line x1="310" y1="300" x2="310" y2="420"/>
+          <rect x="110" y="110" width="140" height="100"/><rect x="270" y="110" width="140" height="100"/>
+          <line x1="180" y1="110" x2="180" y2="210"/><line x1="340" y1="110" x2="340" y2="210"/>
+          <rect x="470" y="320" width="300" height="100"/>
+          <line x1="470" y1="340" x2="770" y2="340"/>
+          <line x1="560" y1="60" x2="560" y2="200"/><path d="M535 200h50l-10 26h-30z"/>
+          <line x1="680" y1="60" x2="680" y2="200"/><path d="M655 200h50l-10 26h-30z"/>
+          <rect x="470" y="110" width="0" height="0"/>
+        </g>
+        <g fill="none" stroke="#E8EAE6" stroke-width="1" opacity=".35">
+          <line x1="110" y1="450" x2="410" y2="450"/><line x1="110" y1="442" x2="110" y2="458"/><line x1="410" y1="442" x2="410" y2="458"/>
+          <line x1="470" y1="450" x2="770" y2="450"/><line x1="470" y1="442" x2="470" y2="458"/><line x1="770" y1="442" x2="770" y2="458"/>
+        </g>
+        <g fill="#AEB7BE" font-family="Public Sans, sans-serif" font-size="13">
+          <text x="235" y="474" text-anchor="middle">12' 6" run</text>
+          <text x="620" y="474" text-anchor="middle">8' 0" island</text>
+        </g>
+      </svg>
+      <span class="tag">Kitchen elevation, Wellington project</span>
+      <span class="chapter" id="chapter"></span>
+      <button class="play" id="play" type="button" aria-label="Play video">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l16 9-16 9z" fill="currentColor"/></svg>
+      </button>
+      <div class="caption" id="caption" aria-live="polite"></div>
+    </div>
+    <div class="tape" aria-hidden="true"><div class="fill" id="fill"></div><span class="time" id="time">0:00 / 2:30</span></div>
+    <div class="player-foot">
+      <span>Sample playback shows the script as captions. The real video goes here.</span>
+      <button class="linkish" type="button" id="skip">Skip to the offer</button>
+    </div>
+  </div>
+
+  <div class="reveal" id="reveal" hidden>
+    <a class="btn btn-stack" href="#book">Book my free in-home estimate<small>Includes a 3D design preview and a 30-day price lock</small></a>
+    <p class="note">The button appears once the video reaches the offer, so viewers hear the full pitch first.</p>
+  </div>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>What the fixed-scope estimate covers</h2>
+      <div class="three">
+        <div><div class="num">1</div><h3>We measure everything</h3><p>Every wall, outlet, and plumbing line is checked on site before we put a number on paper.</p></div>
+        <div><div class="num">2</div><h3>We check your permits</h3><p>We confirm what your city requires up front, so there are no permit surprises after demolition.</p></div>
+        <div><div class="num">3</div><h3>You get one written price</h3><p>Line by line, materials included. It only changes if you decide to change the plan.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>Homeowners who signed one price and paid it</h2>
+      <div class="quotes">
+        <blockquote>
+          <p>“Our last contractor added $14,000 halfway through. Corbel finished our kitchen in six weeks and the final invoice matched the estimate to the dollar.”</p>
+          <footer>Maria A., Wellington – kitchen remodel</footer>
+        </blockquote>
+        <div>
+          <blockquote class="quote-sm"><p>“They showed us the 3D design before anyone touched a wall. No guessing.”</p><footer>Dan and Keisha R., Jupiter – primary bath</footer></blockquote>
+          <blockquote class="quote-sm"><p>“The crew cleaned up every single day. Our kids barely noticed.”</p><footer>Tom L., Boca Raton – guest bath</footer></blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="guarantee">
+        <svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="32" fill="none" stroke="#C8962E" stroke-width="3"/><path d="M22 37l10 10 18-22" fill="none" stroke="#C8962E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><h3>The price-match promise</h3><p>If your final invoice is higher than your signed estimate for anything you didn't request, we cover the difference. In writing, on every contract.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band final">
+    <div class="narrow">
+      <h2>This month's estimate slots are filling</h2>
+      <p>The owner reviews every estimate personally, so we only book a limited number of visits each week.</p>
+      <a class="btn" href="#book">Book my free in-home estimate</a>
+    </div>
+  </section>
+</div>
+
+<!-- STEP 2: BOOKING -->
+<div class="view" id="view-book">
+  <div class="wrap">
+    <div class="book">
+      <div>
+        <h1>Book your free in-home estimate</h1>
+        <p class="lede">Tell us about your project and pick a day. We'll call within one business hour to confirm your visit.</p>
+        <ul class="stack" aria-label="What you get">
+          <li><div>In-home measurement and fixed-scope estimate<span>Written, line-by-line, materials included</span></div><div class="val">Free</div></li>
+          <li><div>3D design preview of your new space<span>See it before demolition starts</span></div><div class="val">$350 value</div></li>
+          <li><div>30-day price lock<span>Your estimate holds while you decide</span></div><div class="val">Included</div></li>
+          <li class="total"><div><strong>Your cost today</strong></div><div class="val">$0</div></li>
+        </ul>
+      </div>
+
+      <form class="card" id="bookForm" novalidate>
+        <p class="progress">Takes about 60 seconds</p>
+        <div class="row">
+          <div class="field"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required><p class="err">Enter your name.</p></div>
+          <div class="field"><label for="phoneIn">Phone</label><input id="phoneIn" name="phone" type="tel" autocomplete="tel" required><p class="err">Enter a 10-digit phone number.</p></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required><p class="err">Enter a valid email address.</p></div>
+          <div class="field"><label for="zip">ZIP code</label><input id="zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" required><p class="err">Enter a 5-digit ZIP code.</p></div>
+        </div>
+        <fieldset class="field" id="projField">
+          <legend>What are you remodeling?</legend>
+          <div class="chips">
+            <input type="radio" name="project" id="p1" value="Kitchen"><label for="p1">Kitchen</label>
+            <input type="radio" name="project" id="p2" value="Bathroom"><label for="p2">Bathroom</label>
+            <input type="radio" name="project" id="p3" value="Kitchen and bath"><label for="p3">Kitchen and bath</label>
+            <input type="radio" name="project" id="p4" value="Whole home"><label for="p4">Whole home</label>
+          </div>
+          <p class="err">Choose a project type.</p>
+        </fieldset>
+        <div class="row">
+          <div class="field"><label for="budget">Budget range</label>
+            <select id="budget" name="budget" required>
+              <option value="">Select a range</option>
+              <option>Under $25,000</option><option>$25,000–$50,000</option><option>$50,000–$100,000</option><option>Over $100,000</option>
+            </select><p class="err">Choose a budget range.</p></div>
+          <div class="field"><label for="date">Preferred visit date</label><input id="date" name="date" type="date" required><p class="err">Pick a date from tomorrow onward.</p></div>
+        </div>
+        <button class="btn" type="submit">Book my free estimate</button>
+        <p class="fine">Sample form. Nothing is sent. In a live funnel this connects to your CRM, calendar, and text reminders.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3: UPGRADE -->
+<div class="view" id="view-upgrade">
+  <div class="oto">
+    <p class="alert">Your visit request is in. One optional add-on before you go.</p>
+    <h1>Walk into your estimate with a full design plan</h1>
+    <p class="lede">Most homeowners spend weeks choosing finishes after the estimate. Do it first, and your estimate comes back exact.</p>
+    <div class="oto-grid">
+      <div class="render" aria-hidden="true">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="300" fill="#24323F"/>
+          <path d="M40 250 L200 290 L360 250 L200 210 Z" fill="#2E3F4E"/>
+          <path d="M80 240 L200 270 L320 240 L320 200 L200 230 L80 200 Z" fill="#C8962E" opacity=".9"/>
+          <path d="M80 200 L200 170 L320 200 L200 230 Z" fill="#E8EAE6"/>
+          <path d="M60 60 L60 170 L170 140 L170 30 Z" fill="none" stroke="#E8EAE6" stroke-width="2" opacity=".6"/>
+          <path d="M230 30 L340 60 L340 170 L230 140 Z" fill="none" stroke="#E8EAE6" stroke-width="2" opacity=".6"/>
+          <line x1="160" y1="20" x2="160" y2="90" stroke="#C8962E" stroke-width="2"/><circle cx="160" cy="98" r="9" fill="#C8962E"/>
+          <line x1="240" y1="20" x2="240" y2="90" stroke="#C8962E" stroke-width="2"/><circle cx="240" cy="98" r="9" fill="#C8962E"/>
+        </svg>
+      </div>
+      <div>
+        <h3>Design consultation with 3D renderings</h3>
+        <ul>
+          <li>A 90-minute session with our designer</li>
+          <li>Three layout options in full 3D</li>
+          <li>Finish and fixture selections priced into your estimate</li>
+        </ul>
+        <p class="price">$149 <s>$450</s></p>
+        <p style="color:var(--muted);margin:8px 0 0">Fully credited to your project if you hire us.</p>
+      </div>
+    </div>
+    <div class="oto-actions">
+      <button class="btn" type="button" data-upgrade="yes">Add the design consultation for $149</button>
+      <button class="linkish" type="button" data-upgrade="no">No thanks, keep my free estimate only</button>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4: THANKS -->
+<div class="view" id="view-thanks">
+  <div class="thanks">
+    <div class="check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h1 id="thanksTitle">Your estimate visit is requested</h1>
+    <p class="lede">Keep your phone nearby. We'll call within one business hour to lock in your time.</p>
+    <div class="summary"><dl id="summary"></dl></div>
+    <h2>What happens next</h2>
+    <ol class="next">
+      <li><div><h3>We call to confirm</h3><p>You'll also get a text reminder the day before your visit.</p></div></li>
+      <li><div><h3>We visit and measure</h3><p>About 60 minutes on site. Have any inspiration photos ready.</p></div></li>
+      <li><div><h3>You get your written price</h3><p>Your fixed-scope estimate and 3D preview arrive within five business days.</p></div></li>
+    </ol>
+    <p style="margin-top:32px"><a class="btn btn-ghost" href="#vsl">Watch the video again</a></p>
+  </div>
+</div>
+
+</main>
+
+<footer class="site">Sample funnel built by Vertex Juan. Corbel Remodeling, its reviews, prices, and phone number are fictional.</footer>
+
+<dialog id="scriptDlg" aria-labelledby="scriptTitle">
+  <div class="dlg-head"><h2 id="scriptTitle" style="font-size:24px">Video script (2:30)</h2><button class="close" type="button" id="closeScript">Close</button></div>
+  <div class="dlg-body" id="scriptBody"></div>
+</dialog>
+
+<script>
+(function(){
+  var beats=[
+    {t:0,  name:"Hook", text:"If you're planning a kitchen or bathroom remodel in Palm Beach County, give me two minutes before you call a single contractor. What I'm about to show you could save you months of delays and thousands in surprise costs."},
+    {t:15, name:"The problem", text:"Most remodels go over budget for one reason: the quote you sign isn't the real price. Vague line items and allowances that run out show up after demolition, when you can't walk away."},
+    {t:45, name:"Who we are", text:"I'm Mark Corbel. For 15 years we've remodeled homes from Jupiter to Boca Raton, and we got tired of fixing other contractors' mistakes. So we built a different process."},
+    {t:70, name:"How it works", text:"It's called the fixed-scope estimate. Before you sign, we measure everything, confirm your city's permit requirements, and give you a line-by-line written price with materials included."},
+    {t:100,name:"Proof", text:"That's how Maria in Wellington got her kitchen done in six weeks, with a final invoice that matched her estimate to the dollar."},
+    {t:120,name:"The offer", text:"This month we're booking free in-home estimates. When you book, you also get a 3D design preview of your new space and a 30-day price lock."},
+    {t:140,name:"Call to action", text:"Click the button below this video, pick a day, and we'll see you at your home. Slots are limited because I review every estimate myself."}
+  ];
+  var TOTAL=150, DEMO_SECONDS=21;
+
+  // Script dialog
+  var body=document.getElementById('scriptBody');
+  beats.forEach(function(b){
+    var d=document.createElement('div');d.className='beat';
+    d.innerHTML='<time>'+fmt(b.t)+'</time><div><h3></h3><p></p></div>';
+    d.querySelector('h3').textContent=b.name;d.querySelector('p').textContent=b.text;
+    body.appendChild(d);
+  });
+  var dlg=document.getElementById('scriptDlg');
+  document.getElementById('openScript').onclick=function(){dlg.showModal()};
+  document.getElementById('closeScript').onclick=function(){dlg.close()};
+
+  function fmt(s){s=Math.floor(s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+
+  // Demo playback
+  var screen=document.getElementById('screen'),cap=document.getElementById('caption'),
+      chap=document.getElementById('chapter'),fill=document.getElementById('fill'),
+      time=document.getElementById('time'),reveal=document.getElementById('reveal'),timer=null;
+  function showCTA(){
+    if(!reveal.hidden)return;
+    reveal.hidden=false;reveal.classList.add('show');
+  }
+  function stop(){clearInterval(timer);timer=null}
+  function play(){
+    if(timer)return;
+    screen.classList.remove('done');screen.classList.add('playing');
+    var start=Date.now();
+    timer=setInterval(function(){
+      var p=Math.min((Date.now()-start)/1000/DEMO_SECONDS,1), v=p*TOTAL, cur=beats[0];
+      beats.forEach(function(b){if(v>=b.t)cur=b});
+      if(cap.dataset.t!==String(cur.t)){cap.dataset.t=cur.t;cap.textContent=cur.text;chap.textContent=cur.name}
+      fill.style.width=(p*100)+'%';time.textContent=fmt(v)+' / '+fmt(TOTAL);
+      if(v>=120)showCTA();
+      if(p>=1){stop();screen.classList.remove('playing');screen.classList.add('done');}
+    },150);
+  }
+  document.getElementById('play').onclick=play;
+  document.getElementById('skip').onclick=function(){
+    showCTA();reveal.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  };
+
+  // Routing
+  var state={upgrade:null,data:null};
+  function route(){
+    var h=(location.hash||'#vsl').slice(1);
+    if(['vsl','book','upgrade','thanks'].indexOf(h)<0)h='vsl';
+    if(h!=='vsl')stop();
+    document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('active',v.id==='view-'+h)});
+    document.querySelectorAll('.steps a').forEach(function(a){
+      if(a.dataset.step===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+    });
+    if(h==='thanks')renderThanks();
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',route);
+
+  // Booking form
+  var form=document.getElementById('bookForm'),dateIn=document.getElementById('date');
+  var tm=new Date();tm.setDate(tm.getDate()+1);
+  dateIn.min=tm.toISOString().slice(0,10);
+  function setErr(el,bad){(el.closest('.field')).classList.toggle('invalid',bad);if(el.setAttribute)el.setAttribute('aria-invalid',bad)}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var f=form.elements,ok=true,first=null;
+    function check(el,bad){setErr(el,bad);if(bad){ok=false;if(!first)first=el}}
+    check(f.name,!f.name.value.trim());
+    check(f.phone,f.phone.value.replace(/\D/g,'').length<10);
+    check(f.email,!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.value));
+    check(f.zip,!/^\d{5}$/.test(f.zip.value));
+    var proj=form.querySelector('input[name=project]:checked');
+    var pf=document.getElementById('projField');pf.classList.toggle('invalid',!proj);
+    if(!proj){ok=false;if(!first)first=document.getElementById('p1')}
+    check(f.budget,!f.budget.value);
+    check(f.date,!f.date.value||f.date.value<dateIn.min);
+    if(!ok){first.focus();return}
+    state.data={name:f.name.value.trim(),project:proj.value,budget:f.budget.value,date:f.date.value,phone:f.phone.value};
+    location.hash='#upgrade';
+  });
+  form.addEventListener('input',function(e){var fld=e.target.closest('.field');if(fld)fld.classList.remove('invalid')});
+
+  document.querySelectorAll('[data-upgrade]').forEach(function(b){
+    b.onclick=function(){state.upgrade=b.dataset.upgrade==='yes';location.hash='#thanks'};
+  });
+
+  function renderThanks(){
+    var d=state.data||{name:'Sample Homeowner',project:'Kitchen',budget:'$25,000–$50,000',date:dateIn.min,phone:'(561) 555-0100'};
+    var first=d.name.split(' ')[0];
+    document.getElementById('thanksTitle').textContent='You\'re booked, '+first;
+    var dt=new Date(d.date+'T12:00:00');
+    var rows=[['Project',d.project],['Budget',d.budget],
+      ['Requested visit',dt.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})],
+      ['We\'ll call',d.phone],
+      ['Design consultation',state.upgrade?'Added, $149 credited to your project':'Not added']];
+    var dl=document.getElementById('summary');dl.innerHTML='';
+    rows.forEach(function(r){var t=document.createElement('dt');t.textContent=r[0];var v=document.createElement('dd');v.textContent=r[1];dl.appendChild(t);dl.appendChild(v)});
+  }
+
+  route();
+})();
+</script>
+</body>
+</html>
