@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Invoice | JN Digital Solutions</title>
+<title>Invoice | Vertex Juan</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,7 +72,7 @@ td b{display:block;font-size:15px}td small{color:var(--ink-3)}
 </style>
 </head>
 <body>
-<div class="bar"><a href="index.html">&larr; JN Digital Solutions</a><span><button class="btn btn-ghost" type="button" id="markPaid" hidden>Mark as paid</button> <button class="btn btn-cta" type="button" onclick="window.print()">Download PDF / Print</button></span></div>
+<div class="bar"><a href="index.html">&larr; Vertex Juan</a><span><button class="btn btn-ghost" type="button" id="markPaid" hidden>Mark as paid</button> <button class="btn btn-cta" type="button" onclick="window.print()">Download PDF / Print</button></span></div>
 
 <form class="builder" id="builder" hidden>
   <h1>Create an invoice</h1>
@@ -91,7 +93,7 @@ td b{display:block;font-size:15px}td small{color:var(--ink-3)}
 
 <article class="sheet" id="sheet" hidden>
   <header class="top">
-    <div class="brand"><img src="jn-logo.png" alt=""><span><b>JN <span>Digital Solutions</span></b><small>Web design, local SEO and virtual assistance</small><small>jnmagatva@gmail.com</small></span></div>
+    <div class="brand"><img src="vertex-juan-logo.png" alt=""><span><b>Vertex <span>Juan</span></b><small>Web design, local SEO and virtual assistance</small><small>jnmagatva@gmail.com</small></span></div>
     <div class="ttl"><h1>Invoice</h1><p>No. <b data-f="ref"></b></p><p>Issued <b data-f="date"></b></p><span class="status" data-f="statusTag"></span></div>
   </header>
   <div class="body">
@@ -112,7 +114,7 @@ td b{display:block;font-size:15px}td small{color:var(--ink-3)}
     </div>
     <div class="note" data-f="note"></div>
   </div>
-  <footer class="foot"><span>JN Digital Solutions &middot; Mariveles, Bataan, Philippines</span><span>Thank you for your business.</span></footer>
+  <footer class="foot"><span>Vertex Juan &middot; Mariveles, Bataan, Philippines</span><span>Thank you for your business.</span></footer>
 </article>
 
 <script>
@@ -156,7 +158,7 @@ td b{display:block;font-size:15px}td small{color:var(--ink-3)}
       set('paidLabel','Amount due now');set('paid',money(now));set('balLabel','Balance after this payment');set('balance',money(Math.max(0,total-now)));
       tag.className='status pending';tag.textContent='Awaiting payment';
       set('note','<b>How to pay.</b> Use the button above to pay '+money(now)+' USD for invoice '+esc(d.ref)+'. Your payment receipt is your proof of payment, and I&rsquo;ll send an updated invoice marked as paid once it arrives.',true);}
-    document.title='Invoice '+d.ref+' | JN Digital Solutions';
+    document.title='Invoice '+d.ref+' | Vertex Juan';
     document.getElementById('sheet').hidden=false;
   }
   var h=location.hash.slice(1),d=h?decode(h):null;
