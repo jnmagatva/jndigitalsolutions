@@ -1126,6 +1126,21 @@ footer.spot-on>.sec-spot{left:0;width:100%}
 #services .tabs h3,#schedule .booking h3,#schedule .booking strong,#schedule .avail h3,#schedule .avail strong{color:var(--ink)}
 @media (max-width:780px){.fx-bokeh i:nth-child(n+9){display:none}.fx-pulses path:nth-child(n+6){display:none}}
 @media (prefers-reduced-motion:reduce){.fx-rays,.fx-bokeh i,.fx-pulses path,.fx-nodes circle,.fx-flare{animation:none!important}.fx-bokeh i{opacity:.25}}
+
+/* Social video slides */
+.pkg-smm{background:var(--cta);color:var(--cta-ink)}
+.pf-vidslide .pf-view{background:var(--cta);color:var(--cta-ink)}
+.pf-vid{position:relative;height:clamp(380px,46vw,560px);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3vw,40px);background:radial-gradient(120% 90% at 50% 0%,#24375E,#13213C 70%);overflow:hidden}
+.pf-vid video{display:block;height:100%;width:auto;max-width:100%;object-fit:contain;border-radius:18px;background:#0B1222;box-shadow:0 30px 60px -20px rgba(0,0,0,.75)}
+.pf-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;border:0;background:var(--cta);color:var(--cta-ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 0 0 8px rgba(245,179,1,.25);transition:opacity .3s ease,transform .3s ease}
+.pf-play svg{width:26px;height:26px}
+.pf-play .pv-pause{display:none}
+.pf-vid.is-playing .pf-play{opacity:0;left:auto;top:auto;right:18px;bottom:18px;transform:none;width:44px;height:44px;box-shadow:none}
+.pf-vid.is-playing .pf-play svg{width:18px;height:18px}
+.pf-vid.is-playing .pf-play .pv-play{display:none}
+.pf-vid.is-playing .pf-play .pv-pause{display:block}
+.pf-vid.is-playing:hover .pf-play,.pf-vid.is-playing .pf-play:focus-visible{opacity:1}
+@media (hover:none){.pf-vid.is-playing .pf-play{opacity:.85}}
 </style>
 </head>
 <body>
@@ -1401,38 +1416,58 @@ footer.spot-on>.sec-spot{left:0;width:100%}
   <ul class="marquee-track" aria-hidden="true"><li>Operations &amp; Account Management</li><li>Leadership</li><li>Process Improvement &amp; Compliance Auditing</li><li>Web Designer &amp; Local SEO Specialist</li><li>Social Media Management</li><li>Graphic Design</li><li>AI Automation</li><li>Customer &amp; Client Support</li></ul>
 </div></div>
 <section id="portfolio" class="wrap section photo-sec" style="--photo:url('ai-bg.jpg');--photo-pos:30% center">
-  <p class="kicker">Web design, SEO &amp; automation portfolio</p>
+  <p class="kicker">Web design, SEO, social media &amp; video portfolio</p>
   <h2 class="display h2">From a single page to a full growth system.</h2>
-  <p class="sub">Real projects that help businesses get found, win trust and save time: a complete website redesign for a South Florida remodeling contractor, my own business site built from scratch, an automated website check-up that finds SEO issues and turns visitors into leads, and a QR e-business card clients can save in one tap.</p>
+  <p class="sub">Real projects that help businesses get found, win trust and save time: a complete website redesign for a South Florida remodeling contractor, my own business site built from scratch, an automated website check-up that finds SEO issues and turns visitors into leads, a QR e-business card clients can save in one tap, plus short-form social videos and graphics designed, animated and edited for Instagram, Facebook and LinkedIn.</p>
   <div class="pf-carousel" role="region" aria-roledescription="carousel" aria-label="Portfolio projects">
-    <div class="pf-bar"><p class="pf-count" aria-live="polite"><b>01</b>of 04</p><div class="pf-nav"><button type="button" class="pf-btn pf-prev" aria-label="Previous slide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><button type="button" class="pf-btn pf-next" aria-label="Next slide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button></div></div>
+    <div class="pf-bar"><p class="pf-count" aria-live="polite"><b>01</b>of 06</p><div class="pf-nav"><button type="button" class="pf-btn pf-prev" aria-label="Previous slide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><button type="button" class="pf-btn pf-next" aria-label="Next slide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button></div></div>
     <div class="pf-track" tabindex="0">
-    <div class="pf-slide" role="group" aria-roledescription="slide" aria-label="1 of 4: HC Remodeling: web preview">
+    <div class="pf-slide" role="group" aria-roledescription="slide" aria-label="1 of 6: HC Remodeling: web preview">
     <figure class="shot portfolio-shot case-card pf-dev pf-web">
       <span class="pf-view">Web preview</span>
       <button type="button" class="shot-btn" data-full="hc-after.jpg" data-cap="HC Remodeling &amp; Renovation: desktop view of the redesigned site." aria-label="Enlarge screenshot: HC Remodeling &amp; Renovation website on desktop"><img src="hc-after.jpg" decoding="async" alt="HC Remodeling &amp; Renovation website on desktop"></button>
       <figcaption><span class="pkg-tag pkg-basic">Basic package + add-ons</span><strong><a class="case-title" href="work-hc-remodeling.html">HC Remodeling &amp; Renovation</a></strong>Full redesign for a South Florida remodeling contractor: 1 page expanded to 7, with real project photos. <span class="pkg-addons"><b>Add-ons:</b> Google Business Profile setup, review growth, LinkedIn and Instagram business pages, and site-wide motion effects.</span> <span class="case-links"><a href="work-hc-remodeling.html">View the case study</a><a href="https://homeconstructionremodeling.com" target="_blank" rel="noopener">Visit the live site</a></span></figcaption>
     </figure>
     </div>
-    <div class="pf-slide" role="group" aria-roledescription="slide" aria-label="2 of 4: HC Remodeling: mobile preview">
+    <div class="pf-slide" role="group" aria-roledescription="slide" aria-label="2 of 6: HC Remodeling: mobile preview">
     <figure class="shot portfolio-shot case-card pf-dev pf-mob">
       <span class="pf-view">Mobile preview</span>
       <button type="button" class="shot-btn" data-full="hc-mobile.jpg" data-cap="HC Remodeling &amp; Renovation: mobile view of the redesigned site." aria-label="Enlarge screenshot: HC Remodeling &amp; Renovation website on a phone"><img src="hc-mobile.jpg" decoding="async" alt="HC Remodeling &amp; Renovation website on a phone"></button>
       <figcaption><strong><a class="case-title" href="work-hc-remodeling.html">HC Remodeling &amp; Renovation</a></strong>The same redesign on a phone, built mobile-first so homeowners can read, browse projects and request an estimate with one thumb. <span class="case-links"><a href="work-hc-remodeling.html">View the case study</a><a href="https://homeconstructionremodeling.com" target="_blank" rel="noopener">Visit the live site</a></span></figcaption>
     </figure>
     </div>
-    <div class="pf-slide" role="group" aria-roledescription="slide" aria-label="3 of 4: Vertex Juan: web preview">
+    <div class="pf-slide" role="group" aria-roledescription="slide" aria-label="3 of 6: Vertex Juan: web preview">
     <figure class="shot portfolio-shot case-card pf-dev pf-web">
       <span class="pf-view">Web preview</span>
       <button type="button" class="shot-btn" data-full="jn-desktop.jpg" data-cap="Vertex Juan: desktop view of my own business site." aria-label="Enlarge screenshot: Vertex Juan website on desktop"><img src="jn-desktop.jpg" decoding="async" alt="Vertex Juan website on desktop"></button>
       <figcaption><span class="pkg-tag pkg-pro">Professional package + automation add-ons</span><strong><a class="case-title" href="work-jn-digital-solutions.html">Vertex Juan</a></strong>My own business website, built from scratch: intro animation, live booking calendar, client reviews and a mobile-first layout. <span class="pkg-addons"><b>Automation add-ons:</b> an automated website check-up with built-in lead capture, a self-serve booking calendar, instant custom invoices with pay-by-card or bank transfer checkout, and a built-in client review form.</span> <span class="case-links"><a href="work-jn-digital-solutions.html">View the case study</a><a href="https://jnmagatva.github.io/jndigitalsolutions/" target="_blank" rel="noopener">Visit the live site</a></span></figcaption>
     </figure>
     </div>
-    <div class="pf-slide" role="group" aria-roledescription="slide" aria-label="4 of 4: Vertex Juan: mobile preview">
+    <div class="pf-slide" role="group" aria-roledescription="slide" aria-label="4 of 6: Vertex Juan: mobile preview">
     <figure class="shot portfolio-shot case-card pf-dev pf-mob">
       <span class="pf-view">Mobile preview</span>
       <button type="button" class="shot-btn" data-full="jn-mobile.jpg" data-cap="Vertex Juan: mobile view of my own business site." aria-label="Enlarge screenshot: Vertex Juan website on a phone"><img src="jn-mobile.jpg" decoding="async" alt="Vertex Juan website on a phone"></button>
       <figcaption><strong><a class="case-title" href="work-jn-digital-solutions.html">Vertex Juan</a></strong>Built mobile-first: the full site, booking calendar included, works as smoothly on a phone as it does on a desktop. <span class="case-links"><a href="work-jn-digital-solutions.html">View the case study</a><a href="https://jnmagatva.github.io/jndigitalsolutions/" target="_blank" rel="noopener">Visit the live site</a></span></figcaption>
+    </figure>
+    </div>
+    <div class="pf-slide" role="group" aria-roledescription="slide" aria-label="5 of 6: Vertex Juan: digital business card promo">
+    <figure class="shot portfolio-shot case-card pf-dev pf-vidslide">
+      <span class="pf-view">Social video</span>
+      <div class="pf-vid">
+        <video src="smm-vj-card.mp4" poster="smm-vj-card.jpg" width="720" height="1280" muted loop playsinline preload="none" aria-label="Ten-second vertical promo: a paper card turns into a QR code that opens the Vertex Juan digital business card on a phone"></video>
+        <button type="button" class="pf-play" aria-pressed="false" aria-label="Play video: Vertex Juan: digital business card promo"><span class="pv-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="pv-pause"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></span></button>
+      </div>
+      <figcaption><span class="pkg-tag pkg-smm">SMM &middot; Graphic design &middot; Video</span><strong>Vertex Juan: Digital Business Card promo</strong>A 10-second vertical ad for my own digital business card service. It opens on a problem (&ldquo;Still handing out paper cards?&rdquo;), then shows the scan, the phone card and the price, so the whole offer lands before someone scrolls past. <span class="pkg-addons"><b>What I did:</b> script and hook, layout, brand graphics, motion animation and editing, sized 9:16 for Reels, Stories and TikTok.</span> <span class="case-links"><a href="business-cards.html">See the business card service</a></span></figcaption>
+    </figure>
+    </div>
+    <div class="pf-slide" role="group" aria-roledescription="slide" aria-label="6 of 6: HC Remodeling: kitchen series, Part 4">
+    <figure class="shot portfolio-shot case-card pf-dev pf-vidslide">
+      <span class="pf-view">Social video</span>
+      <div class="pf-vid">
+        <video src="smm-hc-kitchen.mp4" poster="smm-hc-kitchen.jpg" width="720" height="900" muted loop playsinline preload="none" aria-label="Animated social post for HC Remodeling: Part 4, choose kitchen selections in the right order, ending with a Comment KITCHEN call to action"></video>
+        <button type="button" class="pf-play" aria-pressed="false" aria-label="Play video: HC Remodeling: kitchen series, Part 4"><span class="pv-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="pv-pause"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></span></button>
+      </div>
+      <figcaption><span class="pkg-tag pkg-smm">SMM &middot; Graphic design &middot; Video</span><strong>HC Remodeling: &ldquo;Choose in the Right Order&rdquo;</strong>Part 4 of a 7-part kitchen remodel series I plan, design and post for a South Florida remodeling contractor. Each step animates in one at a time, and the ending asks viewers to comment KITCHEN for the free planning guide, turning a short video into a lead. <span class="pkg-addons"><b>What I did:</b> content plan, copy, branded templates, animation and editing in a 4:5 format for Instagram, Facebook and LinkedIn, plus captions and local hashtags.</span> <span class="case-links"><a href="work-hc-remodeling.html">View the HC case study</a></span></figcaption>
     </figure>
     </div>
     </div>
@@ -2399,6 +2434,19 @@ document.querySelectorAll('.pf-carousel').forEach(function(c){
 <script>
 // Printed business cards: tap to flip
 document.querySelectorAll('.flip-card').forEach(function(b){b.addEventListener('click',function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on?'true':'false');var t=b.querySelector('.ft-t');if(t)t.textContent=on?'Tap to see front':'Tap to flip';});});
+</script>
+<script>
+// Social video slides: tap to play, pause when slid away or scrolled off screen
+(function(){
+  var boxes=[].slice.call(document.querySelectorAll('.pf-vid'));if(!boxes.length)return;
+  function stop(b){var v=b.querySelector('video');v.pause();b.classList.remove('is-playing');b.querySelector('.pf-play').setAttribute('aria-pressed','false');}
+  boxes.forEach(function(b){var v=b.querySelector('video'),btn=b.querySelector('.pf-play');
+    btn.addEventListener('click',function(e){e.stopPropagation();
+      if(v.paused){boxes.forEach(function(o){if(o!==b)stop(o);});v.preload='auto';var p=v.play();if(p&&p.catch)p.catch(function(){});b.classList.add('is-playing');btn.setAttribute('aria-pressed','true');}
+      else stop(b);});
+  });
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.intersectionRatio<.5)stop(e.target);});},{threshold:[0,.5]});boxes.forEach(function(b){io.observe(b);});}
+})();
 </script>
 </body>
 </html>
