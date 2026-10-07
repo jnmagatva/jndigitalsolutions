@@ -1127,20 +1127,31 @@ footer.spot-on>.sec-spot{left:0;width:100%}
 @media (max-width:780px){.fx-bokeh i:nth-child(n+9){display:none}.fx-pulses path:nth-child(n+6){display:none}}
 @media (prefers-reduced-motion:reduce){.fx-rays,.fx-bokeh i,.fx-pulses path,.fx-nodes circle,.fx-flare{animation:none!important}.fx-bokeh i{opacity:.25}}
 
-/* ===== Social media video section ===== */
-.sv-jump{margin-top:22px;font-weight:700}
-.sv-jump a{color:var(--cta)}
-.sv-grid{display:grid;grid-template-columns:1fr;gap:28px;margin-top:44px}
-@media (min-width:900px){.sv-grid{grid-template-columns:1fr 1fr;gap:32px}}
-.sv-card{display:flex;flex-direction:column;background:#fff;color:var(--ink);border-radius:20px;overflow:hidden;box-shadow:0 30px 80px -34px rgba(0,0,0,.85)}
+/* ===== SMM, Graphic Design & Video block (portfolio) ===== */
+.smm-case{display:block}
+.smm-case .auto-copy{margin-bottom:24px}
+.smm-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.smm-tab{font:inherit;font-size:14px;font-weight:700;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.smm-tab:hover{border-color:var(--cta)}
+.smm-tab.is-active{background:var(--cta);border-color:var(--cta);color:var(--cta-ink)}
+.smm-group[hidden]{display:none}
+.smm-group+.smm-group{margin-top:34px}
+.smm-h{display:flex;align-items:baseline;gap:12px;font-size:18px;font-weight:700;color:#fff;margin:0 0 14px}
+.smm-h small{font-size:13px;font-weight:600;color:#AEB9CC}
+.smm-vids{display:grid;grid-template-columns:1fr;gap:20px}
+@media (min-width:760px){.smm-vids{grid-template-columns:1fr 1fr}}
+.smm-vid{margin:0;background:#fff;color:var(--ink);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.smm-vid figcaption{padding:16px 18px 20px;font-size:15px;color:var(--ink-2)}
+.smm-vid figcaption b{display:block;color:var(--ink);font-size:18px;margin-bottom:4px}
+.smm-client{display:block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
 .sv-stage{position:relative;background:radial-gradient(120% 90% at 50% 0%,#24375E,#13213C 70%)}
-.sv-fmt{position:absolute;top:16px;left:16px;z-index:2;font-size:12.5px;font-weight:700;padding:5px 12px;border-radius:999px;background:var(--cta);color:var(--cta-ink)}
-.pf-vid{position:relative;height:clamp(420px,52vw,560px);display:flex;align-items:center;justify-content:center;padding:56px 22px 26px}
-.pf-vid video{display:block;height:100%;width:auto;max-width:100%;object-fit:contain;border-radius:18px;background:#0B1222;box-shadow:0 30px 60px -20px rgba(0,0,0,.75);cursor:pointer}
-.pf-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:50%;border:0;background:var(--cta);color:var(--cta-ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 0 0 8px rgba(245,179,1,.25);transition:opacity .3s ease}
+.sv-fmt{position:absolute;top:14px;left:14px;z-index:2;font-size:12px;font-weight:700;padding:4px 11px;border-radius:999px;background:var(--cta);color:var(--cta-ink)}
+.pf-vid{position:relative;height:clamp(400px,44vw,520px);display:flex;align-items:center;justify-content:center;padding:50px 18px 22px}
+.pf-vid video{display:block;height:100%;width:auto;max-width:100%;object-fit:contain;border-radius:16px;background:#0B1222;box-shadow:0 30px 60px -20px rgba(0,0,0,.75);cursor:pointer}
+.pf-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;border:0;background:var(--cta);color:var(--cta-ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 0 0 8px rgba(245,179,1,.25);transition:opacity .3s ease}
 .pf-play svg{width:26px;height:26px}
 .pf-play .pv-pause{display:none}
-.pf-vid.is-playing .pf-play{opacity:0;left:auto;top:auto;right:22px;bottom:22px;transform:none;width:44px;height:44px;box-shadow:none}
+.pf-vid.is-playing .pf-play{opacity:0;left:auto;top:auto;right:20px;bottom:20px;transform:none;width:44px;height:44px;box-shadow:none}
 .pf-vid.is-playing .pf-play svg{width:18px;height:18px}
 .pf-vid.is-playing .pf-play .pv-play{display:none}
 .pf-vid.is-playing .pf-play .pv-pause{display:block}
@@ -1148,16 +1159,16 @@ footer.spot-on>.sec-spot{left:0;width:100%}
 @media (hover:none){.pf-vid.is-playing .pf-play{opacity:.85}}
 .pf-vid.is-loading .pf-play{animation:svPulse 1s ease-in-out infinite}
 @keyframes svPulse{50%{box-shadow:0 0 0 14px rgba(245,179,1,.12)}}
-.sv-err{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);margin:0;width:max-content;max-width:85%;background:#fff;color:var(--ink);font-size:13px;font-weight:700;padding:8px 14px;border-radius:10px;text-align:center}
-.sv-copy{padding:24px 24px 28px;display:flex;flex-direction:column;gap:10px;flex:1}
-.sv-client{margin:0;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
-.sv-copy h3{margin:0;font-size:22px;line-height:1.25}
-.sv-copy p{margin:0}
-.sv-did{color:var(--ink-2);font-size:15px}
-.sv-did b{color:var(--ink)}
-.sv-tags{display:flex;flex-wrap:wrap;gap:8px}
-.sv-tags span{font-size:12.5px;font-weight:700;padding:4px 11px;border-radius:999px;background:#EEF1F6;color:var(--navy)}
-.sv-link{margin-top:auto;padding-top:6px;font-weight:700;color:var(--navy)}
+.sv-err{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);margin:0;width:max-content;max-width:85%;background:#fff;color:var(--ink);font-size:13px;font-weight:700;padding:8px 14px;border-radius:10px;text-align:center}
+.smm-note{color:#D6DCE8;font-size:15px;margin:0 0 16px;max-width:70ch}
+.smm-note b{color:#fff}
+.smm-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:760px){.smm-grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+.smm-gd{position:relative;display:block;width:100%;padding:0;border:0;border-radius:14px;overflow:hidden;background:#161514;cursor:zoom-in;aspect-ratio:1/1}
+.smm-gd img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.smm-gd:hover img{transform:scale(1.05)}
+.smm-gd span{position:absolute;right:10px;top:10px;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(11,18,34,.8);color:#fff}
+.smm-gd:focus-visible{outline:3px solid var(--cta);outline-offset:3px}
 </style>
 </head>
 <body>
@@ -1436,7 +1447,7 @@ footer.spot-on>.sec-spot{left:0;width:100%}
   <p class="kicker">Website portfolio: web &amp; mobile previews</p>
   <h2 class="display h2">From a single page to a full growth system.</h2>
   <p class="sub">Real projects that help businesses get found, win trust and save time: a complete website redesign for a South Florida remodeling contractor, my own business site built from scratch, an automated website check-up that finds SEO issues and turns visitors into leads, a QR e-business card clients can save in one tap.</p>
-  <p class="sv-jump"><a href="#social-video">Looking for social media videos? See them here &darr;</a></p>
+  <p class="sv-jump"><a href="#social-video">Looking for social media videos and graphics? See them here &darr;</a></p>
   <div class="pf-carousel" role="region" aria-roledescription="carousel" aria-label="Portfolio projects">
     <div class="pf-bar"><p class="pf-count" aria-live="polite"><b>01</b>of 04</p><div class="pf-nav"><button type="button" class="pf-btn pf-prev" aria-label="Previous slide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><button type="button" class="pf-btn pf-next" aria-label="Next slide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button></div></div>
     <div class="pf-track" tabindex="0">
@@ -1534,50 +1545,58 @@ footer.spot-on>.sec-spot{left:0;width:100%}
       <p class="ec-note">Tap a card to flip it</p>
     </div>
   </article>
-</section>
 
-<section id="social-video" class="wrap section photo-sec" style="--photo:url('tech-bg.jpg');--photo-pos:center 55%">
-  <p class="kicker">Social media video &amp; graphic design</p>
-  <h2 class="display h2">Short videos that stop the scroll.</h2>
-  <p class="sub">Branded, animated social videos I script, design and edit for Instagram, Facebook, LinkedIn and TikTok. Each one opens with a hook, makes one clear point, and ends with an action the viewer can take. Tap a video to play it.</p>
-  <div class="sv-grid">
-    <article class="sv-card">
-      <div class="sv-stage">
-        <span class="sv-fmt">9:16 &middot; Reels, Stories, TikTok</span>
-        <div class="pf-vid">
-          <video src="smm-vj-card.mp4" poster="smm-vj-card.jpg" width="720" height="1280" muted loop playsinline preload="metadata" aria-label="Ten-second vertical promo: a paper card turns into a QR code that opens the Vertex Juan digital business card on a phone"></video>
-          <button type="button" class="pf-play" aria-pressed="false" aria-label="Play video: Vertex Juan digital business card promo"><span class="pv-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="pv-pause"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></span></button>
-          <p class="sv-err" hidden>This video couldn&rsquo;t load. Please refresh the page.</p>
-        </div>
+  <article class="auto-case smm-case" id="social-video" aria-labelledby="smm-title">
+    <div class="auto-copy">
+      <p class="auto-label">SMM, Graphic Design &amp; Video</p>
+      <h3 id="smm-title">Social content that stops the scroll.</h3>
+      <p>Videos and graphics I script, design, animate and edit for Instagram, Facebook, LinkedIn and TikTok. Each piece opens with a hook, makes one clear point and ends with an action, like commenting a keyword to get a free guide.</p>
+    </div>
+    <div class="smm-tabs" role="tablist" aria-label="Filter social work">
+      <button type="button" role="tab" class="smm-tab is-active" aria-selected="true" data-show="all">All work</button>
+      <button type="button" role="tab" class="smm-tab" aria-selected="false" data-show="video">Videos</button>
+      <button type="button" role="tab" class="smm-tab" aria-selected="false" data-show="graphic">Graphic design</button>
+    </div>
+    <div class="smm-group" data-kind="video">
+      <h4 class="smm-h">Videos <small>Tap to play</small></h4>
+      <div class="smm-vids">
+        <figure class="smm-vid">
+          <div class="sv-stage">
+            <span class="sv-fmt">9:16 &middot; Reels, Stories, TikTok</span>
+            <div class="pf-vid">
+              <video src="smm-vj-card.mp4" poster="smm-vj-card.jpg" width="720" height="1280" muted loop playsinline preload="metadata" aria-label="Ten-second vertical promo: a paper card turns into a QR code that opens the Vertex Juan digital business card on a phone"></video>
+              <button type="button" class="pf-play" aria-pressed="false" aria-label="Play video: Vertex Juan digital business card promo"><span class="pv-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="pv-pause"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></span></button>
+              <p class="sv-err" hidden>This video couldn&rsquo;t load. Please refresh the page.</p>
+            </div>
+          </div>
+          <figcaption><span class="smm-client">Vertex Juan &middot; my own brand</span><b>Digital Business Card promo</b>A 10-second ad: hook, scan, phone card, price. Script, graphics, animation and editing.</figcaption>
+        </figure>
+        <figure class="smm-vid">
+          <div class="sv-stage">
+            <span class="sv-fmt">4:5 &middot; Instagram, Facebook, LinkedIn</span>
+            <div class="pf-vid">
+              <video src="smm-hc-kitchen.mp4" poster="smm-hc-kitchen.jpg" width="720" height="900" muted loop playsinline preload="metadata" aria-label="Animated social post for HC Remodeling: Part 4, choose kitchen selections in the right order, ending with a Comment KITCHEN call to action"></video>
+              <button type="button" class="pf-play" aria-pressed="false" aria-label="Play video: HC Remodeling kitchen series, Part 4"><span class="pv-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="pv-pause"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></span></button>
+              <p class="sv-err" hidden>This video couldn&rsquo;t load. Please refresh the page.</p>
+            </div>
+          </div>
+          <figcaption><span class="smm-client">HC Remodeling &amp; Renovations &middot; client</span><b>&ldquo;Choose in the Right Order&rdquo;</b>Each step animates in one at a time, ending on a &ldquo;Comment KITCHEN&rdquo; lead magnet.</figcaption>
+        </figure>
       </div>
-      <div class="sv-copy">
-        <p class="sv-client">Vertex Juan &middot; my own brand</p>
-        <h3>Digital Business Card promo</h3>
-        <p>A 10-second ad for my digital business card service. It opens on a problem (&ldquo;Still handing out paper cards?&rdquo;), shows the scan and the phone card, and ends on the price, so the whole offer lands before someone scrolls past.</p>
-        <p class="sv-did"><b>What I did:</b> script and hook, layout, brand graphics, motion animation and editing.</p>
-        <p class="sv-tags"><span>SMM</span><span>Graphic design</span><span>Video editing</span></p>
-        <a class="sv-link" href="business-cards.html">See the business card service &rarr;</a>
-      </div>
-    </article>
-    <article class="sv-card">
-      <div class="sv-stage">
-        <span class="sv-fmt">4:5 &middot; Instagram, Facebook, LinkedIn</span>
-        <div class="pf-vid">
-          <video src="smm-hc-kitchen.mp4" poster="smm-hc-kitchen.jpg" width="720" height="900" muted loop playsinline preload="metadata" aria-label="Animated social post for HC Remodeling: Part 4, choose kitchen selections in the right order, ending with a Comment KITCHEN call to action"></video>
-          <button type="button" class="pf-play" aria-pressed="false" aria-label="Play video: HC Remodeling kitchen series, Part 4"><span class="pv-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><span class="pv-pause"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg></span></button>
-          <p class="sv-err" hidden>This video couldn&rsquo;t load. Please refresh the page.</p>
-        </div>
-      </div>
-      <div class="sv-copy">
-        <p class="sv-client">HC Remodeling &amp; Renovations &middot; client</p>
-        <h3>&ldquo;Choose in the Right Order&rdquo;</h3>
-        <p>Part 4 of a 7-part kitchen remodel series I plan, design and post for a South Florida remodeling contractor. Each step animates in one at a time, and the ending asks viewers to comment KITCHEN for the free planning guide, turning a short video into a lead.</p>
-        <p class="sv-did"><b>What I did:</b> content plan, copy, branded templates, animation and editing, plus captions and local hashtags.</p>
-        <p class="sv-tags"><span>SMM</span><span>Graphic design</span><span>Video editing</span></p>
-        <a class="sv-link" href="work-hc-remodeling.html">View the HC case study &rarr;</a>
-      </div>
-    </article>
-  </div>
+    </div>
+    <div class="smm-group" data-kind="graphic">
+      <h4 class="smm-h">Graphic design <small>Tap to enlarge</small></h4>
+      <p class="smm-note"><b>HC Remodeling &amp; Renovations &middot; 7-part kitchen series.</b> Branded 1080&times;1080 posts for a South Florida remodeling contractor, each one tied to a free planning guide.</p>
+      <ul class="smm-grid">
+          <li><button type="button" class="smm-gd" data-full="gd-hc-kitchen-part2.jpg" data-cap="HC Remodeling kitchen series, Part 2: Set Your Budget First" aria-label="Enlarge graphic: Part 2, Set Your Budget First"><img src="gd-hc-kitchen-part2.jpg" alt="HC Remodeling social post, Part 2: Set Your Budget First" loading="lazy" width="1080" height="1080"><span>Part 2</span></button></li>
+          <li><button type="button" class="smm-gd" data-full="gd-hc-kitchen-part3.jpg" data-cap="HC Remodeling kitchen series, Part 3: Layout First. Colors Later." aria-label="Enlarge graphic: Part 3, Layout First. Colors Later."><img src="gd-hc-kitchen-part3.jpg" alt="HC Remodeling social post, Part 3: Layout First. Colors Later." loading="lazy" width="1080" height="1080"><span>Part 3</span></button></li>
+          <li><button type="button" class="smm-gd" data-full="gd-hc-kitchen-part4.jpg" data-cap="HC Remodeling kitchen series, Part 4: Choose in the Right Order" aria-label="Enlarge graphic: Part 4, Choose in the Right Order"><img src="gd-hc-kitchen-part4.jpg" alt="HC Remodeling social post, Part 4: Choose in the Right Order" loading="lazy" width="1080" height="1080"><span>Part 4</span></button></li>
+          <li><button type="button" class="smm-gd" data-full="gd-hc-kitchen-part5.jpg" data-cap="HC Remodeling kitchen series, Part 5: Plan the Timeline" aria-label="Enlarge graphic: Part 5, Plan the Timeline"><img src="gd-hc-kitchen-part5.jpg" alt="HC Remodeling social post, Part 5: Plan the Timeline" loading="lazy" width="1080" height="1080"><span>Part 5</span></button></li>
+          <li><button type="button" class="smm-gd" data-full="gd-hc-kitchen-part6.jpg" data-cap="HC Remodeling kitchen series, Part 6: Don&rsquo;t Hire on Price Alone" aria-label="Enlarge graphic: Part 6, Don&rsquo;t Hire on Price Alone"><img src="gd-hc-kitchen-part6.jpg" alt="HC Remodeling social post, Part 6: Don&rsquo;t Hire on Price Alone" loading="lazy" width="1080" height="1080"><span>Part 6</span></button></li>
+          <li><button type="button" class="smm-gd" data-full="gd-hc-kitchen-part7.jpg" data-cap="HC Remodeling kitchen series, Part 7: Avoid These Costly Mistakes" aria-label="Enlarge graphic: Part 7, Avoid These Costly Mistakes"><img src="gd-hc-kitchen-part7.jpg" alt="HC Remodeling social post, Part 7: Avoid These Costly Mistakes" loading="lazy" width="1080" height="1080"><span>Part 7</span></button></li>
+      </ul>
+    </div>
+  </article>
 </section>
 
 <!-- ================= BUILD WITH ME (offers) ================= -->
@@ -2494,6 +2513,20 @@ document.querySelectorAll('.flip-card').forEach(function(b){b.addEventListener('
     v.addEventListener('error',function(){b.classList.remove('is-loading');setState(b,false);err.hidden=false;});
   });
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.intersectionRatio<.4)stop(e.target);});},{threshold:[0,.4]});boxes.forEach(function(b){io.observe(b);});}
+})();
+</script>
+<script>
+// SMM block: filter tabs + tap-to-enlarge graphics (uses the site lightbox)
+(function(){
+  var box=document.querySelector('.smm-case');if(!box)return;
+  var tabs=[].slice.call(box.querySelectorAll('.smm-tab')),groups=[].slice.call(box.querySelectorAll('.smm-group'));
+  tabs.forEach(function(t){t.addEventListener('click',function(){var k=t.dataset.show;
+    tabs.forEach(function(o){var on=o===t;o.classList.toggle('is-active',on);o.setAttribute('aria-selected',on?'true':'false');});
+    groups.forEach(function(g){g.hidden=!(k==='all'||g.dataset.kind===k);if(g.hidden)g.querySelectorAll('video').forEach(function(v){v.pause();});});});});
+  var d=document.getElementById('lightbox'),img=document.getElementById('lb-img'),cap=document.getElementById('lb-cap');
+  box.querySelectorAll('.smm-gd').forEach(function(b){b.addEventListener('click',function(){
+    if(d&&d.showModal&&img){img.src=b.dataset.full;img.alt=b.dataset.cap;if(cap)cap.textContent=b.dataset.cap;d.showModal();}
+    else window.open(b.dataset.full,'_blank');});});
 })();
 </script>
 </body>

@@ -79,7 +79,19 @@ h2{margin:0 0 14px;text-align:center;font-family:'Sora',sans-serif;font-weight:7
 .save:hover{background:var(--navy-deep);box-shadow:0 0 0 3px var(--amber) inset}
 .foot{text-align:center;font-size:12.5px;color:var(--muted);margin:16px 0 0}
 a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+
+/* Narrow screens (and the phone preview on the business cards page): stack the QR under the contact list */
+@media (max-width:340px){
+  .info{padding-left:20px;padding-right:20px}
+  .contact{grid-template-columns:1fr;gap:20px}
+  .contact > div:last-child{display:flex;flex-direction:column;align-items:center}
+  .contact li a,.contact li > span{font-size:14px}
+}
+/* Inside the preview frame: hide the scrollbar so it doesn't eat into the card */
+.in-frame{scrollbar-width:none}
+.in-frame::-webkit-scrollbar{display:none}
 </style>
+<script>try{if(window.self!==window.top)document.documentElement.classList.add('in-frame');}catch(e){document.documentElement.classList.add('in-frame');}</script>
 </head>
 <body>
 <main class="card">
